@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block title %}Checkout{% endblock %} {% block content %}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-8 mb-4">
+
+
+            <h2 class="my-3 h2 text-center">Checkout Form</h2>
+            <div class="card">
+                <form method="POST" class="card-body">
+                    {% csrf_token %}
+                    <div class="hideable_shipping_form">
+                        <h3>Delievery Address</h3>
+
+
+                        <h5><b>Note : </b>Our delievery service is only available in Mumbai and nearby areas.</h5>
+
+                        <div class="md-form mb-2">
+                            <label for="address" class="ml-2">Address :-</label> {{ form.address }}
+                        </div>
+
+                        <div class="md-form mb-2">
+                            <label for="pin_code" class="ml-2">Pin code :-</label> {{ form.pin_code }}
+                        </div>
+
+                        <div class="md-form">
+                            <label for="phone_no" class="ml-2">Contact number :-</label> {{ form.contact_no }}
+                        </div>
+                        <div class="md-form">
+                            <label for="refer_code" class="ml-2 mt-1">Reference code :-</label> {{ form.refer_code }}
+                        </div>
+                    </div>                    
+
+                    <hr class="mb-4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">Proceed to payment</button>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="col-lg-3 mt-2">
+            <h4 class="d-flex justify-content-between align-content-center mb-3">
+                <span class="text-muted mt-4">Your Cart</span>
+                <span class="badge badge-primary badge-primary mt-4">{{ order.products.count }}</span>
+            </h4>
+            <ul class="list-group mb-3">
+                {% for order_item in order.products.all %}
+                <li class="list-group-item d-flex justify-content-between lh-condenced">
+                    <div>
+                        <!--Product Title-->
+                        <h6 class="my-0" style="text-transform: capitalize;">{{ order_item.product.book_title }}</h6>
+                        <!--Product Quantity-->
+                        <small class="text-muted">Quantity :- {{ order_item.get_total_quantity }}</small>
+                    </div>
+
+                    <!--Product Price-->
+                    {% if order_item.product.book_discount_price %}
+                    <span class="text-muted"></span>&#8377 {{ order_item.get_pro_discount_price }}</span>
+                    {% else %}
+                    <span class="text-muted"></span>&#8377 {{ order_item.get_pro_price }}</span>
+                    {% endif %}
+                </li>
+                {% endfor %}
+
+                <!--Total order price-->
+                <li class="list-group-item d-flex justify-content-between lh-condenced">
+                    <div>
+                        <h6 class="my-0">Total :</h6>
+                        <small class="text-muted"></small>
+                    </div>
+                    <span class="text-bold">&#8377 {{ order.total_od_price }}</span>
+
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

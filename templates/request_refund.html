@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <h2>Refund Request</h2>
+    <form method="POST" action="{% url 'book:request-refund' %}">
+        {% csrf_token %}
+        <label for="room_no" class="ml-0">Order ID :-</label>
+        <input type="text" value={{od_id}} name="order_id" readonly>
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> {% endblock %} {% block content %}
+<div class="container" style="font-size: 18px;line-height: 40px;">
+    <div class="pt-2"></div>
+    <div class="card pt-1">
+        <div class="card-body body-content" data-aos='fade-left'>
+            <h3 class="content text-center pb-3" data-aos='fade-down'><u>About us</u></h3>
+            <ul class="pl-4">
+                <li style="font-size: 20px;"><b>Why Aplepustak ?</b></li>
+                <p class="pt-1 pl-1">We all know how important books are for any education field. When students buy a
+                    secondary (second-hand) book from a
+                    book depot, generally they charge more than 70% price.
+                    Considering the problems of all the students, Aplepustak has come up
+                    with a platform for students on which students can buy and sell their books.
+                    Aplepustak.com is a website on which you can buy or sell books by any of your respected authors,
+                    stream,
+                    publications, and subjects. Students can buy secondary books at best price from Aplepustak.
+                    </p>
+                                        <p class="pl-1"></p>
+                <li style="font-size: 20px;"><strong>Key features :-</strong></li>
+                <p>1. <ins>One</ins> week delievery.<br>2. Cash on delievery and <ins>UPI</ins> facility.
+                    <br>3. Customer support <ins>24/7</ins>.                    
+        </div>
+        </p>
+        <p class="pl-4"><strong>Contact us - +91-9136869309</strong></p>
+        </ul>
+    </div>
+</div>
+<div class="pb-2"></div>
+
+</div>
+{% endblock %} {% block extra_scripts %}
+<!--Scrolling animation JS-->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 200,
+        duration: 700,
+        once: true
+    });
+</script>
+{% endblock %}

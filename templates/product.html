@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<style type="text/css">
+    .card {
+        width: 15rem;
+        height: 18rem;
+    }
+
+    #p-img {
+        width: 238px;
+        height: 175px;
+    }
+
+    #search_bar {
+        padding-top: 20px;
+        width: 60%;
+        margin-right: auto;
+
+    }
+
+    #query {
+        border: 1px solid black;
+        margin-left: auto;
+        width: 80%;
+
+    }
+    #price{
+        margin-left: 30px;
+    }
+    #cart-btn{
+        margin-left: auto;
+    }
+    @media screen and (max-width: 400px) {
+        .card {
+            height: 15rem;
+        }
+
+        #card-shape {
+            padding-left: 35px;
+        }
+
+        .container {
+            padding-left: 5px;
+        }
+
+        #p-img {
+            width: 238px;
+            height: 130px;
+        }
+
+        #search_bar {
+            width: 90%;
+            margin-left: auto;
+            margin-right: 35px;
+        }
+
+    }
+</style>
+{% endblock %}
+
+{% block content  %}
+<form method="GET" action="/search" class="form-inline" id="search_bar">
+
+    <input type="search" class="form-control" placeholder="Search..." aria-label="Search" name="query" id="query">
+    <button class="btn btn-info" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
+
+</form>
+<div class="container pl-4 pt-4">
+    <div class="row">
+        {% for book in books %}
+        <div class="card-deck pr-3 pt-2" id="card-shape">
+
+            <div class="card border-dark" data-aos='fade-left'>
+                <a href="{{ book.get_absolute_url }}" class="stretched-link"></a>
+                <img class="card-img-top" id="p-img" src="{{ book.book_image1.url }}" alt="{{book.book_title}}"></img>
+                <div class="card-body">
+                    <p class="card-title" id="#ptitle" style="text-transform: capitalize;text-overflow:ellipsis;white-space: nowrap; 
+                    width: 180px; 
+                    overflow: hidden;">{{ book.book_title }}
+                    </p>
+                    <div class="row">
+                        <h6 id="price">{% if book.book_discount_price %} &#8377 {{ book.book_discount_price }} {% else %}
+                            &#8377 {{ book.book_price }} {% endif %} </h6>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pb-4"></div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} {% block extra_scripts %}
+<!--Scrolling animation JS-->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 200,
+        duration: 700,
+        once: true
+    });
+</script>
+{% endblock %}

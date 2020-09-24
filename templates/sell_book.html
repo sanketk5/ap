@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+<style type="text/css">
+    #bk_title,
+    #bk_pub,
+    #bk_auth,
+    #bk_edition,
+    #bk_mrp,
+    #bk_stream,
+    #id_course,
+    #id_sem,
+    #usr_address {
+        font-weight: bolder;
+        padding-top: 20px;
+    }
+
+    #wb_photo {
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+
+<div class="container wow fadeIn">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-9">
+            <h2 class="my-4 h2 text-center">Sell a book</h2>
+            <div class="card">
+                <form method="POST" class="card-body">
+                    {% csrf_token %}
+                    <div class="hideable_shipping_form">
+
+                        <div class="md-form mb-2">
+                            <label id="bk_title" class="ml-2">Book title </label>
+                            <input type="text" class="form-control" placeholder="Enter subject name of the book "
+                                id="shipping_address" name="bk_title" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="bk_pub" class="ml-2">Book publication / prakashan </label>
+                            <input type="text" class="form-control" placeholder="Enter publication or prakashan name"
+                                id="shipping_address" name="bk_pub" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="bk_auth" class="ml-2">Book authors </label>
+                            <input type="text" class="form-control" placeholder="Enter authors name"
+                                id="shipping_address" name="bk_auth" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="bk_edition" class="ml-2">Book edition & year </label>
+                            <input type="text" class="form-control" placeholder="Ex:- Second Revised Edition-2019"
+                                id="shipping_address" name="bk_edition" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="bk_mrp" class="ml-2">Book MRP </label>
+                            <input type="text" class="form-control" placeholder="Enter MRP of the book"
+                                id="shipping_address" name="bk_mrp" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="bk_stream" class="ml-2">Stream </label>
+                            <input type="text" class="form-control"
+                                placeholder="Ex:- Arts, commerce, science, engineering etc." id="shipping_address"
+                                name="bk_stream" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="id_course" class="ml-2">Ideal course </label>
+                            <input type="text" class="form-control"
+                                placeholder="Enter course which is suitable for this book" id="shipping_address"
+                                name="id_course" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="id_sem" class="ml-2">Ideal semester </label>
+                            <input type="text" class="form-control"
+                                placeholder="Enter semester which is suitable for this book" id="shipping_address"
+                                name="id_sem" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="bk_stream" class="ml-2">Address </label>
+                            <input type="text" class="form-control"
+                                placeholder="Enter your address..." id="shipping_address"
+                                name="usr_adrs" required>
+                        </div>
+                        <div class="md-form">
+                            <label id="bk_stream" class="ml-2">Contact number </label>
+                            <input type="text" class="form-control"
+                                placeholder="Enter your contact number..." id="shipping_address"
+                                name="usr_num" required>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <p id="wb_photo">After submitting all books information send cover(front page), backside, edition page photos to this WhatsApp number
+                            <a href="https://api.whatsapp.com/send?phone=+919136869309"
+                                target="_blank">+91-9136869309</a>
+                        </p>
+                        <p>Seller will get minimum 45% of the Book MRP. <br>Our customer support team contact you in
+                            next couple of working hours.</p>
+                        <hr class="mb-4">
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

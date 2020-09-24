@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-sm navbar-info sticky-top" style="background-color: #92f3e9;">
+    <a class="navbar-brand" href="/home">Aplepustak</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_target"
+        aria-controls="collapse_target" aria-expanded="false" aria-label="Toggle navigation" style="border-color: #f57542;">
+        <span class="navbar-toggler-icon">
+            <i class="fa fa-navicon" style="color:#f57542; font-size:25px;"></i>
+        </span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapse_target">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-home mr-3" id="home-tag"><a href="/home" class="nav-link">Home</a></li>            
+            </li>            
+            <li class="nav-item mr-3"><a href="/sell-book" class="nav-link">Sell book</a></li>
+            <li class="nav-item mr-3"><a href="/about" class="nav-link">About us</a></li>
+            {% if user.is_authenticated %}
+            <li class="nav-item dropdown mr-3">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    aria-expanded="false" data-target="dropdown_target">
+                    {{ user.first_name }}
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdown_target">
+                    <ul class="navbar-nav">                        
+                        <a href="/my-profile" class="dropdown-item">My Profile</a>
+                        <div class="dropdown-divider"></div>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <a href="/my-orders" class="dropdown-item">My Orders</a>
+                        <div class="dropdown-divider"></div>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <a href="/profile/logout/" class="dropdown-item">Logout</a>
+                        <div class="dropdown-divider"></div>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item mr-3" id="my-cart" style="font-size: 27px">
+                <a href="{% url 'book:od-summary' %}"><i class="fas fa-shopping-cart"
+                        style="color:#2289e9"></i></a></li>
+            {% else %}
+            <li class="nav-login mr-3"><a href="/profile/login/" class="nav-link">Login</a></li>
+            {% endif %}
+        </ul>        
+        {% if user.is_superuser or user.is_staff %}
+        <a href="/admin" class='btn btn-outline-success ml-1 mt-1' target='_blank'>Admin</a>
+        {% else %}
+        {% endif %}
+    </div>
+</nav>
+<div class="pt-0">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+        {{ message }}
+        <button class="close" type="button" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %} {% endif %}
+</div>

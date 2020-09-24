@@ -1,0 +1,221 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %}
+{% block extra_head %}
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<style type="text/css">
+    .container {
+        margin-top: 10px;
+    }
+
+    .newarrival {
+        background: green;
+        width: 50px;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        padding-top: 1px;
+    }
+
+    .col-md-7 h2 {
+        color: #555;
+    }
+
+    .price {
+        color: black;
+        font-size: 25px;
+        font-weight: bold;
+        padding-top: 10px;
+    }
+
+    #amt_saved {
+        font-size: 12px;
+        position: static;        
+        height: 20px;        
+    }
+
+    #dis-price {
+        color: black;
+        font-size: 25px;
+        font-weight: bold;
+        padding-top: 5px;
+        text-decoration: line-through;
+    }
+
+    #qnt {
+        border: 1px solid #ccc;
+        text-align: center;
+        height: 33px;
+        width: 85px;
+    }
+
+    .quantity {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .note {
+        font-family: sans-serif;
+    }
+
+    .col-md-7 #cart-btn {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .col-md-7 #bn-btn {
+        margin-top: 10px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        height: 100px;
+        width: 100px;
+        outline: black;
+        background-size: 50%, 50%;
+        border-radius: 50%;
+        border: 1px solid black;
+        background-image: none;
+    }
+
+    .carousel-control-next-icon:after {
+        content: '>';
+        font-size: 55px;
+        color: blue;
+    }
+
+    .carousel-control-prev-icon:after {
+        content: '<';
+        font-size: 55px;
+        color: blue;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <form class="form-group" action="{{ book.add_to_cart_url  }}" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-5">
+
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-interval="4000">
+                            <img src="{{ book.book_image1.url }}" class="d-block w-100" alt="{{book.book_title}}">
+                        </div>
+                        {% if book.book_image2 %}
+                        <div class="carousel-item" data-interval="5000">
+                            <img src="{{ book.book_image2.url }}" class="d-block w-100" alt="{{book.book_title}}">
+                        </div>
+                        {% endif %}
+                        {% if book.book_image3 %}
+                        <div class="carousel-item" data-interval="5000">
+                            <img src="{{ book.book_image3.url }}" class="d-block w-100" alt="{{book.book_title}}">
+                        </div>
+                        {% endif %}
+                        {% if book.book_image4 %}
+                        <div class="carousel-item" data-interval="5000">
+                            <img src="{{ book.book_image4.url }}" class="d-block w-100" alt="{{book.book_title}}">
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-7 pt-2">
+                <p class="newarrival text-center" data-aos="fade-left">NEW</p>
+                <h2 style="text-transform: capitalize;">{{book.book_title}}</h2>
+                <p style="text-transform: uppercase;">Product Code : {{book.book_no}}</p>
+                <div class="row">
+                    <p class="price ml-4">
+
+                        {% if book.book_discount_price %}&#8377 {{ book.book_discount_price }}{% else %}
+                        &#8377<s> {{ book.book_mrp}} </s> &nbsp;&nbsp; &#8377 {{ book.book_price }}
+                    </p>
+                    <span class="badge badge-primary mt-3 ml-3" id="amt_saved">
+                        Saving &#8377 {{book.get_pro_amount_saved}}
+                    </span>{% endif %}
+                </div>
+                {% if book.book_type %}
+                <p style="text-transform: capitalize;"><b>type : </b> {{book.book_type}}</p>
+                {% endif %}
+                {% if book.book_category %}
+                <p style="text-transform: capitalize;"><b>Stream : </b> {{book.book_category}}</p>
+                {% endif %}
+                {% if book.publication_name %}
+                <p style="text-transform: capitalize;"><b>Publication : </b> {{book.publication_name}}</p>
+                {% endif %}
+                {% if book.authors %}
+                <p style="text-transform: capitalize;"><b>Author : </b> {{book.authors}}</p>
+                {% endif %}
+                {% if book.edition %}
+                <p style="text-transform: capitalize;"><b>Edition : </b> {{book.edition}}</p>
+                {% endif %}
+
+                {% if book.ideal_course %}
+                <p style="text-transform: capitalize;"><b>Ideal course : </b> {{book.ideal_course}}</p>
+                {% endif %}
+                {% if book.ideal_sem %}
+                <p style="text-transform: capitalize;"><b>Ideal semester : </b> {{book.ideal_sem}}</p>
+                {% endif %}
+                {% if book.book_stock != 0 %}
+                <p><b>Availability : </b> In stock</p>
+                {% else %}
+                <p style="color: red;">Sorry, this book is out of stock.</p>
+                {% endif %}
+                {% if book.book_stock <= 3 and book.book_stock > 0  %}
+                <div class="pb-2" style='color:red;'>
+                    <i>Hurry, only {{ book.book_stock }} left.</i><br>
+                </div>
+                {% endif %}
+
+                <label class="quantity">Quantity : </label>
+                <!--<input type="number" name="qnt" value="1" id="qnt" min="1" max="50" required><br>-->
+                <select name="qnt" id="qnt">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><br>
+                <label class="max-quantity pt-1">Delievery within 7 days.</u></label><br>
+                {% if book.book_stock > 0 %}
+                <button type="submit" id="cart-btn" class="btn btn-outline-primary">Add To Cart</button>
+                {% endif %}
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<!--Scrolling animation JS-->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 200,
+        duration: 700,
+        once: true
+    });
+</script>
+{% endblock %}

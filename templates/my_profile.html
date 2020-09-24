@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block title %}My Profile{% endblock %}
+{% block extra_head %}
+<style type="text/css">
+    h5 {
+        margin-left: 20px;
+    }
+
+    p {
+        margin-left: 20px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="container wow fadeIn">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-7">
+            <h2 class="my-4 h2 text-center">My Profile</h2>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <h5>Name &nbsp; - </h5>
+                        <p> {{user.first_name}}</p>
+                    </div>
+                    <div class="row">
+                        <h5>Email &nbsp; - </h5>
+                        <p> {{user.email}}</p>
+                    </div>
+                    <div class="row">
+                        <h5>Contact number &nbsp; - </h5>
+                        <p> {{pro.contact_no}}</p>
+                    </div>
+                    <div class="row">
+                        <h5>Referal code &nbsp; - </h5>
+                        <p> {{pro.refer_code}}</p>
+                    </div>
+                    <div class="row">
+                        <h5>Reference orders &nbsp; - </h5>
+                        <p> {{pro.refer_order}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

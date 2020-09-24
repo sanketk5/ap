@@ -1,1 +1,1 @@
-web:gunicorn aplepustak.wsgi
+web: gunicorn aplepustak.wsgi

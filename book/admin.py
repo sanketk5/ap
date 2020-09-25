@@ -9,9 +9,9 @@ def make_refund_accepted(modeladmin, request, quesryset):
 make_refund_accepted.short_description = "Update orders to refund granted"
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('book_no', 'book_title', 'book_mrp',
+    list_display = ('book_title', 'book_mrp',
                     'book_price', 'book_discount_price', 'book_stock',)
-    list_display_links = ('book_no','book_title', )
+    list_display_links = ('book_title', )
     list_editable = ('book_mrp', 'book_price',
                      'book_discount_price', 'book_stock',)
 

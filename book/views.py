@@ -1,4 +1,4 @@
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.views.generic.edit import FormView
 from django.views.generic import ListView, DetailView, View
 from django.shortcuts import render, get_object_or_404, redirect
@@ -117,7 +117,7 @@ class SellBook(View):
                                                  ideal_course=id_course, ideal_sem=id_sem, authors=bk_auth, edition=bk_edition, request_date=time)
                 br.save()
                 messages.info(
-                    self.request, "Your request for selling a book is in process.")
+                    self.request, "Your request for selling a book is in process. Thank you")
                 return redirect("/home")
             else:
                 messages.info(
@@ -133,9 +133,13 @@ class SellBook(View):
             return redirect("/sell-book")
 
 
-class BookDetailView(DetailView):
-    model = Book
-    template_name = "plp.html"
+class BookDetailView(DetailView):    
+    try:
+        model = Book
+        template_name = "plp.html"
+    except MultipleObjectsReturned:
+        messages.info(request, "Book is invalid.")
+        template_name = "plp.html"
 
 
 @csrf_protect

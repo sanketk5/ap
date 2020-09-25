@@ -2,11 +2,11 @@
 {% block extra_head %}
 <style type="text/css">
     h5 {
-        margin-left: 20px;
+        margin-left: 30px;
     }
 
-    p {
-        margin-left: 20px;
+    .info {
+        margin-left: 30px;
     }
 </style>
 {% endblock %}
@@ -21,23 +21,23 @@
                 <div class="card-body">
                     <div class="row">
                         <h5>Name &nbsp; - </h5>
-                        <p> {{user.first_name}}</p>
+                        <p class="info"> {{user.first_name}}</p>
                     </div>
                     <div class="row">
                         <h5>Email &nbsp; - </h5>
-                        <p> {{user.email}}</p>
+                        <p class="info"> {{user.email}}</p>
                     </div>
                     <div class="row">
                         <h5>Contact number &nbsp; - </h5>
-                        <p> {{pro.contact_no}}</p>
+                        <p class="info"> {{pro.contact_no}}</p>
                     </div>
                     <div class="row">
                         <h5>Referal code &nbsp; - </h5>
-                        <p> {{pro.refer_code}}</p>
+                        <p class="info"> {{pro.refer_code}}</p>
                     </div>
                     <div class="row">
                         <h5>Reference orders &nbsp; - </h5>
-                        <p> {{pro.refer_order}}</p>
+                        <p class="info"> {{pro.refer_order}}</p>
                     </div>
                 </div>
             </div>

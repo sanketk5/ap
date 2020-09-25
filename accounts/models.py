@@ -10,3 +10,4 @@ class Profile(models.Model):
     contact_no = models.CharField(max_length=50,blank=True, null=True)
     refer_order = models.IntegerField(default=0, blank=True, null=True)
     total_order = models.IntegerField(default=0, blank=True, null=True)
+    #added_books = models.IntegerField(default=0, blank=True, null=True)

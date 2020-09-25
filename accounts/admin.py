@@ -7,8 +7,8 @@ class UserAdmin(admin.ModelAdmin):
     list_editable=('is_active','is_staff','is_superuser',)
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'refer_code', 'refer_order',)
-    list_display_links = ('user', 'refer_code', 'refer_order',)
+    list_display = ('user', 'refer_code','contact_no', 'refer_order',)
+    list_display_links = ('user', 'refer_code', 'contact_no', 'refer_order',)
 
 
 admin.site.register(Profile, ProfileAdmin)

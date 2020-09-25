@@ -2,7 +2,45 @@
 {% block title %} search results for {% endblock %}
 {% block extra_head %}
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<style type="text/css">
+    .card {
+        width: 15rem;
+        height: 18rem;
+    }
 
+    #p-img {
+        width: 238px;
+        height: 175px;
+    }
+
+
+
+    #price {
+        margin-left: 30px;
+    }
+
+    @media screen and (max-width: 400px) {
+        .card {
+            height: 15rem;
+        }
+
+        #card-shape {
+            padding-left: 35px;
+        }
+
+        .container {
+            padding-left: 5px;
+        }
+
+        #p-img {
+            width: 238px;
+            height: 130px;
+        }
+
+
+
+    }
+</style>
 {% endblock %}
 {% block content %}
 <div class="container">
@@ -12,8 +50,8 @@
     Sorry your search <b>{{query}}</b> did not match any our books. <br>
     Suggestions:
     <ul>
-    <li>Make sure that all words are spelled correctly.</li>
-    <li>Try different products.</li>
+        <li>Make sure that all words are spelled correctly.</li>
+        <li>Try different products.</li>
     </ul>
     {% endif %}
     <hr class="mb-1">
@@ -23,14 +61,13 @@
 
             <div class="card border-dark" data-aos='fade-left'>
                 <a href="{{ book.get_absolute_url }}" class="stretched-link"></a>
-                <img class="card-img-top" id="p-img" src="{{ book.book_image1.url }}"
-                    alt="{{book.book_title}}"></img>
+                <img class="card-img-top" id="p-img" src="{{ book.book_image1.url }}" alt="{{book.book_title}}"></img>
                 <div class="card-body">
                     <p class="card-title" id="#ptitle" style="text-transform: capitalize;">{{ book.book_title }}
-                    </p>                    
+                    </p>
                     <h6>{% if book.book_discount_price %} &#8377 {{ book.book_discount_price }} {% else %}
-                    &#8377 {{ book.book_price }} {% endif %} </h6>
-                    
+                        &#8377 {{ book.book_price }} {% endif %} </h6>
+
                     <!--
                      {% if product.product_brand %}
                     <p class="card-text text-muted">By {{ product.product_brand }}</p>{% endif %}-->

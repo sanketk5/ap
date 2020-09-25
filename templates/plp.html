@@ -1,4 +1,5 @@
 {% extends 'base.html' %}{% load crispy_forms_tags %}
+{% block title %}Buy - {{book.book_title}} book online at best price{% endblock %}
 {% block extra_head %}
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <style type="text/css">
@@ -95,6 +96,11 @@
         -webkit-appearance: none;
         margin: 0;
     }
+    @media screen and (max-width: 400px) {
+        #bk-title{
+            font-size: 20px;
+        }
+    }
 </style>
 {% endblock %}
 {% block content %}
@@ -106,9 +112,11 @@
 
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
+                        {% if book.book_image1 %}
                         <div class="carousel-item active" data-interval="4000">
                             <img src="{{ book.book_image1.url }}" class="d-block w-100" alt="{{book.book_title}}">
                         </div>
+                        {% endif %}
                         {% if book.book_image2 %}
                         <div class="carousel-item" data-interval="5000">
                             <img src="{{ book.book_image2.url }}" class="d-block w-100" alt="{{book.book_title}}">
@@ -139,8 +147,10 @@
             </div>
             <div class="col-md-7 pt-2">
                 <p class="newarrival text-center" data-aos="fade-left">NEW</p>
-                <h2 style="text-transform: capitalize;">{{book.book_title}}</h2>
+                <h2 style="text-transform: capitalize;" id="bk-title">{{book.book_title}}</h2>
+                {% if book.book_no %}
                 <p style="text-transform: uppercase;">Product Code : {{book.book_no}}</p>
+                {% endif %}
                 <div class="row">
                     <p class="price ml-4">
 

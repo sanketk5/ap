@@ -15,3 +15,11 @@ create register function for registration or sign-in of users
 then add line in accounts.urls 'path('register', views.register, name='register'),'
 
 pre-receive hook declined heroku django - heroku config:set DISABLE_COLLECTSTATIC=1
+
+heroku  https://git.heroku.com/aplepustak.git (fetch)
+heroku  https://git.heroku.com/aplepustak.git (push)
+
+git remote add heroku git@heroku.com:https://git.heroku.com/aplepustak.git
+git remote add heroku git@heroku.com:aplepustak.git
+
+https://github.com/*your*git*name*/*your*git*app*.git

@@ -1,12 +1,18 @@
 {% extends 'base.html' %} {% block title %}My Profile{% endblock %}
 {% block extra_head %}
 <style type="text/css">
-    h5 {
+    h5,
+    .info {
         margin-left: 30px;
     }
 
-    .info {
-        margin-left: 30px;
+    @media screen and (max-width: 400px) {
+
+        h5,
+        .info {
+            font-size: 15px;
+            margin-left: 5px;
+        }
     }
 </style>
 {% endblock %}

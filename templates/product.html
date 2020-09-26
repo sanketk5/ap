@@ -24,9 +24,17 @@
         width: 80%;
 
     }
-    #price{
+
+    #price {
         margin-left: 30px;
-    }    
+        font-weight: bold;
+    }
+    #amt_saved{
+        margin-bottom: 30px;
+        margin-top: 3px;
+        margin-left: 20px;
+        font-size: 11px;        
+    }
     @media screen and (max-width: 400px) {
         .card {
             height: 15rem;
@@ -58,7 +66,9 @@
 {% block content  %}
 <form method="GET" action="/search" class="form-inline" id="search_bar">
 
-    <input type="search" class="form-control" placeholder="Search..." aria-label="Search" name="query" id="query">
+    <input type="search" class="form-control"
+        placeholder="Search stream, publication, author, edition, course, semester" aria-label="Search" name="query"
+        id="query">
     <button class="btn btn-info" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
 
 </form>
@@ -67,7 +77,7 @@
         {% for book in books %}
         <div class="card-deck pr-3 pt-2" id="card-shape">
 
-            <div class="card border-dark" data-aos='fade-left'>
+            <div class="card border-dark" data-aos='fade-up'>
                 <a href="{{ book.get_absolute_url }}" class="stretched-link"></a>
                 <img class="card-img-top" id="p-img" src="{{ book.book_image1.url }}" alt="{{book.book_title}}"></img>
                 <div class="card-body">
@@ -76,8 +86,11 @@
                     overflow: hidden;">{{ book.book_title }}
                     </p>
                     <div class="row">
-                        <h6 id="price">{% if book.book_discount_price %} &#8377 {{ book.book_discount_price }} {% else %}
-                            &#8377 {{ book.book_price }} {% endif %} </h6>                        
+                        <p id="price">{% if book.book_discount_price %}&#8377 {{ book.book_discount_price }}{% else %}
+                            &#8377<s> {{ book.book_mrp}} </s> &nbsp;&nbsp; &#8377 {{ book.book_price }} </p>
+                        <span class="badge badge-primary" id="amt_saved">
+                            Saving &#8377 {{book.get_pro_amount_saved}}
+                        </span>{% endif %}
                     </div>
                 </div>
             </div>

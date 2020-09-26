@@ -29,12 +29,14 @@
         margin-left: 30px;
         font-weight: bold;
     }
-    #amt_saved{
+
+    #amt_saved {
         margin-bottom: 30px;
         margin-top: 3px;
         margin-left: 20px;
-        font-size: 11px;        
+        font-size: 11px;
     }
+
     @media screen and (max-width: 400px) {
         .card {
             height: 15rem;
@@ -77,14 +79,12 @@
         {% for book in books %}
         <div class="card-deck pr-3 pt-2" id="card-shape">
 
-            <div class="card border-dark" data-aos='fade-up'>
+            <div class="card border-dark">
                 <a href="{{ book.get_absolute_url }}" class="stretched-link"></a>
                 <img class="card-img-top" id="p-img" src="{{ book.book_image1.url }}" alt="{{book.book_title}}"></img>
                 <div class="card-body">
                     <p class="card-title" id="#ptitle" style="text-transform: capitalize;text-overflow:ellipsis;white-space: nowrap; 
-                    width: 180px; 
-                    overflow: hidden;">{{ book.book_title }}
-                    </p>
+                    width: 180px;overflow: hidden;">{{ book.book_title }}</p>
                     <div class="row">
                         <p id="price">{% if book.book_discount_price %}&#8377 {{ book.book_discount_price }}{% else %}
                             &#8377<s> {{ book.book_mrp}} </s> &nbsp;&nbsp; &#8377 {{ book.book_price }} </p>

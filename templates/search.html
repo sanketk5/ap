@@ -59,18 +59,14 @@
         {% for book in products %}
         <div class="card-deck pr-3 pt-2" id="card-shape">
 
-            <div class="card border-dark" data-aos='fade-left'>
+            <div class="card border-dark">
                 <a href="{{ book.get_absolute_url }}" class="stretched-link"></a>
                 <img class="card-img-top" id="p-img" src="{{ book.book_image1.url }}" alt="{{book.book_title}}"></img>
                 <div class="card-body">
-                    <p class="card-title" id="#ptitle" style="text-transform: capitalize;">{{ book.book_title }}
-                    </p>
+                    <p class="card-title" id="#ptitle" style="text-transform: capitalize;text-overflow:ellipsis;white-space: nowrap; 
+                    width: 180px;overflow: hidden;">{{ book.book_title }}</p>
                     <h6>{% if book.book_discount_price %} &#8377 {{ book.book_discount_price }} {% else %}
                         &#8377 {{ book.book_price }} {% endif %} </h6>
-
-                    <!--
-                     {% if product.product_brand %}
-                    <p class="card-text text-muted">By {{ product.product_brand }}</p>{% endif %}-->
                 </div>
             </div>
         </div>

@@ -10,21 +10,7 @@
         width: 238px;
         height: 175px;
     }
-
-    #search_bar {
-        padding-top: 20px;
-        width: 60%;
-        margin-right: auto;
-
-    }
-
-    #query {
-        border: 1px solid black;
-        margin-left: auto;
-        width: 80%;
-
-    }
-
+    
     #price {
         margin-left: 30px;
         font-weight: bold;
@@ -54,27 +40,23 @@
             width: 238px;
             height: 130px;
         }
-
-        #search_bar {
-            width: 90%;
-            margin-left: auto;
-            margin-right: 35px;
-        }
+        
 
     }
 </style>
 {% endblock %}
 
 {% block content  %}
-<form method="GET" action="/search" class="form-inline" id="search_bar">
+<form method="GET" action="/search" class="form-inline" id="search_bar" style="padding-top: 20px;width: 60%;margin-right: auto;">
 
     <input type="search" class="form-control"
         placeholder="Search stream, publication, author, edition, course, semester" aria-label="Search" name="query"
-        id="query">
+        id="query" style="border: 1px solid black;margin-left: auto;width: 80%;">
     <button class="btn btn-info" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
 
 </form>
 <div class="container pl-4 pt-4">
+
     <div class="row">
         {% for book in books %}
         <div class="card-deck pr-3 pt-2" id="card-shape">

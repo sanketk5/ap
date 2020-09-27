@@ -19,7 +19,6 @@ import random
 
 # Create your views here.
 
-
 def home(request):
     book = Book.objects.all()
     return render(request, 'base.html', {'books': book})

@@ -1,34 +1,56 @@
 {% extends 'base.html' %} {% block extra_head %}
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> {% endblock %} {% block content %}
-<div class="container" style="font-size: 18px;line-height: 40px;">
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+<style type="text/css">
+    #at{
+        font-size: 21px;
+    }
+    #kft{
+        font-size: 18px;
+        line-height: 30px;
+    }
+    @media screen and (max-width: 600px) {
+        #at{
+            font-size: 18px;
+        }
+        #kft{
+            font-size: 15px;
+            line-height: 25px;
+        }
+    }
+</style>
+{% endblock %} {% block content %}
+<div class="container">
     <div class="pt-2"></div>
     <div class="card pt-1">
         <div class="card-body body-content" data-aos='fade-left'>
-            <h3 class="content text-center pb-3" data-aos='fade-down'><u>About us</u></h3>
-            <ul class="pl-4">
-                <li style="font-size: 20px;"><b>Why Aplepustak ?</b></li>
-                <p class="pt-1 pl-1">We all know how important books are for any education field. When students buy a
-                    secondary (second-hand) book from a
-                    book depot, generally they charge more than 70% price.
-                    Considering the problems of all the students, Aplepustak has come up
-                    with a platform for students on which students can buy and sell their books.
-                    Aplepustak.com is a website on which you can buy or sell books by any of your respected authors,
-                    stream,
-                    publications, and subjects. Students can buy secondary books at best price from Aplepustak.
-                    </p>
-                                        <p class="pl-1"></p>
-                <li style="font-size: 20px;"><strong>Key features :-</strong></li>
-                <p>1. <ins>One</ins> week delievery.<br>2. Cash on delievery and <ins>UPI</ins> facility.
-                    <br>3. Customer support <ins>24/7</ins>.                    
+            <h3 class="content text-center pb-3" id="at"><u>About us</u></h3>
+            <ul class="pl-4" id="kft">
+                <li id="at"><b>Vision :</b></li>
+                <p class="pt-1 pl-1 abt">We want to reach more than 1 million students accross 10 cities.<br> Finding a
+                    secondary books at minimal price is a challenge for every student. From Aplepustak you will get
+                    secondary books at best prices.
+                </p>
+                <li id="at"><b>Mission :</b></li>
+                <p class="pt-1 pl-1 abt">We bring students together on this platform who willing to buy and sell their
+                    books at the same time. <br> We serve to those students who wants to buy & sell their books at best
+                    price.
+                </p>
+                <li id="at"><b>Objective :</b></li>
+                <p class="pt-1 pl-1 abt">A student sell their books at less than 25% of the MRP, at the same time
+                    another student purchase same books at more than 70% of the MRP.
+                    <br> Due to this both students face financial loss. Considering the problems
+                    of the students we bring this platform for students to reduce such losses.
+                </p>
+            </ul>
         </div>
-        </p>
-        <p class="pl-4"><strong>Contact us - +91-9136869309</strong></p>
-        </ul>
+
+        <p class="pl-3"><strong>Contact us - +91-9136869309</strong></p>
+
     </div>
 </div>
 <div class="pb-2"></div>
 
-</div>
 {% endblock %} {% block extra_scripts %}
 <!--Scrolling animation JS-->
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

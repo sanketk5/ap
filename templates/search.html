@@ -17,7 +17,16 @@
 
     #price {
         margin-left: 30px;
+        font-weight: bold;
     }
+
+    #amt_saved {
+        margin-bottom: 30px;
+        margin-top: 3px;
+        margin-left: 20px;
+        font-size: 11px;
+    }
+
 
     @media screen and (max-width: 400px) {
         .card {
@@ -43,8 +52,18 @@
 </style>
 {% endblock %}
 {% block content %}
+<form method="GET" action="/search" class="form-inline" id="search_bar"
+    style="padding-top: 20px;width: 60%;margin-right: auto;">
+
+    <input type="search" class="form-control"
+        placeholder="Search stream, publication, author, edition, course, semester" aria-label="Search" name="query"
+        id="query" style="border: 1px solid black;margin-left: auto;width: 80%;">
+    <button class="btn btn-info" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
+
+</form>
 <div class="container">
-    <h5 style="padding-top: 5px;">Search results for : {{query}}</h5>
+
+    <h5 style="padding-top: 8px;">Search results for : {{query}}</h5>
     {% if products|length < 1 %}
     <p>No search results</p>
     Sorry your search <b>{{query}}</b> did not match any our books. <br>
@@ -65,8 +84,13 @@
                 <div class="card-body">
                     <p class="card-title" id="#ptitle" style="text-transform: capitalize;text-overflow:ellipsis;white-space: nowrap; 
                     width: 180px;overflow: hidden;">{{ book.book_title }}</p>
-                    <h6>{% if book.book_discount_price %} &#8377 {{ book.book_discount_price }} {% else %}
-                        &#8377 {{ book.book_price }} {% endif %} </h6>
+                    <div class="row">
+                        <p id="price">{% if book.book_discount_price %}&#8377 {{ book.book_discount_price }}{% else %}
+                            &#8377<s> {{ book.book_mrp}} </s> &nbsp;&nbsp; &#8377 {{ book.book_price }} </p>
+                        <span class="badge badge-primary" id="amt_saved">
+                            Saving &#8377 {{book.get_pro_amount_saved}}
+                        </span>{% endif %}
+                    </div>
                 </div>
             </div>
         </div>

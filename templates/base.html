@@ -103,7 +103,7 @@
 
         .social-menu .fab {
             font-size: 25px;
-            line-height: 60px;
+            line-height: 50px;
             transition: 0.6s;
             text-align: center;
         }
@@ -136,6 +136,13 @@
             .footer-items {
                 width: 100%;
             }
+
+            #search_bar {
+                width: 90%;
+                margin-left: auto;
+                margin-right: 35px;
+
+            }
         }
     </style>
     {% block extra_head %}{% endblock %}
@@ -143,10 +150,12 @@
 </head>
 
 <body>
-    {% include 'navbar.html' %} 
-    
+    {% include 'navbar.html' %}
 
-    {% block content %} {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
     <div class="pb-4"></div>
     <!--Footer-->
     <div class="footer" style="margin: 0;padding:0">
@@ -159,10 +168,11 @@
                 </p>
                 <div class="social-menu">
                     <ul class="row ml-1">
-                        <li><a href="https://api.whatsapp.com/send?phone=+919136869309" target="_blank" id="fb" style="color: #18EF18;"><i
-                                    class="fab fa-whatsapp"></i></a></li>
+                        <li><a href="https://api.whatsapp.com/send?phone=+919136869309" target="_blank" id="fb"
+                                style="color: #18EF18;"><i class="fab fa-whatsapp"></i></a></li>
                         <li><a href="https://www.instagram.com/invites/contact/?i=p9qsvpy88q1y&utm_content=ikrrgv9"
-                                target="_blank" id="itg" style="color:#e939ae;"><i class="fab fa-instagram"></i></a></li>
+                                target="_blank" id="itg" style="color:#e939ae;"><i class="fab fa-instagram"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -173,10 +183,10 @@
                 <ul>
                     <a href="/home">
                         <li>Home</li>
-                    </a>    
+                    </a>
                     <a href="/sell-book">
                         <li>Sell book</li>
-                    </a>                
+                    </a>
                     <a href="/about">
                         <li>About us</li>
                     </a>
@@ -202,7 +212,9 @@
             </div>
         </div>
         <div class="footer-bottom">
-            Aplepustak.com | Created with &#10084; by <a href="https://www.instagram.com/invites/contact/?i=7k565o6y5a2x&utm_content=1t2ypu2" target="_blank">developer</a>
+            Aplepustak.com | Created with &#10084; by <a
+                href="https://www.instagram.com/invites/contact/?i=7k565o6y5a2x&utm_content=1t2ypu2"
+                target="_blank">developer</a>
             <!--| created with <i class="fa fa-heart" style="font-size: 14px;color: red;"></i> by developer.-->
         </div>
     </div>

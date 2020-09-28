@@ -26,7 +26,19 @@
         margin-left: 20px;
         font-size: 11px;
     }
+    #search_bar {
+        padding-top: 20px;
+        width: 60%;
+        margin-right: auto;
 
+    }
+
+    #query {
+        border: 1px solid black;
+        margin-left: auto;
+        width: 80%;
+
+    }
 
     @media screen and (max-width: 400px) {
         .card {
@@ -45,19 +57,22 @@
             width: 238px;
             height: 130px;
         }
-
+        #search_bar {
+            width: 90%;
+            margin-left: auto;
+            margin-right: 35px;
+        }
 
 
     }
 </style>
 {% endblock %}
 {% block content %}
-<form method="GET" action="/search" class="form-inline" id="search_bar"
-    style="padding-top: 20px;width: 60%;margin-right: auto;">
+<form method="GET" action="/search" class="form-inline" id="search_bar">
 
     <input type="search" class="form-control"
         placeholder="Search stream, publication, author, edition, course, semester" aria-label="Search" name="query"
-        id="query" style="border: 1px solid black;margin-left: auto;width: 80%;">
+        id="query">
     <button class="btn btn-info" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
 
 </form>
@@ -70,12 +85,13 @@
     Suggestions:
     <ul>
         <li>Make sure that all words are spelled correctly.</li>
-        <li>Try different products.</li>
+        <li>Try different books.</li>
     </ul>
     {% endif %}
     <hr class="mb-1">
     <div class="row">
         {% for book in products %}
+        {% if book.book_stock >= 1 %}
         <div class="card-deck pr-3 pt-2" id="card-shape">
 
             <div class="card border-dark">
@@ -95,6 +111,7 @@
             </div>
         </div>
         <div class="pb-4"></div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>

@@ -23,7 +23,7 @@ class CheckoutForm(forms.Form):
     refer_code = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Enter reference code.',
         'class': 'form-control'
-    }))    
+    }), required=False)    
     save_info = forms.BooleanField(
         widget=forms.widgets.CheckboxInput(), required=False)
 

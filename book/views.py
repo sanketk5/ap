@@ -16,6 +16,7 @@ from .forms import CheckoutForm, PaymentForm, RefundForm
 from itertools import zip_longest
 from collections import OrderedDict
 import random
+import re
 
 # Create your views here.
 
@@ -112,9 +113,15 @@ class SellBook(View):
                 usr_num = self.request.POST['usr_num']
                 time = timezone.now()
 
+                #slg = bk_title + bk_stream
+                #bk_slg = re.sub(" ","-", slg)                
+                #bk = Book.objects.create(book_title=bk_title, book_mrp=bk_mrp, book_category=bk_stream, ideal_course=id_course, ideal_sem=id_sem, 
+                                                #publication_name=bk_pub,authors=bk_auth,edition=bk_edition,slug=bk_slg)
+                
+                #bk.save()   # Book is saved
                 br = BookRequests.objects.create(user=user, address=usr_adr, contact_number=usr_num ,book_title=bk_title, book_mrp=bk_mrp, book_category=bk_stream, publication_name=bk_pub,
                                                  ideal_course=id_course, ideal_sem=id_sem, authors=bk_auth, edition=bk_edition, request_date=time)
-                br.save()
+                br.save()   # Book request is saved
                 messages.info(
                     self.request, "Your request for selling a book is in process. Thank you")
                 return redirect("/home")

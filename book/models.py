@@ -18,7 +18,7 @@ class Book(models.Model):
     book_price = models.IntegerField(default=1)
     book_discount_price = models.IntegerField(blank=True, null=True)
     book_category = models.CharField(max_length=30)
-    book_stock = models.IntegerField(default=1)
+    book_stock = models.IntegerField(default=0)
     ideal_course = models.CharField(max_length=500)
     ideal_sem = models.CharField(max_length=150)
     publication_name = models.CharField(max_length=50)

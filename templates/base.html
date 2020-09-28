@@ -17,6 +17,11 @@
             padding: 0;
         }
 
+        #query {
+            width: 20px;
+            margin-left: 10px;
+        }
+
         .body-content {
             width: 100%;
             padding: 20px;
@@ -126,6 +131,7 @@
             text-align: center;
         }
 
+        
         @media screen and (max-width: 1085px) {
             .footer-items {
                 width: 50%;
@@ -141,7 +147,6 @@
                 width: 90%;
                 margin-left: auto;
                 margin-right: 35px;
-
             }
         }
     </style>
@@ -151,7 +156,7 @@
 
 <body>
     {% include 'navbar.html' %}
-
+    
 
     {% block content %}
 

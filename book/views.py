@@ -22,12 +22,14 @@ import re
 
 def home(request):
     book = Book.objects.all()
-    return render(request, 'base.html', {'books': book})
+    bk2 = book[0:12]
+    return render(request, 'base.html', {'books': bk2})
 
 
 def product(request):
     book = Book.objects.all()
-    return render(request, "product.html", {'books': book})
+    bk2 = book[0:12]
+    return render(request, "product.html", {'books': bk2})
 
 
 def about(request):
@@ -237,6 +239,8 @@ class OrderSummaryView(View):
             messages.warning(self.request, "Your cart is empty.")
             return redirect("/home")
 
+        
+
 
 class Checkoutview(View):
     def get(self, *args, **kwargs):
@@ -290,6 +294,10 @@ class Checkoutview(View):
         except ObjectDoesNotExist:
             messages.warning(self.request, "Your cart is empty.")
             return redirect("book:od-summary")
+        except DataError:
+            messages.warning(
+                self.request, "Please fill all values correctly.")
+            return redirect("products:checkout")
 
 
 class PaymentView(View):

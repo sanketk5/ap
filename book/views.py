@@ -22,13 +22,13 @@ import re
 
 def home(request):
     book = Book.objects.all()
-    bk2 = book[0:12]
+    bk2 = book[:12]
     return render(request, 'base.html', {'books': bk2})
 
 
 def product(request):
     book = Book.objects.all()
-    bk2 = book[0:12]
+    bk2 = book[:12]
     return render(request, "product.html", {'books': bk2})
 
 
@@ -140,6 +140,42 @@ class SellBook(View):
                 self.request, "Please fill all values correctly.")
             return redirect("/sell-book")
 
+
+class SellBk_b12(View):
+    def get(self, *args, **kwargs):
+        return render(self.request, 'sell_book_b12.html')
+
+    def post(self, *args, **kwargs):
+        try:
+            if self.request.user.is_authenticated:
+                print(self.request)
+                user = self.request.user
+                bk_title = self.request.POST['bk_title']
+                bk_std = self.request.POST['bk_std']
+                bk_board = self.request.POST['bk_board']                
+                bk_mrp = self.request.POST['bk_mrp']
+                usr_adr = self.request.POST['usr_adrs']
+                usr_num = self.request.POST['usr_num']
+                time = timezone.now()
+                
+                br = BookRequests.objects.create(user=user, address=usr_adr, contact_number=usr_num , standard=bk_std, 
+                book_board=bk_board, book_title=bk_title, book_mrp=bk_mrp, request_date=time)
+                br.save()   # Book request is saved
+                messages.info(
+                    self.request, "Your request for selling a book is in process. Thank you")
+                return redirect("/home")
+            else:
+                messages.info(
+                    self.request, "Please login first.")
+                return redirect("/profile/login")
+        except ValueError:
+            messages.warning(
+                self.request, "Please fill all values correctly.")
+            return redirect("/sell-book-b12")
+        except DataError:
+            messages.warning(
+                self.request, "Please fill all values correctly.")
+            return redirect("/sell-book-b12")
 
 class BookDetailView(DetailView):    
     try:

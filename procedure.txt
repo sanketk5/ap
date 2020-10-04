@@ -4,22 +4,41 @@ django-admin startproject pro_name
 create app
 django-admin startapp app_name
 
-assume your app for user_accounts name is 'accounts'
-create urls.py file in your app
+-------------------------------------------------
+Django In-built authentication :-
 
-add in your project urls.py 'path('accounts/', include('accounts.urls')),' for urls of app
+assume your app for user_accounts name is 'accounts'
 install 'django-allauth' for authentication of user_accounts
+create urls.py file in your user_accounts app
+Add this in your project urls.py for authentications url -
+path('profile/', include('django.contrib.auth.urls')),    
+
+Add this in your INSTALLED_APPS in settings.py - 
+" 'django.contrib.sites', 'allauth', 'allauth.account','allauth.socialaccount'  " 
+and also - SITE_ID = 1, 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 add in your account.models 'from django.contrib.auth.models import User'
 create register function for registration or sign-in of users
 then add line in accounts.urls 'path('register', views.register, name='register'),'
 
-pre-receive hook declined heroku django - heroku config:set DISABLE_COLLECTSTATIC=1
 
-heroku  https://git.heroku.com/aplepustak.git (fetch)
-heroku  https://git.heroku.com/aplepustak.git (push)
+--------------------------------------------------
+Django crispy-forms :-
 
-git remote add heroku git@heroku.com:https://git.heroku.com/aplepustak.git
-git remote add heroku git@heroku.com:aplepustak.git
+ install 'crispy-forms' and add in Add this in your INSTALLED_APPS in settings.py - 'crispy_forms'
+ Add this line in settings.py  - CRISPY_TEMPLATE_PACK = 'bootstrap4'
+ Create forms.py in app folder, create form and then add this line in your template where forms 
+ are used - {% load crispy_forms_tags %}
 
-https://github.com/*your*git*name*/*your*git*app*.git
+
+--------------------------------------------------
+AWS cloud service in django :- 
+
+
+
+
+

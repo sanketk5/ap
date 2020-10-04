@@ -15,8 +15,15 @@
     }
 
     #wb_photo {
+        padding-top: 10px;
         font-size: 15px;
-        font-weight: bold;
+        font-weight: bolder;
+    }
+    @media screen and (max-width: 600px) {
+        #wb_photo, #info {
+            font-size: 15px;
+        }
+        
     }
 </style>
 {% endblock %}
@@ -27,7 +34,7 @@
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-9">
-            <h2 class="my-4 h2 text-center">Sell a book</h2>
+            <h2 class="my-4 h2 text-center">Other course book</h2>
             <div class="card">
                 <form method="POST" class="card-body">
                     {% csrf_token %}
@@ -78,33 +85,33 @@
                         </div>
                         <div class="md-form">
                             <label id="bk_stream" class="ml-2">Address </label>
-                            <input type="text" class="form-control"
-                                placeholder="Enter your address..." id="shipping_address"
-                                name="usr_adrs" required>
+                            <input type="text" class="form-control" placeholder="Enter your address..."
+                                id="shipping_address" name="usr_adrs" required>
                         </div>
                         <div class="md-form">
                             <label id="bk_stream" class="ml-2">Contact number </label>
-                            <input type="text" class="form-control"
-                                placeholder="Enter your contact number..." id="shipping_address"
-                                name="usr_num" required>
+                            <input type="text" class="form-control" placeholder="Enter your contact number..."
+                                id="shipping_address" name="usr_num" required>
                         </div>
                     </div>
 
-                    <div class="card-body">
-                        <p id="wb_photo">After submitting all books information send cover(front page), backside, edition page photos to this WhatsApp number
-                            <a href="https://api.whatsapp.com/send?phone=+919136869309"
-                                target="_blank">+91-9136869309</a>
-                        </p>
-                        <p>Seller will get minimum 45% of the Book MRP. <br>Our customer support team contact you in
-                            next couple of working hours.</p>
-                        <hr class="mb-4">
 
-                        <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">Submit</button>
-                    </div>
+                    <p id="wb_photo">After submitting all books information send cover(front page), backside,
+                        edition page photos to this WhatsApp number
+                        <a href="https://api.whatsapp.com/send?phone=+919136869309" target="_blank">+91-9136869309</a>
+                    </p>
+                    <p id="info">Seller will get minimum 45% of the Book MRP. <br>Our customer support team contact you in
+                        next couple of working hours.<br>If you sell your books at your own then please inform us
+                        <a href="https://api.whatsapp.com/send?phone=+919136869309" target="_blank">+91-9136869309.</a>
+                    </p>
+                    <hr class="mb-4">
+
+                    <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">Submit</button>
+
                 </form>
             </div>
 
-            
+
 
         </div>
 

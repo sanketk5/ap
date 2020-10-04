@@ -11,6 +11,7 @@ urlpatterns = [
     path('home/', views.product, name='home'),
     path('about/', views.about, name='about'),
     path('my-profile/', views.Myprofile.as_view(), name='profile'),
+    path('sell-book-b12/', views.SellBk_b12.as_view(), name='sell-book-b12'),
     path('sell-book/', views.SellBook.as_view(), name='sell-book'),
     path('terms_and_conditions/', views.t_and_c, name='t_and_c'),
     path('search/', views.search, name='search'),

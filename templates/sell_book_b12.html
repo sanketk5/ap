@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block extra_head %}
+<style type="text/css">
+    #bk_title,
+    #bk_std,
+    #bk_board,
+    #bk_mrp,
+    #usr_adr,
+    #usr_num {
+        font-weight: bolder;
+        padding-top: 20px;
+    }
+
+    #wb_photo {
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    @media screen and (max-width: 600px) {
+        .bt {
+            font-size: 20px;
+        }
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+
+<div class="container wow fadeIn">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-9">
+            <h2 class="my-4 h2 text-center bt">Below standard 12th book</h2>
+            <form method="POST" class="card-body">
+                {% csrf_token %}
+                <div class="card">
+                    <form method="POST" class="card-body">
+                        <div class="hideable_shipping_form m-3">
+
+                            <div class="md-form mb-2">
+                                <label id="bk_title" class="ml-2">Book title </label>
+                                <input type="text" class="form-control" placeholder="Enter subject name of the book "
+                                    id="shipping_address" name="bk_title">
+                            </div>
+                            <div class="md-form">
+                                <label id="bk_std" class="ml-2">Standard / class </label>
+                                <input type="text" class="form-control" placeholder="Ex - 5,6,9,10,etc.,"
+                                    id="shipping_address" name="bk_std">
+                            </div>
+                            <div class="md-form">
+                                <label id="bk_board" class="ml-2">Board name </label>
+                                <input type="text" class="form-control" placeholder="Ex-ICSE, CBSE, Maharashtra"
+                                    id="shipping_address" name="bk_board">
+                            </div>
+                            <div class="md-form">
+                                <label id="bk_mrp" class="ml-2">Book MRP </label>
+                                <input type="text" class="form-control" placeholder="Enter MRP of the book"
+                                    id="shipping_address" name="bk_mrp">
+                            </div>
+                            <div class="md-form">
+                                <label id="usr_adr" class="ml-2">Address </label>
+                                <input type="text" class="form-control" placeholder="Enter your address..."
+                                    id="shipping_address" name="usr_adrs" required>
+                            </div>
+                            <div class="md-form">
+                                <label id="usr_num" class="ml-2">Contact number </label>
+                                <input type="text" class="form-control" placeholder="Enter your contact number..."
+                                    id="shipping_address" name="usr_num" required>
+
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-body">
+                        <p id="wb_photo">Send cover(front page) and backside photos to this WhatsApp number <a
+                                href="https://api.whatsapp.com/send?phone=+919136869309"
+                                target="_blank">+91-9136869309</a> </p>
+                        <p>Seller will get minimum 45% of the Book MRP. <br>Our customer support team contact you in
+                            next couple of working hours. <br>If you sell your books at your own then please inform us
+                            <a href="https://api.whatsapp.com/send?phone=+919136869309"
+                                target="_blank">+91-9136869309.</a></p>
+                        <hr class="mb-4">
+
+                        <button class="btn btn-primary btn-lg btn-block mt-4" type="submit">Submit</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+{% endblock %}

@@ -3,8 +3,8 @@ from . models import Profile, User
 # Register your models here.
 
 class UserAdmin(admin.ModelAdmin):
-    list_display=('username','first_name','email', 'is_staff','is_superuser','is_active',)
-    list_editable=('is_active','is_staff','is_superuser',)
+    list_display=('username','first_name','is_staff','is_superuser','is_active',)
+    #list_editable=('is_active','is_staff','is_superuser',)
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'refer_code','contact_no', 'refer_order',)

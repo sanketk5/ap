@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
     <!--This CSS file.-->
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <style type="text/css">
@@ -84,6 +85,23 @@
             color: #ff9800;
         }
 
+        #fb:hover {
+            color: #18EF18;
+
+        }
+
+        #itg:hover {
+            color: #e939ae;
+        }
+
+        .social-menu .fab {
+            font-size: 25px;
+            line-height: 50px;
+            transition: 0.6s;
+            text-align: center;
+        }
+
+
         .footer-items ul li {
             margin: 10px 0;
             height: 25px;
@@ -101,6 +119,7 @@
             text-align: center;
         }
 
+
         @media screen and (max-width: 1085px) {
             .footer-items {
                 width: 50%;
@@ -110,6 +129,12 @@
         @media screen and (max-width: 600px) {
             .footer-items {
                 width: 100%;
+            }
+
+            #search_bar {
+                width: 90%;
+                margin-left: auto;
+                margin-right: 35px;
             }
         }
     </style>
@@ -188,6 +213,15 @@
                 <h1 class="h-1">Aplepustak</h1>
                 <p>Customer satisfaction is the first priority for us.
                 </p>
+                <div class="social-menu">
+                    <ul class="row ml-1">
+                        <li><a href="https://api.whatsapp.com/send?phone=+919136869309" target="_blank" id="fb"
+                                style="color: #18EF18;"><i class="fab fa-whatsapp"></i></a></li>
+                        <li><a href="https://www.instagram.com/invites/contact/?i=p9qsvpy88q1y&utm_content=ikrrgv9"
+                                target="_blank" id="itg" style="color:#e939ae;"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <!-- This is for menu in footer. -->
             <div class="footer-items">
@@ -211,7 +245,9 @@
                 <h2 class="h-2">Contact us</h2>
                 <div class="border"></div>
                 <ul>
-                    <li><i class="fa fa-map-marker" aria-hidden='true'></i>Safed Pul, Mumbai-400072</li>
+                    <li><i class="fa fa-map-marker" aria-hidden='true'></i><a
+                            href="http://maps.google.com/?q=Safed Pul, Saki Naka, Mumbai, Maharashtra" target="_blank">Safed
+                        Pul, Mumbai-400072</a></li>
                     <li><i class="fa fa-phone fa-flip-horizontal" aria-hidden='true'></i><a
                             href="tel:+91-9136869309">+91-9136869309</a>
                     </li>

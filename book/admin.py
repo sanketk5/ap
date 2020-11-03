@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book, OrderProduct, Order, Address, Refund, Payment, BookRequests
+from .models import Book, OrderProduct, Order, Address, Refund, Payment, BookRequests, Messages
 # Register your models here.
 
 def make_refund_accepted(modeladmin, request, quesryset):
@@ -49,6 +49,9 @@ class RefundAdmin(admin.ModelAdmin):
     list_display = ('order', 'reason', 'email', 'accepted')
     list_editable = ('accepted',)
 
+class MessagesAdmin(admin.ModelAdmin):
+    list_display = ('contact_no', 'message')    
+
 admin.site.site_header = "Aplepustak admin panel"
 admin.site.site_title = "Log in to Aplepustak"
 admin.site.index_title = "Welcome to the Aplepustak admin panel"
@@ -59,3 +62,4 @@ admin.site.register(Order, OrderAdmin)
 admin.site.register(Payment, PaymentAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Refund, RefundAdmin)
+admin.site.register(Messages, MessagesAdmin)

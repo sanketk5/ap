@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-info sticky-top" style="background-color: #f3d21a;">
+<nav class="navbar navbar-expand-sm navbar-info sticky-top navbar-light" style="background-color: #10a6f7;">
     <a class="navbar-brand" href="/home">Aplepustak</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapse_target"
         aria-controls="collapse_target" aria-expanded="false" aria-label="Toggle navigation"
@@ -10,7 +10,7 @@
 
     <div class="collapse navbar-collapse" id="collapse_target">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-home mr-3" id="home-tag"><a href="/home" class="nav-link">Home</a></li>
+            <li class="nav-home mr-3" id="home-tag" style="color: red;"><a href="/home" class="nav-link">Home</a></li>
             </li>
             <li class="nav-item mr-3"><a href="/about" class="nav-link">About us</a></li>
             <li class="nav-item dropdown mr-3">
@@ -52,14 +52,14 @@
                 </div>
             </li>
             <li class="nav-item mr-3" id="my-cart" style="font-size: 27px">
-                <a href="{% url 'book:od-summary' %}"><i class="fas fa-shopping-cart" style="color:#2289e9"></i></a>
+                <a href="{% url 'book:od-summary' %}"><i class="fas fa-shopping-cart" style="color:#F7A710"></i></a>
             </li>
             {% else %}
             <li class="nav-login mr-3"><a href="/profile/login/" class="nav-link">Login</a></li>
             {% endif %}
         </ul>
         {% if user.is_superuser or user.is_staff %}
-        <a href="/admin" class='btn btn-outline-success ml-1 mt-1' target='_blank'>Admin</a>
+        <a href="/admin" class='btn btn-success ml-1 mt-1' target='_blank'>Admin</a>
         {% else %}
         {% endif %}
     </div>

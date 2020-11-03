@@ -197,3 +197,14 @@ class BookRequests(models.Model):
 
     class Meta:
         verbose_name_plural = 'Book requests'
+
+
+class Messages(models.Model):
+    contact_no = models.CharField(max_length=20, blank=True, null=True)
+    message = models.TextField(max_length=500, blank=True, null=True)
+
+    def __str__(self):
+        return self.contact_no
+
+    class Meta:
+        verbose_name_plural = 'Messages'

@@ -205,8 +205,8 @@
                     <div class="border"></div>
                     <ul>
                         <li><i class="fa fa-map-marker" aria-hidden='true'></i><a
-                                href="http://maps.google.com/?q=Safed Pul, Saki Naka, Mumbai, Maharashtra"></a>Safed
-                            Pul, Mumbai-400072</li>
+                                href="http://maps.google.com/?q=Safed Pul, Saki Naka, Mumbai, Maharashtra" target="_blank">Safed
+                            Pul, Mumbai-400072</a></li>
                         <li><i class="fa fa-phone fa-flip-horizontal" aria-hidden='true'></i><a
                                 href="tel:+91-9136869309">+91-9136869309</a>
                         </li>
@@ -217,11 +217,25 @@
 
                 </div>
             </div>
+
+             <!-- This is for message from user. -->
+            <div class="footer-items" id="msg_form">    
+                <h2 class="h-2">Any queries</h2>
+                <div class="border" id="bdr"></div>            
+                <form action="/message/" style="padding-top: 10px;" method="POST">
+                    {% csrf_token %}
+                    <label for="cn" style="color: white;">Contact no:</label>
+                    <input type="text" name="cn" size="21" required><br>
+                    <label for="mg" style="color: white;">Message :&nbsp;</label>
+                    <textarea id = "msg" name="msg" rows="3" cols="25" required></textarea>
+                    <button class="btn btn-info btn-sm mb-0" id="fsub" type="submit">Submit</button>
+                </form>
+            </div>
         </div>
         <div class="footer-bottom">
             Aplepustak.com | Created with &#10084; by <a
                 href="https://www.instagram.com/invites/contact/?i=7k565o6y5a2x&utm_content=1t2ypu2"
-                target="_blank">developer</a>
+                target="_blank">Developer  &#128515;</a>
             <!--| created with <i class="fa fa-heart" style="font-size: 14px;color: red;"></i> by developer.-->
         </div>
     </div>

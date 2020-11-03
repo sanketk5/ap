@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from django.utils import timezone
 from django.db.utils import DataError
-from .models import Book, OrderProduct, Order, Address, Refund, Payment, BookRequests
+from .models import Book, OrderProduct, Order, Address, Refund, Payment, BookRequests, Messages
 from accounts.models import Profile
 from .forms import CheckoutForm, PaymentForm, RefundForm
 from itertools import zip_longest
@@ -468,3 +468,17 @@ class RefundRequestView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "This order is not exist.")
                 return redirect("/request-refund/")
+
+def message_new(request):
+    try:
+        contact_no = request.POST['cn']
+        msg = request.POST['msg']
+        ms = Messages.objects.create(contact_no=contact_no, message=msg)
+        ms.save()
+        messages.info(
+                        request, "Your message is succesfully recieved.")
+        return redirect("/home/")
+    except DataError:
+        messages.info(
+                        request, "Please fill details carefully.")
+        return redirect("/home/")

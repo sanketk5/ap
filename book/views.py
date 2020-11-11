@@ -473,7 +473,7 @@ def message_new(request):
     try:
         contact_no = request.POST['cn']
         msg = request.POST['msg']
-        ms = Messages.objects.create(contact_no=contact_no, message=msg)
+        ms = Messages.objects.create(contact_no=contact_no, message=msg, message_time=timezone.now())
         ms.save()
         messages.info(
                         request, "Your message is succesfully recieved.")

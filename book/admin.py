@@ -50,7 +50,7 @@ class RefundAdmin(admin.ModelAdmin):
     list_editable = ('accepted',)
 
 class MessagesAdmin(admin.ModelAdmin):
-    list_display = ('contact_no', 'message')    
+    list_display = ('contact_no', 'message', 'message_time')    
 
 admin.site.site_header = "Aplepustak admin panel"
 admin.site.site_title = "Log in to Aplepustak"

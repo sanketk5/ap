@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',      # Django-admin theme app
+    'colorfield',   # Django-admin theme app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',  # new
     'allauth.socialaccount',  # new
     'allauth.socialaccount.providers.google',  # new
-    'crispy_forms',  # new
+    'crispy_forms',  # new    
     'accounts.apps.AccountsConfig',  # New custom made app
     'book.apps.BookConfig',  # New custom made app
     'storages',   # App for storages

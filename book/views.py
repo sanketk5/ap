@@ -27,7 +27,7 @@ def home(request):
 
 
 def product(request):
-    book = Book.objects.all()
+    book = Book.objects.all()    
     bk2 = book[:12]
     return render(request, "product.html", {'books': bk2})
 

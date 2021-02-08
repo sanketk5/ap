@@ -52,9 +52,9 @@ class RefundAdmin(admin.ModelAdmin):
 class MessagesAdmin(admin.ModelAdmin):
     list_display = ('contact_no', 'message', 'message_time')    
 
-#admin.site.site_header = "Aplepustak admin panel"
+admin.site.site_header = "Aplepustak admin panel"
 admin.site.site_title = "Log in to Aplepustak"
-#admin.site.index_title = "Welcome to the Aplepustak admin panel"
+admin.site.index_title = "Welcome to the Aplepustak admin panel"
 admin.site.register(Book, BookAdmin)
 admin.site.register(BookRequests, BookRequestAdmin)
 admin.site.register(OrderProduct, OrderProductAdmin)

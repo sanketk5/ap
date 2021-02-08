@@ -145,8 +145,8 @@ STATIC_URL = '/static/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-AWS_ACCESS_KEY_ID = 'AKIA3IZVWH7EV6UIEIPU'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIA3IZVWH7E3QYE7LPX'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'aplepustak-bkt'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None

@@ -138,13 +138,6 @@ LOGOUT_REDIRECT_URL = '/home'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# AWS_ACCESS_KEY_ID = 'AKIA3IZVWH7E3QYE7LPX'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'aplepustak-bkt'
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAULT_ACL = None
-# AWS_S3_REGION_NAME = 'ap-south-1'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')]

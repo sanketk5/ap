@@ -1,91 +1,180 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block extra_head %}
+    <style>
+        .container_payment {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            min-height: 100vh;
+            background: #fff;
+        }
 
-<div class="container wow fadeIn">
-    <div class="row">
+        .container_payment form {
+            padding: 20px;
+            width: 700px;
+            background: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
 
-        <div class="col-md-12 mb-4">
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+        }
 
-            <h2 class="my-4 h2 text-center">Payment</h2>
-            <div class="card">
+        .container_payment form .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
 
-                <form method="POST" class="card-body m-auto">
-                    <h4 class="mb-1 ml-2">Select payment type</h4>
+        .container_payment form .row .col {
+            flex: 1 1 250px;
+        }
 
-                    <div class="d-block my-3 ml-2">
-                        {% for value,name in form.fields.payment_option.choices %}
-                        <div class="custom-control custom-radio">
-                            <input type="radio" name="payment_option" id="{{ name }}" value="{{ value }}"
-                                class="custom-control-input" required>
-                            <label for="{{ name }}" class="custom-control-label">{{ name }}</label>
-                        </div>
-                        {% endfor %}
+        .container_payment form .row .col .title {
+            font-size: 20px;
+            color: #333;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .container_payment form .row .col .inputBox {
+            margin: 15px 0;
+        }
+
+        .container_payment form .row .col .inputBox span {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .container_payment form .row .col .inputBox input {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 10px 5px;
+            font-size: 15px;
+            text-transform: none;
+        }
+
+        .container_payment form .row .col .inputBox input:focus {
+            border: 1px solid #000;
+        }
+
+        .container_payment form .row .col .flex {
+            display: flex;
+            gap: 15px;
+        }
+
+        .container_payment form .row .col .flex .inputBox {
+            margin-top: 5px;
+        }
+
+        .container_payment form .row .col .inputBox img {
+            height: 34px;
+            margin-top: 5px;
+            filter: drop-shadow(0 0 1px #000);
+        }
+
+        .container_payment form .submit-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+            background: #e74c3c;
+            color: #fff;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+
+        .myDiv {
+            display: none;
+
+        }
+
+        * {
+            margin: auto;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+
+    <div class="container_payment" style="padding-bottom: 100px;">
+
+        <form method="POST">
+            {% csrf_token %}
+            <h3 class="title">Select Payment Method</h3>
+
+            <br><input type="radio" name="payment_option" value="COD"/> Cash On delivery&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input
+                    type="radio" name="payment_option" value="onlinePay"/> UPI
+
+
+            <div class="row">
+
+                <div class="col myDiv" id="onlinePay">
+
+
+                    <div class="inputBox">
+                        <span>Online Payment Accepted :</span>
+                        <img src="./images/card_img.png" alt="">
                     </div>
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-8 mb-3 ml-4">
-                            <h5>Steps for UPI payment </h5>
-                            <dl>
-                                <dt class="mt-2">Step 1:</dt>
-                                <dd>Open or Go to any web or mobile application which supports UPI transaction.</dd>
-                                <dt>Step 2:</dt>
-                                <dd>Enter payee(company) UPI ID - 828671007401@ippb to make payment.</dd>
-                                <dt>Step 3:</dt>
-                                <dd>Enter <b>&#8377 {{ order.total_od_price }} </b> (order total of your cart) in amount
-                                    to
-                                    be transfered.
-                                </dd>
-                                <dt>Step 4:</dt>
-                                <dd>After transaction is completed, Please enter name of payment sender in the
-                                    respective box.</dd>
-                            </dl>
-                            <h5><u>Message</u> - After completing payment our customer service team contact you in next
-                                couple of hours.
-                            </h5>
-                            <div class="md-form mb-2">
-                                <label for="payment_sender_name" class="mt-1"><b>Sender Name :-</b></label>
-                                {{ form.payment_sender_name }}
-                            </div>
-                        </div>
+                    <div class="inputBox">
+                        <span>To UPI ID :</span>
+                        <input type="text" value="pachputesanket1@okaxis" readonly>
                     </div>
-                    <hr class="mb-1">
-                    <button class="btn btn-primary btn-block" type="submit">Confirm order</button>
-                </form>
+                    <div class="inputBox">
+                        <span>total amount to pay (In Rupee) :</span>
+                        <input type="text" value=" {{ order.total_od_price }} " readonly>
+                    </div>
+                    <div class="inputBox">
+                        <span>number of item :</span>
+                        <input type="number" value="{{ order.get_total_quantity }}" readonly>
+                    </div>
+
+
+                    <p>
+
+                        <b>Steps For UPI Payment</b><br>
+                        Step 1: Open or Go to any web or mobile application which supports UPI
+                        transaction.<br><br>
+                        Step 2: Enter payee(company) UPI ID - pachputesanket1@okaxis to make payment.
+                        <br><br>
+                        Step 3: Enter {{ order.total_od_price }} (order total of your cart) in amount to be transferred.
+                        <br><br>
+                        Step 4: After transaction is completed, Please enter name of payment
+                        sender in the respective box. <br> <br>
+                        <b> Message- After completing payment our customer service team contact
+                            you in next couple of hours.
+                        </b>
+                        <br>
+                        <br>
+
+
+                    </p>
+
+                    <div class="inputBox">
+                        <span>Sender's name :</span>
+                        {{ form.payment_sender_name }}
+                    </div>
+
+                </div>
+
+
             </div>
-        </div>
 
-        <div class="col-lg-12 mt-2">
-            <h4 class="d-flex justify-content-between align-content-center mb-3">
-                <span class="text-muted mt-4">Your Cart</span>
-                <span class="badge badge-secondary badge-pill mt-4">{{ order.products.count }}</span>
-            </h4>
-            <ul class="list-group mb-3">
-                {% for order_item in order.products.all %}
-                <li class="list-group-item d-flex justify-content-between lh-condenced">
-                    <div>
-                        <h6 class="my-0">{{ order_item.product.book_title }}</h6>
-                        <small class="text-muted">Quantity :- {{ order_item.get_total_quantity }}</small>
-                    </div>
+            <input type="submit" value="proceed to payment" class="submit-btn">
 
-                    {% if order_item.product.book_discount_price %}
-                    <span class="text-muted"></span>&#8377 {{ order_item.get_total_cart_discount_price }}</span>
-                    {% else %}
-                    <span class="text-muted"></span>&#8377 {{ order_item.get_total_cart_price }}</span>
-                    {% endif %}
-                </li>
-                {% endfor %}
-
-                <li class="list-group-item d-flex justify-content-between lh-condenced">
-                    <div>
-                        <h6 class="my-0">Total :</h6>
-                        <small class="text-muted"></small>
-                    </div>
-                    <span class="text-bold">&#8377 {{ order.total_od_price }}</span>
-                </li>
-            </ul>
-
-        </div>
+        </form>
 
     </div>
-</div>
+
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $(document).ready(function () {
+            $('input[type="radio"]').click(function () {
+                var demovalue = $(this).val();
+                $("div.myDiv").hide();
+                $("#" + demovalue).show();
+            });
+        });
+    </script>
 
 {% endblock %}

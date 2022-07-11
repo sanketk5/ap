@@ -1,252 +1,912 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
 
 <head>
-    <title>Aplepustak {% block title %}{% endblock %}</title>
+    <title>Greenkys {% block title %}{% endblock %}</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
-    <link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <style type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,600&display=swap" rel="stylesheet">
+
+    <!-- Animate On Scroll -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <title>Navbar & Footer!</title>
+    <style>
+        /*
+======================
+Reset
+======================
+*/
+
+        :root {
+            /* --primaryColor: #f1f1f1; */
+            /* --primaryColor: #d1e2e9; */
+            /* --primaryColor: #ffdef4; */
+
+            --primaryColor: #f39179;
+            --black: #222;
+            --black2: #555;
+            --black3: #252525;
+            --black4: #000;
+            --black5: #212529;
+            --orange: #eb0028;
+            --white: #fff;
+            --grey: #959595;
+            --grey2: #666;
+            --grey3: #ccc;
+            --secondaryColor: #2b1f4d;
+            --yellow: #ffcc00;
+            --green: #59b210;
+            --blue: rgb(56, 10, 223);
+
+        }
+
         * {
             margin: 0;
             padding: 0;
+
         }
 
-        #query {
-            width: 20px;
-            margin-left: 10px;
-        }
-
-        .body-content {
-            width: 100%;
-            padding: 20px;
-            text-align: justify;
+        html {
+            font-size: 62.5%;
             box-sizing: border-box;
-            font-size: 18px;
+            scroll-behavior: smooth;
         }
 
-        .footer {
-            width: 100%;
-            background: #00121b;
-            display: block;
+        body,
+        input {
+            font-size: 1.6rem;
+            font-weight: 400;
+            font-family: 'Poppins', sans-serif;
+            color: var(--black);
         }
 
-        .inner-footer {
-            width: 95%;
-            margin: auto;
-            padding: 30px 10px;
-            display: flex;
-            flex-wrap: wrap;
-            box-sizing: border-box;
-            justify-content: center;
-        }
-
-        .footer-items {
-            width: 25%;
-            padding: 10px 20px;
-            box-sizing: border-box;
-        }
-
-        .h-1 {
-            padding: 10px 0;
-            font-size: 25px;
-            color: #fff;
-        }
-
-        .footer-items p {
-            color: grey;
-            font-size: 16px;
-            text-align: justify;
-            line-height: 25px;
-        }
-
-        .h-2 {
-            color: grey;
-            margin: 10px 0;
-            font-size: 16px;
-            font-weight: lighter;
-            text-transform: uppercase;
-        }
-
-        .footer-items .border {
-            height: 2px;
-            width: 100px;
-            background-color: red;
-        }
-
-        .footer-items ul {
-            list-style: none;
-            letter-spacing: 0.5px;
-            font-size: 15px;
-            color: #fff;
-        }
-
-        .footer-items ul a {
+        a {
             text-decoration: none;
-            outline: none;
-            color: #fff;
-            transition: 0.3s;
         }
 
-        .footer-items ul a:hover {
-            color: #ff9800;
+        ul {
+            list-style: none;
         }
 
-        #fb:hover {
-            color: #18EF18;
-
+        img {
+            max-width: 100%;
         }
 
-        #itg:hover {
-            color: #e939ae;
+        h3,
+        h4 {
+            font-weight: 500;
         }
 
-        .social-menu .fab {
-            font-size: 25px;
-            line-height: 50px;
-            transition: 0.6s;
-            text-align: center;
+        /*
+======================
+Header
+======================
+*/
+
+        #pre-loader {
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            z-index: 999999;
+            background-color: var(--white);
+            transition: all 300ms ease-in-out;
         }
 
-
-        .footer-items ul li {
-            margin: 10px 0;
-            height: 25px;
+        .loader {
+            height: 100vh;
+            width: 100vw;
+            background: url("./images/loader.svg") center/30rem no-repeat fixed;
         }
 
-        .footer-items li i {
-            margin-right: 20px;
+        #pre-loader.hide {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        .footer-bottom {
-            padding: 10px;
-            background: #3d545f;
-            color: #fff;
-            font-size: 12px;
-            text-align: center;
-        }
-
-
-        @media screen and (max-width: 1085px) {
-            .footer-items {
-                width: 50%;
+        @media only screen and (max-width: 567px) {
+            .loader {
+                background-size: 20rem;
             }
         }
 
-        @media screen and (max-width: 600px) {
-            .footer-items {
+
+        .header {
+            position: relative;
+        }
+
+        .container_home {
+            max-width: 117rem;
+            margin: 0 auto;
+            padding: 0 1.6rem;
+        }
+
+
+        /*
+======================
+Navigation
+======================
+*/
+
+        .navigation {
+            position: relative;
+            height: 7rem;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+        }
+
+        .nav_base {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            height: 7rem;
+            padding: 0 1rem;
+        }
+
+        .fix__nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            z-index: 1200;
+        }
+
+        .nav__logo a {
+            font-size: 2.5rem;
+            color: var(--black);
+            padding: 1 . rem;
+            font-weight: 700;
+        }
+
+        .nav__hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .nav__hamburger svg {
+            height: 2.3rem;
+            width: 2.3rem;
+        }
+
+        .menu__top {
+            display: none;
+        }
+
+        /* .nav__menu {
+  width: 50%;
+} */
+
+        .nav__list {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 50%;
+        }
+
+        .nav__item:not(:last-child) {
+            margin-right: 1.6rem;
+        }
+
+        .nav__list .nav__link:link,
+        .nav__list .nav__link:visited {
+            display: inline-block;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            color: var(--black);
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav__list .nav__link:hover {
+            color: var(--orange);
+        }
+
+        .nav__icons {
+            display: flex;
+            position: relative;
+        }
+
+        .nav__icons .icon__item img {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+
+        .nav__icons .icon__item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.7rem;
+            border: 1px solid var(--black);
+            border-radius: 50%;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .nav__icons .icon__item:link,
+        .nav__icons .icon__item:visited {
+            color: var(--black);
+        }
+
+        .nav__icons .icon__item:hover {
+            background-color: var(--primaryColor);
+            border: 1px solid var(--black);
+        }
+
+        .nav__icons .icon__item:not(:last-child) {
+            margin-right: 1rem;
+        }
+
+        .nav__icons #cart__total {
+            font-size: 1rem;
+            position: absolute;
+            top: 2px;
+            right: -6px;
+            background-color: var(--primaryColor);
+            padding: 0.2rem 0.4rem;
+            border-radius: 100%;
+
+        }
+
+
+        .page__titles a {
+            margin-right: 2rem;
+        }
+
+        .page__titles a svg {
+            width: 1.8rem;
+            height: 1.8rem;
+            fill: var(--grey2);
+        }
+
+
+        .login-form form,
+        .sign-up-form form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .login-form strong,
+        .sign-up-form strong {
+            color: #272727;
+            font-size: 2rem;
+            margin: 2px 7px 7px 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .login-form input,
+        .sign-up-form input {
+            width: 90%;
+            height: 45px;
+            margin: 6px;
+            padding: 0px 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            outline: none;
+            border-radius: 7px;
+        }
+
+        .login-form input::placeholder,
+        .sign-up-form input::placeholder {
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .login-form input[type="submit"],
+        .sign-up-form input[type="submit"] {
+            background-color: var(--primaryColor);
+            color: #ffffff;
+            border: none;
+            outline: none;
+            text-transform: uppercase;
+            margin-top: 10px;
+            border-radius: 3px;
+            box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .form-btns a {
+            color: #4d4d4d;
+            /* font-size: 0.9rem; */
+        }
+
+
+        .login-active,
+        .login-active .login-form {
+            display: flex;
+            animation: fade 0.3s;
+        }
+
+        .sign-up-active,
+        .sign-up-active .sign-up-form {
+            display: flex;
+            animation: fade 0.3s;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /*
+======================
+Navigation Media Query
+======================
+*/
+        @media only screen and (max-width: 768px) {
+            .nav__menu {
+                position: fixed;
+                top: 0;
+                left: -30rem;
+                width: 0;
+                background-color: var(--white);
+                z-index: 9990;
+                height: 100%;
+                transition: all 0.5s;
+            }
+
+            .nav__menu.open {
+                left: 30rem;
+                width: 30rem;
+            }
+
+            .nav__logo {
+                width: 50%;
+            }
+
+            .nav__hamburger {
+                display: block;
+            }
+
+            .menu__top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: var(--primaryColor);
+                padding: 1.8rem 1rem;
+            }
+
+            .menu__top svg {
+                height: 1.6rem;
+                width: 1.6rem;
+                fill: var(--primaryColor);
+            }
+
+            .nav__category {
+                color: var(--white);
+                font-size: 2.3rem;
+                font-weight: 700;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                align-items: start;
+                padding: 1.6rem 1rem;
+            }
+
+            .nav__item:not(:last-child) {
+                margin-right: 0;
+            }
+
+            .nav__item {
                 width: 100%;
             }
 
-            #search_bar {
-                width: 90%;
-                margin-left: auto;
-                margin-right: 35px;
+            .nav__list .nav__link:link,
+            .nav__list .nav__link:visited {
+                padding: 1.6rem 0;
+                width: 100%;
+                color: var(--grey2);
+            }
+
+            body.active::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 110%;
+                background: var(--black) none no-repeat 0 0;
+                opacity: 0.7;
+                z-index: 999;
+                transition: 0.8s;
             }
         }
+
+        @media only screen and (max-width: 568px) {
+            .nav__icons .icon__item img {
+                width: 1.4rem;
+                height: 1.4rem;
+            }
+
+            .nav__icons .icon__item {
+                padding: 0.4rem;
+            }
+        }
+
+        .alert {
+            padding: 20px;
+            background-color: #4ba6e3;
+            color: white;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .closebtn:hover {
+            color: black;
+        }
+
+        /*-------------------Footer-----------------------------*/
+        /* Search Bar CSS */
+
+        .openBtn {
+
+            border: none;
+            padding: 10px 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .overlay {
+            height: 9%;
+            width: 100%;
+            display: none;
+            position: fixed;
+            z-index: 1;
+            top: 40px;
+            left: 0;
+        }
+
+        .overlay-content {
+            position: relative;
+            top: 50%;
+            width: 80%;
+            text-align: center;
+            margin-top: 30px;
+            margin: auto;
+        }
+
+        .overlay .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            font-size: 50px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .overlay .closebtn:hover {
+            color: #ccc;
+        }
+
+        .overlay input[type=text] {
+            padding: 15px;
+            font-size: 15px;
+            border: none;
+            float: left;
+            width: 80%;
+            background: white;
+        }
+
+        .overlay button {
+
+            width: 5%;
+            padding: 15px;
+            background: #ddd;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .overlay button:hover {
+            background: #bbb;
+        }
+
+        --------------------------------------------------------------------
+            /*
+    ======================
+    Footer
+    ======================
+    */
+        #footer {
+            background-color: var(--black3);
+            padding: 6rem 1rem;
+            line-height: 3rem;
+        }
+
+        .footer-top__box span svg {
+            width: 1.6rem;
+            height: 1.6rem;
+            fill: var(--grey3);
+        }
+
+        .footer-top__box span {
+            margin-right: 1rem;
+        }
+
+        .footer__top {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            color: var(--grey3);
+        }
+
+        .footer-top__box a:link,
+        .footer-top__box a:visited {
+            display: block;
+            color: var(--grey);
+            font-size: 1.4rem;
+            transition: 0.6s;
+        }
+
+        .footer-top__box a:hover {
+            color: var(--orange);
+        }
+
+        .footer-top__box div {
+            color: var(--grey);
+            font-size: 1.4rem;
+        }
+
+        .footer-top__box h3 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        @media only screen and (max-width: 998px) {
+            .footer__top {
+                grid-template-columns: repeat(2, 1fr);
+                row-gap: 2rem;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .footer__top {
+                grid-template-columns: 1fr;
+                row-gap: 2rem;
+            }
+        }
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 2px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+
+            background-color: var(--primaryColor);
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .contact_form {
+            border-radius: 5px;
+
+            padding-right: 20px;
+        }
+
     </style>
     {% block extra_head %}{% endblock %}
 
 </head>
 
 <body>
-    {% include 'navbar.html' %}
+<!-- Header -->
+<header id="header" class="header">
+    <div class="navigation">
+        <div class="container_home">
+            <div class="nav_base">
+                <div class="nav__hamburger">
+                    <img src="{% static './images/icons/hamburger.svg' %}"/>
+
+                </div>
+
+                <div class="nav__logo">
+                    <a href="/home/" class="scroll-link">
+                        Greenkys
 
 
-    {% block content %}
-
-    {% endblock %}
-    <div class="pb-4"></div>
-    <!--Footer-->
-    <div class="footer" style="margin: 0;padding:0">
-        <!--Footer content -->
-        <div class="inner-footer">
-            <!-- This is for comapny name and its info.  -->
-            <div class="footer-items">
-                <h1 class="h-1">Aplepustak</h1>
-                <p>Customer satisfaction is the priority for us.
-                </p>
-                <div class="social-menu">
-                    <ul class="row ml-1">
-                        <li><a href="https://api.whatsapp.com/send?phone=+919136869309" target="_blank" id="fb"
-                                style="color: #18EF18;"><i class="fab fa-whatsapp"></i></a></li>
-                        <li><a href="https://www.instagram.com/invites/contact/?i=p9qsvpy88q1y&utm_content=ikrrgv9"
-                                target="_blank" id="itg" style="color:#e939ae;"><i class="fab fa-instagram"></i></a>
+                    </a>
+                </div>
+                <div class="nav__menu">
+                    <div class="menu__top">
+                        <span class="nav__category">Greenkys</span>
+                        <a class="close__toggle">
+                            <img src="{% static './images/icons/close.svg' %}"/>
+                        </a>
+                    </div>
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="/" class="nav__link">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="/sell-book" class="nav__link">Sell</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#footer" class="nav__link scroll-link">Contact</a>
                         </li>
                     </ul>
                 </div>
-            </div>
-            <!-- This is for menu in footer. -->
-            <div class="footer-items">
-                <h2 class="h-2">Quick links</h2>
-                <div class="border" id="bdr"></div>
-                <ul>
-                    <a href="/home">
-                        <li>Home</li>
+                <div class="nav__icons">
+                    <a class="icon__item openBtn" onclick="openSearch()">
+                        <img src="{% static './images/icons/search.svg' %}"/>
                     </a>
-                    <a href="/sell-book">
-                        <li>Sell book</li>
+                    {% if user.is_authenticated %}
+                        <a href="/my-profile" class="icon__item user">
+                            <img src="{% static './images/icons/user.svg' %}"/>
+                        </a>
+                    {% else %}
+                        <a href="/profile/login/" class="icon__item user">
+
+                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                        </a>
+                    {% endif %}
+                    <a href="{% url 'book:od-summary' %}" class="icon__item cart">
+                        <img src="{% static './images/icons/cart.svg' %}"/>
+                        <!--<span id="cart__total"></span>-->
                     </a>
-                    <a href="/about">
-                        <li>About us</li>
-                    </a>
-                </ul>
-            </div>
-
-            <!-- This is for contact us info. -->
-            <div class="footer-items">
-                <div class="contact-us">
-                    <h2 class="h-2">Contact us</h2>
-                    <div class="border"></div>
-                    <ul>
-                        <li><i class="fa fa-map-marker" aria-hidden='true'></i><a
-                                href="http://maps.google.com/?q=Safed Pul, Saki Naka, Mumbai, Maharashtra" target="_blank">Safed
-                            Pul, Mumbai-400072</a></li>
-                        <li><i class="fa fa-phone fa-flip-horizontal" aria-hidden='true'></i><a
-                                href="tel:+91-9136869309">+91-9136869309</a>
-                        </li>
-                        <li><i class="fa fa-envelope" aria-hidden='true'></i><a
-                                href="mailto:Aplepustak@gmail.com">aplepustak@gmail.com</a></li>
-
-                    </ul>
-
+                    {% if user.is_superuser or user.is_staff %}
+                        <a href="/admin" class='btn btn-success ml-1 mt-1' target='_blank'>Admin</a>
+                    {% else %}
+                    {% endif %}
                 </div>
             </div>
-
-             <!-- This is for message from user. -->
-            <div class="footer-items" id="msg_form">    
-                <h2 class="h-2">Any queries</h2>
-                <div class="border" id="bdr"></div>            
-                <form action="/message/" style="padding-top: 10px;" method="POST">
-                    {% csrf_token %}
-                    <label for="cn" style="color: white;">Contact no:</label>
-                    <input type="text" name="cn" size="21" required><br>
-                    <label for="mg" style="color: white;">Message :&nbsp;</label>
-                    <textarea id = "msg" name="msg" rows="3" cols="25" required></textarea>
-                    <button class="btn btn-info btn-sm mb-0" id="fsub" type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            Aplepustak.com | Created with &#10084; by <a
-                href="https://www.instagram.com/invites/contact/?i=7k565o6y5a2x&utm_content=1t2ypu2"
-                target="_blank">Developer  &#128515;</a>
-            <!--| created with <i class="fa fa-heart" style="font-size: 14px;color: red;"></i> by developer.-->
         </div>
     </div>
-    <!--Footer-->
+    <!---login-and-sign-up--------------------------------->
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    {% block extra_scripts %} {% endblock %}
+</header>
+
+<!-- End Header-->
+<div class="pt-2">
+    {% if messages %} {% for message in messages %}
+
+        <div class="pt-0">
+            {% if messages %} {% for message in messages %}
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <strong> {{ message }}</strong>
+                </div>
+
+            {% endfor %} {% endif %}
+        </div>
+        </div>
+    {% endfor %} {% endif %}
+
+<div id="myOverlay" class="overlay">
+    <div class="overlay-content">
+        <form style="display:flex;flex-direction:row;">
+            <input type="text" placeholder="Search.." name="query" id="query">
+            <button type="submit" formaction="/search" formmethod="get"><i class="fa fa-search"></i></button>
+            <button onclick="closeSearch()"><i class="fa fa-close"></i></button>
+        </form>
+    </div>
+</div>
+{% block content %}
+
+{% endblock %}
+
+
+</main>
+<!-- End Main -->
+<!-- Footer -->
+<br>
+<footer id="footer" class="section footer"
+        style="background-color: var(--black3); line-height: 3rem;padding: 1rem 1rem 3rem;">
+    <div class="container_ftr">
+        <div class="footer__top">
+            <div class="footer-top__box contact_form">
+                <h3>Message for us</h3>
+                <form action="/message/" method="POST">
+                    {% csrf_token %}
+
+                    <label for="lname">Contact no</label>
+                    <input type="text" id="num" name="cn" placeholder="Enter Your Number.."
+                    >
+
+                    <label for="subject">Message</label>
+                    <textarea id="msg" name="msg" placeholder="Write something.."
+                              style="height:70px;font-family:'Poppins'"></textarea>
+
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            <div class="footer-top__box">
+                <h3>INFORMATION</h3>
+                <a href="/about">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="/terms_and_conditions">Terms & Conditions</a>
+
+            </div>
+            <div class="footer-top__box">
+                <h3>MY ACCOUNT</h3>
+                {% if user.is_authenticated %}
+                    <a href="/my-profile">My Account</a>
+                {% endif %}
+                <a href="{% url 'book:od-summary' %}">My cart</a>
+                <a href="/sell-book">Sell book</a>
+
+            </div>
+            <div class="footer-top__box">
+                <h3>CONTACT US</h3>
+                <div>
+                    <a href="http://maps.google.com/?q=Safed Pul, Saki Naka, Mumbai, Maharashtra" target="_blank">
+            <span>
+              <img src="{% static './images/icons/placeholder.svg' %}">
+            </span>
+                        Safed Pul, Mumbai- 400072</a>
+                </div>
+                <div><a
+                        href="mailto:Aplepustak@gmail.com">
+            <span>
+              <img src=" {% static './images/icons/mail.svg' %}">
+            </span>
+                    aplepustak@gmail.com</a>
+                </div>
+                <div><a
+                        href="tel:+91-9136869309">
+            <span>
+              <img src="{% static './images/icons/phone.svg' %}">
+            </span>
+                    +91-9136869309</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer-bottom__box">
+
+            </div>
+            <div class="footer-bottom__box">
+
+            </div>
+        </div>
+
+</footer>
+<!-- End Footer -->
+
+<!-- Glide Carousel Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- Animate On Scroll -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script type="text/javascript">
+    /*
+       =============
+       Msg bar
+       =============
+       */
+    function closemessagebar() {
+        document.getElementById("messageBar").style.display = "none";
+    }
+
+    /*
+    =============
+    Navigation
+    =============
+    */
+    const navOpen = document.querySelector(".nav__hamburger");
+    const navClose = document.querySelector(".close__toggle");
+    const menu = document.querySelector(".nav__menu");
+    const scrollLink = document.querySelectorAll(".scroll-link");
+    const navContainer = document.querySelector(".nav__menu");
+
+    navOpen.addEventListener("click", () => {
+        menu.classList.add("open");
+        document.body.classList.add("active");
+        navContainer.style.left = "0";
+        navContainer.style.width = "30rem";
+    });
+
+    navClose.addEventListener("click", () => {
+        menu.classList.remove("open");
+        document.body.classList.remove("active");
+        navContainer.style.left = "-30rem";
+        navContainer.style.width = "0";
+    });
+
+    const navBar = document.querySelector(".navigation");
+    const gotoTop = document.querySelector(".goto-top");
+
+
+    window.addEventListener("scroll", e => {
+        const scrollHeight = window.pageYOffset;
+        const navHeight = navBar.getBoundingClientRect().height;
+        if (scrollHeight > navHeight) {
+            navBar.classList.add("fix__nav");
+        } else {
+            navBar.classList.remove("fix__nav");
+        }
+
+        if (scrollHeight > 300) {
+            gotoTop.classList.add("show-top");
+        } else {
+            gotoTop.classList.remove("show-top");
+        }
+    });
+
+
+    // Smooth Scroll
+
+
+    Array.from(scrollLink).map(link => {
+        link.addEventListener("click", e => {
+// Prevent Default
+            e.preventDefault();
+
+            const id = e.currentTarget.getAttribute("href").slice(1);
+            const element = document.getElementById(id);
+            const navHeight = navBar.getBoundingClientRect().height;
+            const fixNav = navBar.classList.contains("fix__nav");
+            let position = element.offsetTop - navHeight;
+
+            if (!fixNav) {
+                position = position - navHeight;
+            }
+
+            window.scrollTo({
+                left: 0,
+                top: position,
+            });
+            navContainer.style.left = "-30rem";
+            document.body.classList.remove("active");
+        });
+    });
+
+
+    // Search Bar......
+
+    function openSearch() {
+        document.getElementById("myOverlay").style.display = "block";
+    }
+
+    function closeSearch() {
+        document.getElementById("myOverlay").style.display = "none";
+    }
+
+    // preloader
+    window.addEventListener("load", () => {
+        const loader = document.getElementById("pre-loader");
+        setTimeout(() => {
+            loader.classList.add("hide");
+        }, 2000);
+    });
+
+
+</script>
+{% block extra_scripts %}L̥
+{% endblock %}
+
 </body>
 
 </html>

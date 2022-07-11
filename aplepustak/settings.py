@@ -9,12 +9,11 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-import django_heroku
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -27,12 +26,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    #'admin_interface',      # Django-admin theme app
-    #'colorfield',   # Django-admin theme app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',  # new    
     'accounts.apps.AccountsConfig',  # New custom made app
     'book.apps.BookConfig',  # New custom made app
-    'storages',   # App for storages
+    'storages',  # App for storages
 ]
 
 MIDDLEWARE = [
@@ -79,7 +75,7 @@ TEMPLATES = [
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 WSGI_APPLICATION = 'aplepustak.wsgi.application'
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -87,13 +83,13 @@ WSGI_APPLICATION = 'aplepustak.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'aplepustak',
+        'NAME': 'ap_backup',
         'USER': 'postgres',
-        'PASSWORD': 'S@nketp3003',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
     }
-}
 
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -113,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -127,13 +122,11 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-SITE_ID = 1
 
+SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -141,23 +134,22 @@ AUTHENTICATION_BACKENDS = [
 ]
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/home'
-STATIC_URL = '/static/'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-AWS_ACCESS_KEY_ID = 'AKIA3IZVWH7E3QYE7LPX'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'aplepustak-bkt'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-AWS_S3_REGION_NAME = 'ap-south-1'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
+# AWS_ACCESS_KEY_ID = 'AKIA3IZVWH7E3QYE7LPX'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'aplepustak-bkt'
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# AWS_S3_REGION_NAME = 'ap-south-1'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 
 MEDIA_URL = '/media/'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# django_heroku.settings(locals())  # Activate Django-Heroku.

@@ -1,78 +1,263 @@
-{% extends 'base.html' %} {% block content %}
-<div class=" container-fluid table-responsive text-nowrap">
-    <h2 class="pt-2 ml-3">Order summary</h2><br>
-    <table class="table" id="t1">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Product Title</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
-                <th scope="col">Total price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for order_product in object.products.all %}
-            <tr>
-                <!--Number-->
-                <td scope="row">{{ forloop.counter }}</td>
-                <!--Product Name-->
-                <td class="col-sm-0" style="text-transform: capitalize;">{{ order_product.product.book_title }}</td>
-                <!--Product Quantity-->
-                <td style="padding-left: 35px;">                   
-                    {{ order_product.product_quantity }}
-                </td>
-                <!--Product Price-->
-                <td>
-                    {% if order_product.product.book_discount_price %} &#8377
-                    {{ order_product.product.book_discount_price }} {% else %} &#8377
-                    {{ order_product.product.book_price }} {% endif %}
-                </td>
-                <!--Product Total Price-->
-                <td colspan="4">
-                    {% if order_product.product.book_discount_price %} &#8377
-                    {{ order_product.get_pro_discount_price }}
-                    <span class="badge badge-primary">
-                        Saving &#8377 {{order_product.get_amount_saved}}
-                    </span> {% else %} &#8377 {{ order_product.get_pro_price }} {% endif %}
-                    <a href="{% url 'book:remove-from-cart' order_product.product.slug %}"><i style="color: red;"
-                            class="fa fa-trash ml-3"></i></a>
+{% extends 'base.html' %}{% load static %}
+{% block title %}My cart{% endblock %}
+{% block extra_head %}
+    <style>
 
-                    <br><br>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5">Your cart is empty.</td>
-            </tr>
-            <tr>
-                <td colspan="5">
-                    <a href="/home" class="btn btn-primary float-right">Continue Shopping</a>
-                </td>
-            </tr>
-            {% endfor %} {% if object.total_od_price %}
-            <tr>
-                <td colspan="4"><b>Total delievery charges :</b></td>
-                <td><b>&#8377 {{ object.get_total_delievery_charges }}</b></td>
-            </tr>
-            <tr>
-                <td colspan="4"><b>Order Total :</b></td>
-                <td><b>&#8377 {{ object.total_od_price }}</b></td>
-            </tr>
-            <tr>
-                <td colspan="4"><b>Total products :</b></td>
-                <td><b>{{ object.get_total_quantity }}</b></td>
-            </tr>
-            <tr>
-                <td colspan="5">
-                    <a href="/checkout" class="btn btn-warning float-right ml-2">Proceed To
-                        Checkout</a>
-                    <a href="/home" class="btn btn-primary float-right">Continue Shopping</a>
-                </td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
-</div>
+        /*
+    ======================
+    Cart Area
+    ======================
+    */
+
+        section {
+            margin: auto;
+        }
+
+        .page__title-area {
+            background-color: var(--primaryColor);
+        }
+
+
+        .page__title-container {
+            padding: 1rem;
+        }
+
+        .page__titles {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            color: var(--grey2);
+        }
+
+        .page__titles a {
+            margin-right: 2rem;
+        }
+
+        .page__titles a svg {
+            width: 1.8rem;
+            height: 1.8rem;
+            fill: var(--grey2);
+        }
+
+        .page__title {
+            position: relative;
+        }
+
+        .page__title::before {
+            position: absolute;
+            content: "/";
+            top: 0;
+            left: -1rem;
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .cart-info {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .cart-page {
+            max-width: 117rem;
+            margin: auto;
+        }
+
+        th {
+            text-align: left;
+            padding: 5px;
+            color: #fff;
+            background: #e74c3c;
+            font-weight: normal;
+        }
+
+        td {
+            padding: 10px 10px;
+        }
+
+        td input {
+            width: 40px;
+            height: 30px;
+            padding: 5px;
+        }
+
+        td a {
+            color: #e74c3c;
+            font-size: 15px;
+        }
+
+        td img {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+
+        .total-price {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .total-price table {
+
+            border-bottom: 3px solid #e74c3c;
+            width: 100%;
+            max-width: 100vh;
+        }
+
+        .Total-Price-border {
+            border-top: 3px solid #e74c3c;
+        }
+
+        td:last-child {
+            text-align: right;
+        }
+
+        th:last-child {
+            text-align: right;
+        }
+
+
+        .hero__btn {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 1.4rem;
+            background-color: var(--black);
+            color: var(--primaryColor);
+            cursor: pointer;
+            margin-top: 1rem;
+            padding: 1.5rem 4rem;
+            border: 1px solid var(--black);
+            transition: all 0.3s ease-in-out;
+        }
+
+        th:nth-child(2) {
+            text-align: center;
+        }
+
+    </style>
+{% endblock %}
+{% block content %}
+
+
+    <div class="page__title-area">
+        <div class="container">
+            <div class="page__title-container">
+                <ul class="page__titles">
+                    <li>
+                        <a href="/home">
+                            <img src="{% static './images/icons/home.svg' %}"/>
+                        </a>
+                    </li>
+                    <li class="page__title">Cart</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        <main id="main" class="container_od_summary">
+
+            <!---cart-item-details---->
+
+            <section class="cart-page">
+
+
+
+                <table>
+                    <tr>
+                        <th>Products</th>
+                        <th>Quantity</th>
+                        <th>Subtotal</th>
+
+                    </tr>
+                    {% for order_product in object.products.all %}
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="{{ order_product.product.book_image1.url }}"
+                                         alt="{{ order_product.product.book_title }}">
+                                </div>
+                                <div><br>
+                                    <p>{{ order_product.product.book_title }}</p>
+
+                                    <small> Price: {% if order_product.product.book_discount_price %} &#8377
+                                        {{ order_product.product.book_discount_price }} {% else %} &#8377
+                                        {{ order_product.product.book_price }} {% endif %}</small>
+                                    <br>
+                                    <a href="{% url 'book:remove-from-cart' order_product.product.slug %}">Remove</a>
+                                </div>
+                            </td>
+                            <td style=" text-align:center;">
+                            <span type="text" value="1"
+                                  class="counter-btn">{{ order_product.product_quantity }}</span>
+                            </td>
+
+                            <td>{% if order_product.product.book_discount_price %} &#8377
+                                {{ order_product.get_pro_discount_price }}{% else %} &#8377
+                                {{ order_product.get_pro_price }}
+                            {% endif %}</td>
+                        </tr>
+                    {% endfor %}
+
+
+                </table>
+                {% if object.total_od_price %}
+                    <div class="total-price"
+                         style="border-top:3px solid #ff523b;display: flex; flex-direction: row; justify-content: space-between;">
+                        <div style="display: flex; flex-direction: column; justify-content: space-around; margin: 5px">
+                            <a href="/home">
+                                <button class="hero__btn"
+                                        style="color: whitesmoke; display: flex; justify-content: space-around; background-color: #e74c3c;">
+                                    Continue shopping
+                                </button>
+                            </a>
+                            <a href="/checkout">
+                                <button class="hero__btn"
+                                        style="color:black;display: flex; justify-content: space-around; background-color: var(--primaryColor);">
+                                    Proceed
+                                    To Checkout
+                                </button>
+                            </a>
+
+                        </div>
+
+                        <table style="border-left: 3px solid #ff523b;
+                    border-right: 3px solid #ff523b;">
+                            <tr>
+                                <td>
+                                    Subtotal
+                                </td>
+                                <td>
+                                    &#8377 {{ object.get_total }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    delivery charges
+                                </td>
+                                <td>
+                                    &#8377 {{ object.get_total_delievery_charges }}
+                                </td>
+                            </tr>
+                            <tr class="Total-Price-border">
+                                <td>
+                                    Total
+                                </td>
+                                <td>
+                                    &#8377 {{ object.total_od_price }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                {% endif %}
+            </section>
+        </main>
+    {% endif %}
+{% endblock %}
+{% block extra_scripts %}
 
 {% endblock %}

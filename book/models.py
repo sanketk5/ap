@@ -48,6 +48,9 @@ class Book(models.Model):
             'slug': self.slug
         })
 
+    def buy_now_url(self):
+        return reverse("book:od-summary")
+
 
 class OrderProduct(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -95,6 +98,8 @@ class Order(models.Model):
     products = models.ManyToManyField(OrderProduct)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
+    delievery_date = models.DateTimeField(null=True, blank=True)
+    delivery_chages = models.FloatField(default=0.0)
     ordered = models.BooleanField(default=False)
     being_delieverd = models.BooleanField(default=False)
     recieved = models.BooleanField(default=False)
@@ -122,10 +127,10 @@ class Order(models.Model):
 
     # Delievery charges set karnya sathi
     def get_total_delievery_charges(self):
-        if self.get_total() >= 30:
+        if self.get_total() >= 100:
             return 0
         else:
-            return 0
+            return 30
 
     def get_total(self):
         total = 0

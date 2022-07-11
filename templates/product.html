@@ -1,119 +1,1249 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %} - Buy and sell secondary books online at best price{% endblock %}
 {% block extra_head %}
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-<style type="text/css">
-    .card {
-        width: 15rem;
-        height: 18rem;
-    }
 
-    #p-img {
-        width: 238px; /*  # 238  */
-        height: 175px;
-    }
+    <!-- Glide Carousel Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
 
-    #price {
-        margin-left: 30px;
-        font-weight: bold;
-    }
+    <style type="text/css">
 
-    #amt_saved {
-        margin-bottom: 30px;
-        margin-top: 3px;
-        margin-left: 20px;
-        font-size: 11px;
-    }
-
-    #search_bar {
-        padding-top: 20px;
-        width: 60%;
-        margin-right: auto;
-
-    }
-
-    #query {
-        border: 1px solid black;
-        margin-left: auto;
-        width: 80%;
-
-    }
-
-    @media screen and (max-width: 600px) {
-        .card {
-            height: 15rem;
+        #pre-loader {
+            position: fixed;
+            height: 100vh;
+            width: 100vw;
+            z-index: 999999;
+            background-color: var(--white);
+            transition: all 300ms ease-in-out;
         }
 
-        #card-shape {
-            padding-left: 15px;
+        .loader {
+            height: 100vh;
+            width: 100vw;
+            background: url({% static './images/loader.svg' %}) center/30rem no-repeat fixed;
         }
 
-        .container {
-            padding-left: 5px;
-        }
-        #price {
-            margin-left:10px;
-        }
-        #p-img {
-            width: 238px;
-            height: 130px;
+        #pre-loader.hide {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        #search_bar {
+        @media only screen and (max-width: 567px) {
+            .loader {
+                background-size: 20rem;
+            }
+        }
+
+        /*
+    ======================
+    Hero Area
+    ======================
+    */
+
+        .hero,
+        .hero .glide__slides {
+            background-color: var(--primaryColor);
+            position: relative;
+            width: 100%;
+            height: 90vh;
+        }
+
+        .hero .glide__bullet {
+            background-color: #222;
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        .hero .glide__arrow {
+            padding-top: 1.5rem;
+            opacity: 0;
+            border: none;
+            background-color: var(--grey);
+            transition: all 0.5s ease-in-out 0.2s;
+        }
+
+        .glide__arrow:hover {
+            background-color: var(--black);
+        }
+
+        .glide__arrow--left {
+            left: 5rem;
+        }
+
+        .glide__arrow--right {
+            position: absolute;
+            right: 5rem;
+        }
+
+        .hero:hover .glide__arrow {
+            opacity: 1;
+        }
+
+        .hero:hover .glide__arrow--left {
+            left: 23rem;
+        }
+
+        .hero:hover .glide__arrow--right {
+            right: 23rem;
+        }
+
+        .hero .glide__arrow img {
+            height: 1.8rem;
+            width: 1.8rem;
+            fill: var(--primaryColor);
+        }
+
+        .glide__arrows .glide__arrow img {
+            height: 1.8rem;
+            width: 1.8rem;
+            fill: var(--primaryColor);
+        }
+
+        .hero .glide__arrow {
+            border-radius: 50%;
+        }
+
+        .hero__center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            max-width: 114rem;
+            margin: 0 auto;
+            height: 100%;
+
+        }
+
+        .hero__left {
+            padding: 0 3rem;
+            flex: 0 0 50%;
+        }
+
+        .hero__btn {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 1.4rem;
+            background-color: var(--black);
+            color: var(--primaryColor);
+            cursor: pointer;
+            margin-top: 1rem;
+            padding: 1.5rem 4rem;
+            border: 1px solid var(--black);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hero__btn:focus {
+            outline: none;
+        }
+
+        .hero__left .hero__btn:hover {
+            font-weight: 700;
+            background-color: transparent;
+            color: var(--black);
+        }
+
+        .hero__left h1 {
+            margin: 1rem 0;
+        }
+
+        .hero__left p {
+            margin-bottom: 1rem;
+        }
+
+        .hero__right {
+            flex: 0 0 50%;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero__right img.banner_03 {
+            width: 70%;
+        }
+
+        /*
+    ======================
+    Hero Media Query
+    ======================
+    */
+        @media only screen and (max-width: 999px) {
+            .hero__center {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero__right {
+                top: 50%;
+                position: absolute;
+            }
+
+            .hero__left {
+                position: absolute;
+                padding: 0 1rem;
+                top: 20%;
+            }
+
+            .hero__right img {
+                width: 55%;
+            }
+
+            .hero__btn {
+                padding: 1.1rem 2.8rem;
+            }
+
+            .hero .glide__arrows {
+                display: none;
+            }
+        }
+
+        @media only screen and (max-width: 567px) {
+
+            .hero,
+            .hero .glide__slides {
+                height: 60vh;
+            }
+
+            .hero__right {
+                display: none;
+            }
+        }
+
+
+        /*-------------------Footer-----------------------------*/
+        /*
+    ======================
+    Facility
+    ======================
+    */
+
+        .facility__section {
+            background-color: var(--primaryColor);
+            padding: 6rem 0;
+
+        }
+
+        .facility__contianer {
+            display: grid;
+            align-items: center;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .facility-img__container svg {
+            width: 3rem;
+            height: 3rem;
+            transition: 1s;
+            perspective: 4000;
+        }
+
+        .facility__box {
+            text-align: center;
+        }
+
+        .facility-img__container {
+            position: relative;
+            display: inline-block;
+            line-height: 9.5rem;
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            border: 1.5px solid var(--white);
+            z-index: 1;
+            margin-bottom: 1.6rem;
+        }
+
+        .facility-img__container::before {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0.7rem;
+            background-color: var(--white);
+            z-index: -1;
+        }
+
+        .facility__box:hover svg {
+            transform: rotateY(180deg);
+            line-height: 9.5rem;
+        }
+
+        /*
+    ======================
+    Facility Media Query
+    ======================
+    */
+        @media only screen and (max-width: 998px) {
+            .facility__contianer {
+                grid-template-columns: 1fr 1fr;
+                row-gap: 3rem;
+            }
+        }
+
+        @media only screen and (max-width: 568px) {
+            .facility__contianer {
+                grid-template-columns: 1fr;
+            }
+
+            .facility-img__container {
+                width: 7rem;
+                height: 7rem;
+                line-height: 8.5rem;
+            }
+
+            .facility__contianer p {
+                font-size: 1.4rem;
+            }
+        }
+
+
+        /*
+    ======================
+    Testimonial
+    ======================
+    */
+
+        .testimonial {
+            position: relative;
+            background:  center/cover no-repeat;
+            height: 40rem;
+            padding: 5rem 0;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .testimonial::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: -1;
+        }
+
+        .client__image {
+            margin-bottom: 3rem;
+        }
+
+        .client__image img {
+            width: 7rem;
+            height: 7rem;
+            max-width: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .testimonial__container {
+            height: 100%;
+            padding: 1rem;
+        }
+
+        .testimonial__box {
             width: 90%;
-            margin-left: auto;
-            margin-right: 35px;
+            margin: 0 auto;
+            height: 100%;
+            color: #ccc;
         }
 
-    }
-</style>
+        .testimonial__box p {
+            width: 70%;
+            margin: 0 auto;
+            line-height: 2.5rem;
+            font-style: italic;
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .client__info h3 {
+            font-weight: 400;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .client__info span {
+            font-size: 1.4rem;
+        }
+
+        .testimonial .glide__bullets {
+            bottom: -8%;
+        }
+
+        /*
+    ======================
+    Testimonial Media Query
+    ======================
+    */
+        @media only screen and (max-width: 1200px) {
+            .testimonial__box {
+                height: 100%;
+            }
+
+            .testimonial__box p {
+                width: 90%;
+                margin: 0 auto;
+                line-height: 2.2rem;
+                margin-bottom: 3rem;
+            }
+
+            .client__image {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        @media only screen and (max-width: 568px) {
+            .testimonial {
+                height: 100%;
+                padding: 4rem 0 5rem;
+                z-index: 1;
+                text-align: center;
+            }
+
+            .testimonial__box {
+                height: 100%;
+            }
+
+            .testimonial__box p {
+                width: 100%;
+                font-size: 1.3rem;
+                line-height: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .client__image {
+                margin-bottom: 1.5rem;
+            }
+
+            .testimonial__box span {
+                margin-bottom: 1rem;
+            }
+
+            .testimonial .glide__bullets {
+                bottom: -8%;
+            }
+        }
+
+        /*
+    ======================
+    News Section
+    ======================
+    */
+
+
+        .card__footer h3 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .card__footer span {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--black2);
+        }
+
+        .card__footer p {
+            font-size: 1.5rem;
+            color: var(--black2);
+            margin-bottom: 1.6rem;
+            line-height: 2.7rem;
+        }
+
+        .card__footer a button,
+        .card__footer a button {
+            display: inline-block;
+            padding: 1.4rem 4rem;
+            border: 1px solid var(--black);
+            color: var(--black);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card__footer a button:focus {
+            outline: none;
+        }
+
+        .card__footer a button:hover {
+            border: 1px solid var(--black);
+            color: var(--white);
+            background-color: var(--black);
+        }
+
+        /*
+    ======================
+    Latest Products
+    ======================
+    */
+
+        .title__container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6rem;
+            padding: 2rem 0;
+            background-color: var(--primaryColor);
+        }
+
+        .section__titles:not(:last-child) {
+            margin-right: 1.5rem;
+        }
+
+        .section__title {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .section__title h1 {
+            font-size: 1.9rem;
+            font-weight: inherit;
+        }
+
+        .section__title:hover .primary__title,
+        .section__title:hover span.dot,
+        .section__title:hover span.dot::before {
+            opacity: 1;
+        }
+
+        .section__title .primary__title {
+            opacity: 0.6;
+            padding-left: 0.5rem;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        span.dot {
+            opacity: 0.6;
+            padding: 0.45rem;
+            position: relative;
+            border: 1px solid var(--black);
+            cursor: pointer;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        span.dot::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid var(--black);
+            background-color: var(--black);
+            margin: 1px;
+            opacity: 0.6;
+        }
+
+        .section__title.active span.dot {
+            opacity: 1;
+        }
+
+        .section__title.active span.dot::before {
+            opacity: 1;
+        }
+
+        .section__title.active .primary__title {
+            opacity: 1;
+        }
+
+        .product {
+            position: relative;
+            text-align: center;
+        }
+
+        .product ul svg {
+            width: 1.7rem;
+            height: 1.7rem;
+            fill: var(--white);
+        }
+
+        .product ul {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 35%;
+            left: 50%;
+            width: 17rem;
+            height: 5rem;
+            background-color: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -50%) scale(0.7);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .product:hover ul {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .product ul li:not(:last-child) {
+            margin-right: 1.6rem;
+        }
+
+        .product ul a {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--orange);
+            width: 3.5rem;
+            height: 3.5rem;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .product ul a:hover {
+            background-color: var(--black);
+        }
+
+        .product ul a::before {
+            content: "";
+            position: absolute;
+            top: -0.6rem;
+            left: -0.6rem;
+            height: 0;
+            width: 0;
+            border-top: 3px solid var(--orange);
+            border-left: 3px solid var(--orange);
+            transition: 0.5s;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .product ul a::after {
+            content: "";
+            position: absolute;
+            bottom: -0.6rem;
+            right: -0.6rem;
+            width: 0;
+            height: 0;
+            border-bottom: 3px solid var(--orange);
+            border-right: 3px solid var(--orange);
+            z-index: 1;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        .product ul a:hover::before {
+            width: 126%;
+            height: 126%;
+            border-top: 3px solid var(--black);
+            border-left: 3px solid var(--black);
+            opacity: 1;
+        }
+
+        .product ul a:hover::after {
+            width: 126%;
+            height: 126%;
+            border-bottom: 3px solid var(--black);
+            border-right: 3px solid var(--black);
+            opacity: 1;
+        }
+
+        @media only screen and (max-width: 567px) {
+            .title__container {
+                flex-direction: column;
+            }
+
+            .section__titles:not(:last-child) {
+                margin: 0 0 1.3rem;
+            }
+        }
+
+        .product {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 25rem;
+        }
+
+        .product__header {
+            height: 25rem;
+            padding: 0.5rem 0;
+            text-align: center;
+        }
+
+        .product__header img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .product__footer {
+            padding: 1rem 0;
+        }
+
+        .rating svg {
+            width: 1.6rem;
+            height: 1.6rem;
+            fill: var(--yellow);
+        }
+
+        .product__footer h3 {
+            padding: 1rem 0;
+        }
+
+        .product__footer .product__price {
+            padding-bottom: 1rem;
+        }
+
+        .product__footer h3 {
+            font-size: 1.6rem;
+        }
+
+
+        .latest__products .glide__arrow,
+        .related__products .glide__arrow {
+            background-color: transparent;
+            border: 1px solid var(--primaryColor);
+            outline: none;
+            border-radius: 0;
+            box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0);
+            top: -7%;
+            left: 85%;
+        }
+
+        .latest__products .glide__arrow:hover,
+        .related__products .glide__arrow:hover {
+            background-color: var(--orange);
+            border: 1px solid var(--primaryColor);
+        }
+
+        .latest__products .glide__arrow--left,
+        .related__products .glide__arrow--left {
+            left: 75%;
+        }
+
+        .latest__products .glide__arrow--right,
+        .related__products .glide__arrow--right {
+            right: 5%;
+        }
+
+        .latest__products .glide__arrow svg,
+        .related__products .glide__arrow svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: var(--grey);
+        }
+
+        /*
+        ======================
+        Category Center
+        ======================
+        */
+        .category__center {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 3rem 2rem;
+        }
+
+        @media only screen and (max-width: 999px) {
+            .category__center {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        @media only screen and (max-width: 568px) {
+            .category__center {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem 1rem;
+            }
+
+            .category__products .product__header {
+                height: 10rem;
+            }
+
+            .category__products .product__header img {
+                object-fit: contain;
+            }
+        }
+
+    </style>
 {% endblock %}
 
-{% block content  %}
-<form method="GET" action="/search" class="form-inline" id="search_bar">
+{% block content %}
+    <div id="pre-loader">
+        <div class="loader"></div>
+    </div>
 
-    <input type="search" class="form-control"
-        placeholder="Search stream, publication, author, edition, course, semester" aria-label="Search" name="query"
-        id="query">
-    <button class="btn btn-info" style="border-radius: 0px;"><i class="fa fa-search"></i></button>
+    <!-- Header -->
+    <header id="header" class="header">
+        <!-- Hero -->
+        <div class="hero">
+            <div class="glide" id="glide_1">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        <li class="glide__slide">
+                            <div class="hero__center">
+                                <div class="hero__left">
+                                    <span class="">New Inspiration 2020</span>
+                                    <h1 class="">PHONES MADE FOR YOU!</h1>
+                                    <p>Trending from mobile and headphone style collection</p>
+                                    <a href="#">
+                                        <button class="hero__btn">SHOP NOW</button>
+                                    </a>
+                                </div>
+                                <div class="hero__right">
+                                    <div class="hero__img-container">
+                                        <object class="banner_01" type="image/svg+xml"
+                                                data="{% static './images/banner_img.svg' %}"
+                                                alt="banner2"></object>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="glide__slide">
+                            <div class="hero__center">
+                                <div class="hero__left">
+                                    <span>New Inspiration 2020</span>
+                                    <h1>PHONES MADE FOR YOU!</h1>
+                                    <a href="#">
+                                        <button class="hero__btn">SHOP NOW</button>
+                                    </a>
+                                </div>
+                                <div class="hero__right">
+                                    <img class="banner_02" src="{% static './images/banner_02.png' %}" alt="banner2"/>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                </div>
 
-</form>
-<div class="container pl-4 pt-4">
-    
-    <div class="row">
-        {% for book in books %}
-        {% if book.book_stock >= 1 %}
-        <div class="card-deck pr-3 pt-2" id="card-shape">
-
-            <div class="card border-dark">
-                <a href="{{ book.get_absolute_url }}" class="stretched-link"></a>
-                <img class="card-img-top" id="p-img" src="{{ book.book_image1.url }}" alt="{{book.book_title}}"></img>
-                <div class="card-body">
-                    <p class="card-title" id="#ptitle" style="text-transform: capitalize;text-overflow:ellipsis;white-space: nowrap; 
-                    width: 200px;overflow: hidden;">{{ book.book_title }}</p>
-                    <div class="row">
-                        <p id="price">{% if book.book_discount_price %}&#8377 {{ book.book_discount_price }}{% else %}
-                            &#8377<s> {{ book.book_mrp}} </s> &nbsp;&nbsp; &#8377 {{ book.book_price }} </p>
-                        <span class="badge badge-primary" id="amt_saved">
-                            Saving &#8377 {{book.get_pro_amount_saved}}
-                        </span>{% endif %}
-                    </div>
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+    </div>
+    <!-- Testimonial Section -->
+    <section class="section testimonial" id="testimonial">
+        <div class="testimonial__container">
+            <div class="glide" id="glide_4">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        <li class="glide__slide">
+                            <div class="testimonial__box">
+                                <div class="client__image">
+                                    <img src="{% static './images/profile1.jpg' %}" alt="profile">
+                                </div>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae fuga hic
+                                    nesciunt
+                                    tempore
+                                    quibusdam consequatur eligendi unde officia ex quae.ipsum dolor sit amet consectetur
+                                    adipisicing
+                                    elit. Recusandae fuga hic nesciunt tempore
+                                    quibusdam consequatur eligendi unde officia ex quae.</p>
+                                <div class="client__info">
+                                    <h3>John Smith</h3>
+                                    <span>Founder at Apple</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="glide__slide">
+                            <div class="testimonial__box">
+                                <div class="client__image">
+                                    <img src="{% static './images/profile2.jpg' %}" alt="profile">
+                                </div>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae fuga hic
+                                    nesciunt
+                                    tempore
+                                    quibusdam consequatur
+                                    eligendi unde officia ex quae.ipsum dolor sit amet consectetur adipisicing elit.
+                                    Recusandae fuga hic
+                                    nesciunt tempore
+                                    quibusdam consequatur eligendi unde officia ex quae.adipisicing elit. Recusandae
+                                    fuga
+                                    hic
+                                    nesciunt tempore
+                                    quibusdam consequatur eligendi unde officia ex quae.</p>
+                                <div class="client__info">
+                                    <h3>John Smith</h3>
+                                    <span>Founder at Apple</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="glide__slide">
+                            <div class="testimonial__box">
+                                <div class="client__image">
+                                    <img src="{% static './images/profile3.jpg' %}" alt="profile">
+                                </div>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae fuga hic
+                                    nesciunt
+                                    tempore
+                                    quibusdam consequatur
+                                    eligendi unde officia ex quae.ipsum dolor sit amet consectetur adipisicing elit.
+                                    Recusandae fuga hic
+                                    nesciunt tempore
+                                    quibusdam consequatur eligendi unde officia ex quae.adipisicing elit. Recusandae
+                                    fuga
+                                    hic
+                                    nesciunt tempore
+                                    quibusdam consequatur eligendi unde officia ex quae.</p>
+                                <div class="client__info">
+                                    <h3>John Smith</h3>
+                                    <span>Founder at Apple</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="glide__slide">
+                            <div class="testimonial__box">
+                                <div class="client__image">
+                                    <img src="{% static './images/profile4.jpg' %}" alt="">
+                                </div>
+                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae fuga hic
+                                    nesciunt
+                                    tempore
+                                    quibusdam consequatur
+                                    eligendi unde officia ex quae.adipisicing elit. Recusandae fuga hic
+                                    nesciunt tempore
+                                    quibusdam consequatur eligendi unde officia ex quae.
+                                    hic
+                                    nesciunt tempore
+                                    quibusdam consequatur eligendi unde officia ex quae.</p>
+                                <div class="client__info">
+                                    <h3>John Smith</h3>
+                                    <span>Founder at Apple</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                    <button class="glide__bullet" data-glide-dir="=3"></button>
                 </div>
             </div>
         </div>
-        <div class="pb-4"></div>
-        {% endif %}
-        {% endfor %}
+    </section>
+
+    <section class="section latest__products" id="latest">
+        <div class="title__container">
+            <div class="section__title active" data-id="Latest Products">
+                <span class="dot"></span>
+                <h1 class="primary__title">Latest Products</h1>
+            </div>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-duration="1200">
+            <div class="glide" id="glide_2">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides latest-center">
+                        {% for book in books %}
+                            {% if book.book_stock >= 1 %}
+
+                                <li class="glide__slide">
+                                    <div class="product">
+                                        <a href="{{ book.get_absolute_url }}" class="stretched-link">
+                                            <div class="product__header">
+                                                <img src="{{ book.book_image1.url }}" alt="{{ book.book_title }}">
+                                            </div>
+                                        </a>
+                                        <div class="product__footer">
+                                            <h3>{{ book.book_title }}</h3>
+                                            <div class="product__price">
+                                                <h4> &#8377 {{ book.book_price }}</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Facility Section -->
+    <section class="facility__section section" id="facility">
+        <div class="container">
+            <div class="facility__contianer" data-aos="fade-up" data-aos-duration="1200">
+                <div class="facility__box">
+                    <div class="facility-img__container">
+                        <img src="{% static './images/icons/delivery.svg' %}"/>
+                    </div>
+                    <p>FAST DELIVERY</p>
+                </div>
+                <div class="facility__box">
+                    <div class="facility-img__container">
+                        <img src="{% static './images/icons/credit-card.svg' %}"/>
+                    </div>
+                    <p>100% MONEY BACK GUARANTEE</p>
+                </div>
+                <div class="facility__box">
+                    <div class="facility-img__container">
+                        <i class="fa fa-money fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <p>AFFORDABLE PRICE</p>
+                </div>
+                <div class="facility__box">
+                    <div class="facility-img__container">
+                        <img src="{% static 'images/icons/customer-service.svg' %}"/>
+                    </div>
+                    <p>24/7 CUSTOMER SUPPORT</p>
+                </div>
+            </div>
+        </div>
+    </section>
     </div>
-</div>
-{% endblock %} {% block extra_scripts %}
-<!--Scrolling animation JS-->
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    AOS.init({
-        offset: 200,
-        duration: 700,
-        once: true
-    });
-</script>
+
+    <!-- NewsLetter
+    <section class="section newsletter" id="contact">
+        <div class="container">
+            <div class="newsletter__content">
+                <div class="newsletter__data">
+                    <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
+                    <p>A short sentence describing what someone will receive by subscribing</p>
+                </div>
+                <form action="#">
+                    <input type="email" placeholder="Enter your email address" class="newsletter__email">
+                    <a class="newsletter__link" href="#">subscribe</a>
+                </form>
+            </div>
+        </div>
+    </section>-->
+
+
+
+{% endblock %}
+{% block extra_scripts %}
+    <!-- Glide Carousel Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- Animate On Scroll -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript">
+        // preloader
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("pre-loader");
+            setTimeout(() => {
+                loader.classList.add("hide");
+            }, 2000);
+        });
+
+        // Search Bar......
+        function openSearch() {
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function closeSearch() {
+            document.getElementById("myOverlay").style.display = "none";
+        }
+
+        /*
+        =============
+        Glide Js Carousel
+        =============
+        */
+
+        const slider1 = document.getElementById("glide_1");
+        const slider2 = document.getElementById("glide_2");
+        const slider3 = document.getElementById("glide_3");
+        const slider4 = document.getElementById("glide_4");
+        const slider5 = document.getElementById("glide_5");
+
+        /*
+        =============
+        Hero
+        =============
+        */
+        if (slider1) {
+            new Glide(slider1, {
+                type: "carousel",
+                startAt: 0,
+                autoplay: 3000,
+                hoverpause: true,
+                perView: 1,
+                animationDuration: 800,
+                animationTimingFunc: "linear",
+            }).mount();
+        }
+
+        /*
+        =============
+        Latest Products
+        =============
+        */
+
+        if (slider2) {
+            new Glide("#glide_2", {
+                type: "carousel",
+                startAt: 0,
+                perView: 4,
+                rewin: false,
+                animationDuration: 800,
+                animationTimingFunc: "cubic-bezier(0.165, 0.840, 0.440, 1.000)",
+                breakpoints: {
+                    1200: {
+                        perView: 3,
+                    },
+                    768: {
+                        perView: 2,
+                    },
+                },
+            }).mount();
+        }
+
+        /*
+        =============
+        Related Products
+        =============
+        */
+
+        if (slider3) {
+            new Glide("#glide_3", {
+                type: "carousel",
+                startAt: 0,
+                perView: 4,
+                rewin: false,
+                animationDuration: 800,
+                animationTimingFunc: "cubic-bezier(0.165, 0.840, 0.440, 1.000)",
+                breakpoints: {
+                    1200: {
+                        perView: 3,
+                    },
+                    768: {
+                        perView: 2,
+                    },
+                },
+            }).mount();
+        }
+
+        // Testimonial
+
+        if (slider4) {
+            new Glide("#glide_4", {
+                type: "carousel",
+                startAt: 0,
+                perView: 1,
+                rewin: false,
+                animationDuration: 800,
+                animationTimingFunc: "cubic-bezier(0.165, 0.840, 0.440, 1.000)",
+            }).mount();
+        }
+
+        // News
+        if (slider5) {
+            new Glide("#glide_5", {
+                type: "carousel",
+                startAt: 0,
+                perView: 3,
+                rewin: false,
+                autoplay: 3000,
+                animationDuration: 800,
+                animationTimingFunc: "cubic-bezier(0.165, 0.840, 0.440, 1.000)",
+                breakpoints: {
+                    998: {
+                        perView: 2,
+                    },
+                    768: {
+                        perView: 1,
+                    },
+                },
+            }).mount();
+        }
+
+        AOS.init();
+
+        // Smooth Scroll
+
+
+        Array.from(scrollLink).map(link => {
+            link.addEventListener("click", e => {
+                // Prevent Default
+                e.preventDefault();
+
+                const id = e.currentTarget.getAttribute("href").slice(1);
+                const element = document.getElementById(id);
+                const navHeight = navBar.getBoundingClientRect().height;
+                const fixNav = navBar.classList.contains("fix__nav");
+                let position = element.offsetTop - navHeight;
+
+                if (!fixNav) {
+                    position = position - navHeight;
+                }
+
+                window.scrollTo({
+                    left: 0,
+                    top: position,
+                });
+                navContainer.style.left = "-30rem";
+                document.body.classList.remove("active");
+            });
+        });
+
+        /*
+        =============
+        Load Category Products
+        =============
+         */
+        const categoryCenter = document.querySelector(".category__center");
+
+        window.addEventListener("DOMContentLoaded", async function () {
+            const products = await getProducts();
+            displayProductItems(products);
+        });
+        displayProduct = displayProduct.join("");
+        if (categoryCenter) {
+            categoryCenter.innerHTML = displayProduct;
+        }
+        /*
+=============
+Filtering
+=============
+ */
+
+        const filterBtn = document.querySelectorAll(".filter-btn");
+        const categoryContainer = document.getElementById("category");
+
+        if (categoryContainer) {
+            categoryContainer.addEventListener("click", async e => {
+                const target = e.target.closest(".section__title");
+                if (!target) return;
+
+                const id = target.dataset.id;
+                const products = await getProducts();
+
+                if (id) {
+                    // remove active from buttons
+                    Array.from(filterBtn).forEach(btn => {
+                        btn.classList.remove("active");
+                    });
+                    target.classList.add("active");
+
+                    // Load Products
+                    let menuCategory = products.filter(product => {
+                        if (product.category === id) {
+                            return product;
+                        }
+                    });
+
+                    if (id === "All Products") {
+                        displayProductItems(products);
+                    } else {
+                        displayProductItems(menuCategory);
+                    }
+                }
+            });
+        }
+
+    </script>
 {% endblock %}

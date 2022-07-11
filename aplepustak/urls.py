@@ -26,4 +26,4 @@ urlpatterns = [
     path('profile/', include('django.contrib.auth.urls')),    
     path('', include('book.urls', namespace='book')),       
 ]
-#urlpatterns = urlpatterns + \static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

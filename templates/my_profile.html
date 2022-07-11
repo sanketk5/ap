@@ -1,65 +1,244 @@
 {% extends 'base.html' %} {% block title %}My Profile{% endblock %}
 {% block extra_head %}
-<style type="text/css">
-    h5,
-    .info {
-        margin-left: 30px;
-    }
-
-    @media screen and (max-width: 400px) {
-
-        h5,
-        .info {
-            font-size: 15px;
-            margin-left: 5px;
-            padding-bottom: 5px;
+    <style>
+        .ord {
+            overflow-x: hidden;
+            font-size: 2vh;
+            padding: auto;
         }
-    }
-</style>
+
+        .container_od {
+            background: #fff;
+            width: 95vw;
+            height: 100vh;
+            margin: auto;
+            position: relative;
+            margin-top: 5%;
+            box-shadow: 2px 5px 20px rgba(119, 119, 119, .5);
+        }
+
+        .leftbox {
+
+            position: absolute;
+            width: 95vw;
+            height: 10vh;
+            background: var(--primaryColor);
+            box-shadow: 3px 3px 10px rgba(119, 119, 119, .5);
+            border: .1em solid #fff;
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+        }
+
+        a.tab {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            align-content: center;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        nav a {
+            list-style: none;
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+            color: #fff;
+            font-size: 1.1rem;
+            display: block;
+            transition: all .3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: white;
+            cursor: pointer;
+            transform: scale(1.2);
+
+        }
+
+
+        nav a.active {
+            color: black;
+        }
+
+        .rightbox {
+            width: 95vw;
+            margin-left: 5vw;
+            padding-top: 10vh;
+
+        }
+
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primaryColor);
+            font-size: 5vh;
+            margin-top: 1vh;
+            margin-bottom: 2vh;
+
+
+        }
+
+        h2 {
+            color: #777;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            font-size: 3vh;
+            letter-spacing: 1px;
+            margin-left: 2px;
+            margin-top: 10px;
+
+        }
+
+        .input,
+        p {
+            border: 0;
+            border-bottom: 1px solid var(--primaryColor);
+            width: 80%;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2vh;
+            padding: 7px 0;
+            color: #070707;
+            outline: none;
+
+        }
+
+        span {
+            font-size: .7em;
+            color: #777;
+        }
+
+
+        .tabShow {
+            transition: all .5s ease-in;
+            width: 90%;
+            height: 90%;
+            position: absolute;
+        }
+
+        .tableContainerDiv {
+            overflow: auto;
+            height: 80%;
+
+        }
+
+        table {
+            font-family: 'Poppins', sans-serif;
+            /* border-collapse: collapse; */
+            position: relative;
+            width: 100%;
+
+        }
+
+        th {
+            background-color: var(--primaryColor);
+            position: sticky;
+            top: 0;
+            padding: 5px;
+            text-align: left;
+
+        }
+
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 {% endblock %}
 {% block content %}
+    <body class="ord">
+    <div class="container_od">
+        <div class="leftbox">
+            <nav>
+                <a onclick="tabs(0)" class="tab active">
+                    <i class="fa fa-user fa-4x"></i>
 
-<div class="container wow fadeIn">
-    <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-7">
-            <h2 class="my-4 h2 text-center">My Profile</h2>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <h5>Name &nbsp; - </h5>
-                        <p class="info"> {{user.first_name}}</p>
-                    </div>
-                    <div class="row">
-                        <h5>Email &nbsp; - </h5>
-                        <p class="info"> {{user.email}}</p>
-                    </div>
-                    <div class="row">
-                        <h5>Contact number &nbsp; - </h5>
-                        <p class="info"> {{pro.contact_no}}</p>
-                    </div>
-                    <div class="row">
-                        <h5>Referal code &nbsp; - </h5>
-                        <p class="info"> {{pro.refer_code}}</p>
-                    </div>
-                    <div class="row">
-                        <h5>Reference orders &nbsp; - </h5>
-                        <p class="info"> {{pro.refer_order}}</p>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <h5>Refer & Earn :</h5>
-                        <p class="info">Care for your friends ?<br> Invite them and they’ll get a 3% off on their order.<br>
-                            <br>This is how we say thanks to you.<br> Refer and get a 3% commision on your all referenced
-                            orders. </p>
-                    </div>
+                </a>
+
+                <a onclick="tabs(1)" class="tab">
+                    <i class="fa fa-credit-card fa-4x"></i>
+                </a>
+
+                <a href="/profile/logout/" onclick="tabs(3)" class="tab"><i class="fa fa-power-off fa-4x"
+                                                                            title="Logout"></i></a>
+            </nav>
+        </div>
+        <div class="rightbox">
+            <div class="profile tabShow">
+                <h1>Personal Info</h1>
+                <h2>Full Name</h2>
+                <input type="email" class="input" value="{{ user.first_name }}" readonly>
+                <h2>Contact number</h2>
+                <input type="gender" class="input" value="{{ pro.contact_no }}" readonly>
+                <h2>Email</h2>
+                <input type="email" class="input" value=" {{ user.email }}" readonly>
+                <h2>Refer code</h2>
+                <input type="email" class="input" value="{{ pro.refer_code }}" readonly>
+                <br>
+            </div>
+            <div class="tabShow ">
+                <h1>Order Details</h1>
+                <div class="tableContainerDiv ">
+                    <table>
+                        <tr>
+                            <th>Order Id</th>
+                            <th>Products</th>
+                            <th>Total Price</th>
+                            <th>Ordered date</th>
+                            <th>Delivery date</th>
+
+                        </tr>
+                        {% for pro, od in mylist %}
+                            <tr>
+                                <td>{{ od.order_id }}</td>
+                                <td>{{ pro.product.book_title }}-{{ pro.product_quantity }}</td>
+                                <td>₹ {{ od.total_od_price }}</td>
+                                <td>{{ od.ordered_date }}</td>
+                                {% if od.delivery_date %}
+                                    <td>{{ od.delievery_date }}</td>
+                                {% else %}
+                                    <td>Coming soon..</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
 
+
         </div>
-
     </div>
-</div>
 
+    </body>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        const tabBtn = document.querySelectorAll(".tab");
+        const tab = document.querySelectorAll(".tabShow");
 
+        function tabs(panelIndex) {
+            tab.forEach(function (node) {
+                node.style.display = "none";
+            });
+            tab[panelIndex].style.display = "block";
+        }
+
+        tabs(0);
+
+        $(".tab").click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+    </script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
 {% endblock %}

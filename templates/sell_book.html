@@ -1,120 +1,255 @@
 {% extends 'base.html' %}
 {% block extra_head %}
-<style type="text/css">
-    #bk_title,
-    #bk_pub,
-    #bk_auth,
-    #bk_edition,
-    #bk_mrp,
-    #bk_stream,
-    #id_course,
-    #id_sem,
-    #usr_address {
-        font-weight: bolder;
-        padding-top: 20px;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    #wb_photo {
-        padding-top: 10px;
-        font-size: 15px;
-        font-weight: bolder;
-    }
-    @media screen and (max-width: 600px) {
-        #wb_photo, #info {
-            font-size: 15px;
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            border: none;
+            text-transform: capitalize;
+            transition: all .2s linear;
         }
-        
-    }
-</style>
+
+        .container_SellPage {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            min-height: 100vh;
+            background: #fff;
+        }
+
+        .container_SellPage form {
+            padding: 20px;
+            width: 700px;
+            background: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+        }
+
+        .container_SellPage form .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .container_SellPage form .row .col {
+            flex: 1 1 250px;
+        }
+
+        .container_SellPage form .row .col .title {
+            font-size: 20px;
+            color: #333;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .container_SellPage form .row .col .inputBox {
+            margin: 15px 0;
+        }
+
+        .container_SellPage form .row .col .inputBox span {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .container_SellPage form .row .col .inputBox input {
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            font-size: 15px;
+            text-transform: none;
+        }
+
+        .container_SellPage form .row .col .inputBox input:focus {
+            border: 1px solid #000;
+        }
+
+        .container_SellPage form .row .col .flex {
+            display: flex;
+            gap: 15px;
+        }
+
+        .container_SellPage form .row .col .flex .inputBox {
+            margin-top: 5px;
+        }
+
+        .container_SellPage form .row .col .inputBox img {
+            height: 34px;
+            margin-top: 5px;
+            filter: drop-shadow(0 0 1px #000);
+        }
+
+        .container_SellPage form .submit-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 17px;
+            background: #e74c3c;
+            color: #fff;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+
+        .myDiv {
+            display: none;
+
+        }
+    </style>
+
 {% endblock %}
 {% block content %}
 
 
-<div class="container wow fadeIn">
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-9">
-            <h2 class="my-4 h2 text-center">Other course book</h2>
-            <div class="card">
-                <form method="POST" class="card-body">
-                    {% csrf_token %}
-                    <div class="hideable_shipping_form">
+    <div class="container_SellPage">
 
-                        <div class="md-form mb-2">
-                            <label id="bk_title" class="ml-2">Book title </label>
-                            <input type="text" class="form-control" placeholder="Enter subject name of the book "
-                                id="shipping_address" name="bk_title" required>
-                        </div>
-                        <div class="md-form">
-                            <label id="bk_pub" class="ml-2">Book publication / prakashan </label>
-                            <input type="text" class="form-control" placeholder="Enter publication or prakashan name"
-                                id="shipping_address" name="bk_pub" required>
-                        </div>
-                        <div class="md-form">
-                            <label id="bk_auth" class="ml-2">Book authors </label>
-                            <input type="text" class="form-control" placeholder="Enter authors name"
-                                id="shipping_address" name="bk_auth" required>
-                        </div>
-                        <div class="md-form">
-                            <label id="bk_edition" class="ml-2">Book edition & year / scheme</label>
-                            <input type="text" class="form-control" placeholder="Ex:- Second Revised Edition-2019 / G Scheme"
-                                id="shipping_address" name="bk_edition" required>
-                        </div>
-                        <div class="md-form">
-                            <label id="bk_mrp" class="ml-2">Book MRP </label>
-                            <input type="text" class="form-control" placeholder="Enter MRP of the book"
-                                id="shipping_address" name="bk_mrp" required>
-                        </div>
-                        <div class="md-form">
-                            <label id="bk_stream" class="ml-2">Stream </label>
-                            <input type="text" class="form-control"
-                                placeholder="Ex:- Arts, commerce, science, engineering etc." id="shipping_address"
-                                name="bk_stream" required>
-                        </div>
-                        <div class="md-form">
-                            <label id="id_course" class="ml-2">Ideal course </label>
-                            <input type="text" class="form-control"
-                                placeholder="Enter course which is suitable for this book" id="shipping_address"
-                                name="id_course" required>
-                        </div>
-                        <div class="md-form">
-                            <label id="id_sem" class="ml-2">Ideal semester </label>
-                            <input type="text" class="form-control"
-                                placeholder="Enter semester which is suitable for this book" id="shipping_address"
-                                name="id_sem">
-                        </div>
-                        <div class="md-form">
-                            <label id="bk_stream" class="ml-2">Address </label>
-                            <input type="text" class="form-control" placeholder="Enter your address..."
-                                id="shipping_address" name="usr_adrs" required>
-                        </div>
-                        <div class="md-form">
-                            <label id="bk_stream" class="ml-2">Contact number </label>
-                            <input type="text" class="form-control" placeholder="Enter your contact number..."
-                                id="shipping_address" name="usr_num" required>
-                        </div>
+        <form method="POST">
+            {% csrf_token %}
+
+            <h3 class="title">Select Category To Sell Books</h3>
+
+            <br><input type="radio" name="demo" value="Below12th"/> Below 12th Standard Books&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input
+                    type="radio" name="demo" value="otherBooks"/> Other Course Book
+
+
+            <br><br>
+            <div class="row">
+
+                <div class="col myDiv" id="Below12th">
+
+                    <div class="inputBox">
+                        <span>Book Title </span>
+                        <input type="text" name="bk_title" placeholder="Enter Subject Name of The Book"/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Standard / Class</span>
+                        <input type="text" name="bk_std" placeholder="Ex - 5 , 6 , 9 etc"/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Board Name</span>
+                        <input type="text" name="bk_board" placeholder="Ex - ICSE , CBSE , HSC"/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Book MRP (In Rupee)</span>
+                        <input type="text" name="bk_mrp" placeholder=" Enter MRP Of The Book"/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Address</span>
+                        <input type="text" name="usr_adrs" placeholder="Enter Your Address"/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Contact Number</span>
+                        <input type="tel" name="usr_num" placeholder="Enter Your Contact Number"/>
                     </div>
 
 
-                    <p id="wb_photo">After submitting all books information send cover(front page), backside,
-                        edition page photos to this WhatsApp number
-                        <a href="https://api.whatsapp.com/send?phone=+919136869309" target="_blank">+91-9136869309</a>
-                    </p>
-                    <p id="info">Seller will get minimum 45% of the Book MRP. <br>Our customer support team contact you in
-                        next couple of working hours.<br>If you sell your books at your own then please inform us
-                        <a href="https://api.whatsapp.com/send?phone=+919136869309" target="_blank">+91-9136869309.</a>
-                    </p>
-                    <hr class="mb-4">
+                    <p>
+                        <b><a href="https://api.whatsapp.com/send?phone=9136869309" target="_blank"><u>Click here
+                            to </u></a>
+                            Send Cover (Front Page) And Backside Photos To This Whatsapp Number: +91-9136869309</b><br>
+                        Seller Will Get Minimum 45% Of The MRP.
+                        <br>
+                        Our Customer Support Team Contact You In Next Couple Of Working Hours
+                        <br>
+                        If You Sell Your Books at Your Own Then Please Inform us - +91-9136869309
+                        <br>
 
-                    <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">Submit</button>
 
-                </form>
+                        <br>
+                        <br>
+                        <br>
+
+                    </p>
+
+
+                </div>
+
+                <div class="col myDiv" id="otherBooks">
+                    <div class="inputBox">
+                        <span>Book Title </span>
+                        <input type="text" name="bk_title" placeholder="Enter Subject Name of The Book" required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Book Publication/Prakashan</span>
+                        <input type="text" name="bk_pub" placeholder="Enter Publication Or Prakashan Name" required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Book Author</span>
+                        <input type="text" name="bk_auth" placeholder="Enter Author Name Of Book" required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Book Edition & Year/Scheme</span>
+                        <input type="text" name="bk_edition" placeholder="Ex - Second Revised Edition -2019 / G Scheme"
+                               required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Book MRP (In Rupee)</span>
+                        <input type="text" name="bk_mrp" placeholder=" Enter MRP Of The Book" required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Stream</span>
+                        <input type="text" name="bk_stream"
+                               placeholder="Ex - Arts / Commerce / Science / Engineering etc." required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Ideal Course</span>
+                        <input type="text" name="id_course" placeholder="Enter Course Which Is Suitable For This Book"
+                               required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Ideal Semester</span>
+                        <input type="text" name="id_sem" placeholder="Enter Semester Which Is Suitable For This Book"
+                               required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Address</span>
+                        <input type="text" name="usr_adrs" placeholder="Enter Your Address" required/>
+                    </div>
+                    <div class="inputBox">
+                        <span>Contact Number</span>
+                        <input type="tel" name="usr_num" placeholder="Enter Your Contact Number" required/>
+                    </div>
+                    <p><b><a href="https://api.whatsapp.com/send?phone=9136869309" target="_blank"><u>Click here
+                        to </u></a>
+                        Send Cover (Front Page) And Backside, Edition Page
+                        Photos To This Whatsapp Number: +91-9136869309</b>
+                        <br>
+                        Seller Will Get Minimum 45% Of The MRP.
+                        <br>
+                        Our Customer Support Team Contact You In Next Couple Of Working Hours
+                        <br>
+                        If You Sell Your Books at Your Own Then Please Inform us - +91-9136869309
+                        <br>
+
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+                </div>
+
+
             </div>
 
+            <input type="submit" value="Submit" class="submit-btn"/>
 
-
-        </div>
+        </form>
 
     </div>
-</div>
+{% endblock %}
+{% block extra_scripts %}
+    <script>
+        $(document).ready(function () {
+            $('input[type="radio"]').click(function () {
+                var demovalue = $(this).val();
+                $("div.myDiv").hide();
+                $("#" + demovalue).show();
+            });
+        });
+    </script>
+
 {% endblock %}

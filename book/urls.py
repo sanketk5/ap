@@ -17,6 +17,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('book/<slug>/', views.BookDetailView.as_view(), name='book_product'),
     path('add-to-cart/<slug>', views.add_to_cart, name='add-to-cart'),
+    path('od-summary/', views.buy_now, name='buy-now'),
     path('remove-from-cart/<slug>',
          views.remove_from_cart, name='remove-from-cart'),
     path('order-summary/', views.OrderSummaryView.as_view(), name='od-summary'),
@@ -24,6 +25,6 @@ urlpatterns = [
     path('payment/<payment_option>/', views.PaymentView.as_view(), name='payment'),
     path('cancel-order/', views.cancel_order, name='cancel-order'),
     path('request-refund/', views.RefundRequestView.as_view(), name='request-refund'),
-    path('my-orders/', views.MyorderView.as_view(), name='my-orders'),
+    #path('my-orders/', views.MyorderView.as_view(), name='my-orders'),
     path('message/', views.message_new, name='message'),
 ]

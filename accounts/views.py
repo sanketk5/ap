@@ -14,6 +14,8 @@ from django.contrib import messages
 from .models import Profile
 import string
 import random
+
+
 # Create your views here.
 
 
@@ -32,9 +34,9 @@ def register(request):
             else:
                 user = User.objects.create_user(
                     username=user_name, email=user_name, first_name=user_first_name, password=user_pwd1)
-                profile = Profile.objects.create(user=user, refer_code=get_string(), contact_no=mob_no,)                
+                profile = Profile.objects.create(user=user, refer_code=get_string(), contact_no=mob_no, )
                 user.save()
-                profile.save()                
+                profile.save()
                 messages.info(request, 'Your Email is your Username')
                 return redirect('/profile/login')
         else:
@@ -43,7 +45,7 @@ def register(request):
         return redirect('/')
 
     else:
-        return render(request, 'register.html')
+        return redirect('/accounts/register')
 
 
 def get_string(length=3):
@@ -53,5 +55,5 @@ def get_string(length=3):
     for i in range(length):
         a += random.choice(let)
         b += str(random.randint(0, 9))
-    c = a+b
+    c = a + b
     return c

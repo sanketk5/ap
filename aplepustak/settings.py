@@ -24,7 +24,7 @@ SECRET_KEY = 't+rf5r&8)#dv2r5v2wdipzg*@_8&-++d06v8432-1j)ze+ncc1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['206.189.133.95']
 
 # Application definition
 
@@ -80,16 +80,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ap_backup',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-    }
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'ap_backup',
+            'USER': 'postgres',
+            'PASSWORD': '12345',
+            'HOST': 'localhost',
+        }
 
-}
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'aplepustak',
+            'USER': 'ap_admin',
+            'PASSWORD': 'Aplepustak@1507',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

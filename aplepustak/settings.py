@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,7 +24,7 @@ SECRET_KEY = 't+rf5r&8)#dv2r5v2wdipzg*@_8&-++d06v8432-1j)ze+ncc1'
 # SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['139.59.69.104']
 
@@ -81,6 +82,7 @@ SECURE_HSTS_SECONDS = 31536000
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+"""
 if DEBUG:
     DATABASES = {
         'default': {
@@ -92,17 +94,17 @@ if DEBUG:
         }
 
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'aplepustak',
-            'USER': 'ap_admin',
-            'PASSWORD': 'Aplepustak@1507',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
+else:"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'aplepustak',
+        'USER': 'ap_admin',
+        'PASSWORD': 'Aplepustak@1507',
+        'HOST': 'localhost',
+        'PORT': '',
     }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -159,7 +161,7 @@ STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # django_heroku.settings(locals())  # Activate Django-Heroku.
-#SECURE_CONTENT_TYPE_NONSNIFF = True
+# SECURE_CONTENT_TYPE_NONSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
@@ -169,6 +171,5 @@ SECURE_HSTS_PRELOAD = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
-#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#CSRF_TRUSTED_ORIGINS = ['yoursite.com']
-
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# CSRF_TRUSTED_ORIGINS = ['yoursite.com']

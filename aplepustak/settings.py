@@ -78,7 +78,7 @@ TEMPLATES = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 WSGI_APPLICATION = 'aplepustak.wsgi.application'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-SECURE_HSTS_SECONDS = 31536000
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -162,7 +162,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # django_heroku.settings(locals())  # Activate Django-Heroku.
 # SECURE_CONTENT_TYPE_NONSNIFF = True
-
+SECURE_HSTS_SECONDS = 31536000
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True

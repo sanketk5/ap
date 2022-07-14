@@ -23,7 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('users/', include('allauth.urls')),
-    path('profile/', include('django.contrib.auth.urls')),    
-    path('', include('book.urls', namespace='book')),       
+    path('profile/', include('django.contrib.auth.urls')),
+    path('', include('book.urls', namespace='book')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,5 +1,4 @@
 {% load static %}
-
 <!doctype html>
 <html lang="en">
 
@@ -102,7 +101,7 @@ Header
         .loader {
             height: 100vh;
             width: 100vw;
-            background: url("./images/loader.svg") center/30rem no-repeat fixed;
+            background: {% static './images/loader.svg' %} center/30rem no-repeat fixed;
         }
 
         #pre-loader.hide {

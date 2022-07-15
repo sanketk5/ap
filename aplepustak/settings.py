@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['165.232.178.167']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -81,7 +81,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-"""
+
 if DEBUG:
     DATABASES = {
         'default': {
@@ -93,17 +93,17 @@ if DEBUG:
         }
 
     }
-else:"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'aplepustak',
-        'USER': 'ap_admin',
-        'PASSWORD': 'Aplepustak@1507',
-        'HOST': 'localhost',
-        'PORT': '',
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'aplepustak',
+            'USER': 'ap_admin',
+            'PASSWORD': 'Aplepustak@1507',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -153,13 +153,14 @@ LOGOUT_REDIRECT_URL = '/home'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#STATIC_ROOT = os.path.join(BASE_DIR, "/static")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # django_heroku.settings(locals())  # Activate Django-Heroku.
 # SECURE_CONTENT_TYPE_NONSNIFF = True
+""""
 SECURE_HSTS_SECONDS = 31536000
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_BROWSER_XSS_FILTER = True
@@ -170,6 +171,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
 SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
+X_FRAME_OPTIONS = 'DENY'"""
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # CSRF_TRUSTED_ORIGINS = ['yoursite.com']

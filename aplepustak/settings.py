@@ -155,7 +155,7 @@ LOGOUT_REDIRECT_URL = '/home'
 STATIC_URL = '/static/'
 #STATIC_URL = '/home/sanket/apdir/static/'
 #STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, "/home/sanket/apdir/static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -93,6 +93,8 @@ if DEBUG:
         }
 
     }
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 else:
     DATABASES = {
         'default': {
@@ -104,6 +106,8 @@ else:
             'PORT': '',
         }
     }
+    STATIC_URL = '/static/'
+    STATIC_ROOT = '/home/sanket/apdir/static/'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -152,10 +156,10 @@ LOGOUT_REDIRECT_URL = '/home'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+
 #STATIC_URL = '/home/sanket/apdir/static/'
 #STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

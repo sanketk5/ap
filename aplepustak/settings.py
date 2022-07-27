@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['134.209.152.88', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['159.65.150.13', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic",  # new
     'django.contrib.staticfiles',
     'django.contrib.sites',  # new
     'allauth',  # new
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # new
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,25 +77,27 @@ TEMPLATES = [
     },
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 WSGI_APPLICATION = 'aplepustak.wsgi.application'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'ap_backup',
-            'USER': 'postgres',
-            'PASSWORD': '12345',
-            'HOST': 'localhost',
-        }
-
+# if DEBUG:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ap_backup',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
     }
 
+}
+"""
 else:
     DATABASES = {
         'default': {
@@ -105,10 +109,7 @@ else:
             'PORT': '',
         }
     }
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles-cdn")
+"""
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -144,6 +145,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles-cdn")
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+
 SITE_ID = 1
 
 AUTHENTICATION_BACKENDS = [
@@ -155,10 +162,6 @@ LOGOUT_REDIRECT_URL = '/home'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-
-# STATIC_URL = '/home/sanket/apdir/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 
 MEDIA_URL = '/media/'

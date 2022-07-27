@@ -86,18 +86,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-# if DEBUG:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ap_backup',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'ap_backup',
+            'USER': 'postgres',
+            'PASSWORD': '12345',
+            'HOST': 'localhost',
+        }
+
     }
 
-}
-"""
 else:
     DATABASES = {
         'default': {
@@ -109,7 +109,7 @@ else:
             'PORT': '',
         }
     }
-"""
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 

@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['142.93.209.40', 'localhost', '127.0.0.1', ]
+ALLOWED_HOSTS = ['134.209.152.88', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -106,7 +106,7 @@ else:
         }
     }
 
-STATIC_URL = '/staticfiles-cdn/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles-cdn")
 # Password validation

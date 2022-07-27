@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['139.59.61.186', 'localhost', '127.0.0.1', ]
+ALLOWED_HOSTS = ['142.93.209.40', 'localhost', '127.0.0.1', ]
 
 # Application definition
 
@@ -82,19 +82,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'ap_backup',
-            'USER': 'postgres',
-            'PASSWORD': '12345',
-            'HOST': 'localhost',
-        }
-
+# if DEBUG:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ap_backup',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
     }
 
+}
 
+"""
 else:
     DATABASES = {
         'default': {
@@ -106,6 +106,7 @@ else:
             'PORT': '',
         }
     }
+ """
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles-cdn")

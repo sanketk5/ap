@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import sys
+import dj_database_url
 from django.core.management.utils import get_random_secret_key
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +26,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = False
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['139.59.75.15', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['139.59.75.15', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 # Application definition
 
@@ -39,10 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',  # new
     'allauth',  # new
-    'allauth.account',  # new
-    'allauth.socialaccount',  # new
-    'allauth.socialaccount.providers.google',  # new
-    'crispy_forms',  # new    
+    'crispy_forms',  # new
     'accounts.apps.AccountsConfig',  # New custom made app
     'book.apps.BookConfig',  # New custom made app
     'storages',  # App for storages
@@ -85,8 +87,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-
-if DEBUG:
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+# if DEBUG:
+if DEVELOPMENT_MODE:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -98,16 +101,11 @@ if DEBUG:
 
     }
 
-else:
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'aplepustak',
-            'USER': 'ap_admin',
-            'PASSWORD': 'Aplepustak@1507',
-            'HOST': 'localhost',
-            'PORT': '',
-        }
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 
 # Password validation

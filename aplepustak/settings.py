@@ -15,6 +15,7 @@ import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -88,8 +89,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-# if DEBUG:
-if DEVELOPMENT_MODE:
+
+if os.getenv("DATABASE_URL", "") != "":
+    r = urlparse(os.environ.get("DATABASE_URL"))
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql.psycopg2',
+            'NAME': os.path.relpath(r.path, "/"),
+            'USER': r.username,
+            'PASSWORD': r.password,
+            'HOST': r.hostname,
+            "PORT": r.port,
+            "OPTIONS": {"sslmode": "require"},
+        }
+
+    }
+
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -99,13 +115,6 @@ if DEVELOPMENT_MODE:
             'HOST': 'localhost',
         }
 
-    }
-
-elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
     }
 
 # Password validation

@@ -1,21 +1,20 @@
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
-from django.http import request
-from django.contrib.auth.models import AnonymousUser
-from django.views.generic import DetailView, View
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.decorators.csrf import csrf_protect
-from django.contrib.auth.decorators import login_required
-
-from django.contrib import messages
-
-from datetime import datetime
-from django.utils import timezone
-from django.db.utils import DataError
-
-from .models import Book, OrderProduct, Order, Address, Refund, Payment, BookRequests, Messages
-from accounts.models import Profile
-from .forms import CheckoutForm, PaymentForm, RefundForm
 import random
+from datetime import datetime
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
+from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
+from django.db.utils import DataError
+from django.http import request
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template import TemplateDoesNotExist
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_protect
+from django.views.generic import DetailView, View
+
+from accounts.models import Profile, User
+from .forms import CheckoutForm, PaymentForm, RefundForm
+from .models import Address, Book, BookRequests, Messages, Order, OrderProduct, Payment, Refund
 
 
 # Create your views here.
@@ -29,13 +28,6 @@ def home(request):
 def product(request):
     book = Book.objects.all()
     bk2 = book[:12]
-    """global cb
-    if request.user.is_authenticated:
-        cb = len(OrderProduct.objects.filter(user=request.user))
-
-    else:
-        cb = 0"""
-
     return render(request, "product.html", {'books': bk2})
 
 
@@ -80,36 +72,49 @@ def search(request):
 class Myprofile(View):
     def get(self, *args, **kwargs):
         try:
-            user = self.request.user
-            pro = Profile.objects.get(user=user)
-            print(Order.objects.get())
-            order = Order.objects.get(user=user)
-            c = list()
-            if Order.objects.exists():
-                order = Order.objects.filter(
-                    user_id=self.request.user.id, ordered=True, recieved=False).order_by('-start_date')
-                for i in range(0, len(order)):
-                    b = order[i]
-                    print(b.get_total())
-                    c += b.products.all()
-                print(f'Diff : {c}')
+            if self.request.user.is_authenticated:
+                print('my_profile 1')
+                print(f"user is {self.request.user.username}")
+                user_m = self.request.user
+                pro = Profile.objects.filter(user=user_m)
+                # print(f"user is {get_user_model()}")
+                c = list()
+                mylist = list()
+                if Order.objects.filter(ordered=True, recieved=False, user=user_m):
+                    order = Order.objects.order_by('-start_date')
+                    print(11)
+                    for i in range(0, len(order)):
+                        b = order[i]
+                        print(b.get_total())
+                        c += b.products.all()
 
-                mylist = list(zip(c, order))
-                context = {
-                    'user': user,
-                    'pro': pro,
-                    'mylist': mylist,  # LIst of c and order
-                }
-                return render(self.request, "my_profile.html", context)
-            else:
-                return redirect("/")
+                    mylist = list(zip(c, order))
+                    context = {
+                        'user': user_m,
+                        'pro': pro,
+                        'mylist': mylist,  # LIst of c and order
+                    }
+                    return render(self.request, "my_profile.html", context)
+                else:
+                    context = {
+                        'user': user_m,
+                        'pro': pro,
+                        'mylist': mylist,  # LIst of c and order
+                    }
+                    return render(self.request, "my_profile.html", context)
+
         except ObjectDoesNotExist:
+            print('my_profile working not')
             messages.info(
                 self.request, "Your profile is not ready.")
             return redirect("/home")
+
         except AnonymousUser:
             return redirect("/home")
 
+        except TemplateDoesNotExist:
+            print('template not')
+            return redirect("/home")
 
 
 def get_id(self):

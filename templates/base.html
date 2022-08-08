@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Greenkys {% block title %}{% endblock %}</title>
+    <title>Aplepustak {% block title %}{% endblock %}</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -160,7 +160,7 @@ Navigation
         .nav__logo a {
             font-size: 2.5rem;
             color: var(--black);
-            padding: 1 . rem;
+            padding: 1.5rem;
             font-weight: 700;
         }
 
@@ -472,6 +472,7 @@ Navigation Media Query
             width: 100%;
             display: none;
             position: fixed;
+            border-radius: 2rem;
             z-index: 1;
             top: 40px;
             left: 0;
@@ -479,7 +480,7 @@ Navigation Media Query
 
         .overlay-content {
             position: relative;
-            top: 50%;
+            top: 90%;
             width: 80%;
             text-align: center;
             margin-top: 30px;
@@ -503,14 +504,14 @@ Navigation Media Query
             padding: 15px;
             font-size: 15px;
             border: none;
+            border-top-left-radius: 2.2rem;
+            border-bottom-left-radius: 2.2rem;
             float: left;
             width: 80%;
             background: white;
         }
 
         .overlay button {
-
-            width: 5%;
             padding: 15px;
             background: #ddd;
             font-size: 17px;
@@ -631,15 +632,13 @@ Navigation Media Query
                 </div>
 
                 <div class="nav__logo">
-                    <a href="/home/" class="scroll-link">
-                        Greenkys
-
-
+                    <a href="/" class="nav__link">
+                        Aplepustak
                     </a>
                 </div>
                 <div class="nav__menu">
                     <div class="menu__top">
-                        <span class="nav__category">Greenkys</span>
+                        <span class="nav__category">Aplepustak</span>
                         <a class="close__toggle">
                             <img src="{% static './images/icons/close.svg' %}"/>
                         </a>
@@ -707,7 +706,7 @@ Navigation Media Query
         <form style="display:flex;flex-direction:row;">
             <input type="text" placeholder="Search.." name="query" id="query">
             <button type="submit" formaction="/search" formmethod="get"><i class="fa fa-search"></i></button>
-            <button onclick="closeSearch()"><i class="fa fa-close"></i></button>
+            <button onclick="closeSearch()" style="border-top-right-radius:2.2rem;border-bottom-right-radius: 2.2rem;"><i class="fa fa-close"></i></button>
         </form>
     </div>
 </div>

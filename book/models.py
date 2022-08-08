@@ -127,10 +127,10 @@ class Order(models.Model):
 
     # Delievery charges set karnya sathi
     def get_total_delievery_charges(self):
-        if self.get_total() >= 100:
-            return 0
+        if self.get_total() >= 10:
+            return 50
         else:
-            return 30
+            return 0
 
     def get_total(self):
         total = 0

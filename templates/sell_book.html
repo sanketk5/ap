@@ -110,13 +110,15 @@
         <form method="POST">
             {% csrf_token %}
 
-            <h3 class="title">Select Category To Sell Books</h3>
+            <h3 class="title">Select Category To Sell Book</h3>
 
-            <br><input type="radio" name="demo" value="Below12th"/> Below 12th Standard Books&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input
-                    type="radio" name="demo" value="otherBooks"/> Other Course Book
+            <br>
+            <div>
+                <input type="radio" name="demo" value="Below12th"/> Below 12th Standard Book <br>
+                <input
+                        type="radio" name="demo" value="otherBooks"/> Other Course Book
 
-
+            </div>
             <br><br>
             <div class="row">
 
@@ -149,7 +151,7 @@
 
 
                     <p>
-                        <b><a href="https://api.whatsapp.com/send?phone=9136869309" target="_blank"><u>Click here
+                        <b><a href="https://wa.me/919136869309?text="Hello!" target="_blank"><u>Click here
                             to </u></a>
                             Send Cover (Front Page) And Backside Photos To This Whatsapp Number: +91-9136869309</b><br>
                         Seller Will Get Minimum 45% Of The MRP.
@@ -214,7 +216,7 @@
                         <span>Contact Number</span>
                         <input type="tel" name="usr_num" placeholder="Enter Your Contact Number" required/>
                     </div>
-                    <p><b><a href="https://api.whatsapp.com/send?phone=9136869309" target="_blank"><u>Click here
+                    <p><b><a href="https://wa.me/919136869309?text="Hello!" target="_blank"><u>Click here
                         to </u></a>
                         Send Cover (Front Page) And Backside, Edition Page
                         Photos To This Whatsapp Number: +91-9136869309</b>

@@ -1,15 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import auth, User
-from django.contrib.auth import authenticate, login
-from django.views.decorators.csrf import csrf_protect
-from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, View
-from django.utils import timezone
+from django.shortcuts import redirect
 from django.contrib import messages
 from .models import Profile
 import string
@@ -37,7 +27,6 @@ def register(request):
                 profile = Profile.objects.create(user=user, refer_code=get_string(), contact_no=mob_no, )
                 user.save()
                 profile.save()
-                messages.info(request, 'Your Email is your Username')
                 return redirect('/profile/login')
         else:
             messages.info(request, 'Password not matching')

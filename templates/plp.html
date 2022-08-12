@@ -998,8 +998,7 @@
                                     </div>
                                 {% endif %}
                             </div>
-                            <div class="product__picture" id="product__picture">
-                                <!-- <div class="rect" id="rect"></div> -->
+                            <div class="product__picture" id="product__picture">                                
                                 <div class="picture__container">
                                     <img src="{{ book.book_image1.url }}" id="pic"/>
                                 </div>
@@ -1089,10 +1088,17 @@
                                         <a href="#">{{ book.ideal_sem }}</a>
                                     </li>
                                 {% endif %}
+                                {% if book.book_stock < 5 %}
                                 <li>
                                     <span>Availability:</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="#" class="in-stock">In Stock (7 Items)</a>
+                                    <a href="#" class="in-stock" style="color: red;">Only {{ book.book_stock }} left</a>
                                 </li>
+                                {% else %}
+                                <li>
+                                    <span>Availability:</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="#" class="in-stock">In Stock {{ book.book_stock }} left</a>
+                                </li>
+                                {% endif %}
                             <li>
                                 <div class="product-details__btn">
                                     <a class="add" type="submit" onclick="pro_form.submit()">
@@ -1339,7 +1345,7 @@
                     const target = e.target.closest("img");
                     if (!target) return;
                     const id = target.id.slice(3);
-                    changeImage(`./images/products/iPhone/iphone${id}.jpeg`, id);
+                    changeImage(`./media/media/${id}.jpeg`, id);
                 });
             }
         });

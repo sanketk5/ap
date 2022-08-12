@@ -3,224 +3,225 @@
 
 {% block title %}Login{% endblock %}
 {% block extra_head %}
-    <style>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+    section {
+        position: relative;
+        min-height: 100vh;
+        background-color: #99ebf9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
 
-        section {
-            position: relative;
-            min-height: 100vh;
-            background-color: #99ebf9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    section .container_login {
+        position: relative;
+        width: 800px;
+        height: 500px;
+        background: #fff;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
 
+    section .container_login .user {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
+
+    section .container_login .user .imgBx {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        background: #e6e6e6;
+        ;
+        transition: 0.5s;
+    }
+
+    section .container_login .user .imgBx img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+    }
+
+    section .container_login .user .formBx {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        transition: 0.5s;
+    }
+
+    section .container_login .user .formBx form h2 {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    section .container_login .user .formBx form input {
+        position: relative;
+        width: 100%;
+        padding: 10px;
+        background: #f5f5f5;
+        color: #333;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        margin: 8px 0;
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-weight: 300;
+    }
+
+    section .container_login .user .formBx form input[type='submit'] {
+        max-width: 100px;
+        background: #677eff;
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        transition: 0.5s;
+    }
+
+    section .container_login .user .formBx form .signup {
+        position: relative;
+        margin-top: 20px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: #555;
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+
+    section .container_login .user .formBx form .signup a {
+        font-weight: 600;
+        text-decoration: none;
+        color: #677eff;
+    }
+
+    section .container_login .signupBx {
+        pointer-events: none;
+    }
+
+    section .container_login.active .signupBx {
+        pointer-events: initial;
+    }
+
+    section .container_login .signupBx .formBx {
+        left: 100%;
+    }
+
+    section .container_login.active .signupBx .formBx {
+        left: 0;
+    }
+
+    section .container_login .signupBx .imgBx {
+        left: -100%;
+    }
+
+
+    section .container_login.active .signinBx .formBx {
+        left: 100%;
+    }
+
+
+    section .container_login.active .signinBx .imgBx {
+        left: -100%;
+    }
+
+    @media (max-width: 991px) {
         section .container_login {
-            position: relative;
-            width: 800px;
-            height: 500px;
-            background: #fff;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            max-width: 400px;
         }
 
-        section .container_login .user {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-        }
-
-        section .container_login .user .imgBx {
-            position: relative;
-            width: 50%;
-            height: 100%;
-            background: #e6e6e6;;
-            transition: 0.5s;
-        }
-
-        section .container_login .user .imgBx img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 15px;
+        section .container_login .imgBx {
+            display: none;
         }
 
         section .container_login .user .formBx {
-            position: relative;
-            width: 50%;
-            height: 100%;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            transition: 0.5s;
-        }
-
-        section .container_login .user .formBx form h2 {
-            font-size: 18px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-align: center;
             width: 100%;
-            margin-bottom: 10px;
-            color: #555;
         }
-
-        section .container_login .user .formBx form input {
-            position: relative;
-            width: 100%;
-            padding: 10px;
-            background: #f5f5f5;
-            color: #333;
-            border: none;
-            outline: none;
-            box-shadow: none;
-            margin: 8px 0;
-            font-size: 14px;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
-
-        section .container_login .user .formBx form input[type='submit'] {
-            max-width: 100px;
-            background: #677eff;
-            color: #fff;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: 0.5s;
-        }
-
-        section .container_login .user .formBx form .signup {
-            position: relative;
-            margin-top: 20px;
-            font-size: 12px;
-            letter-spacing: 1px;
-            color: #555;
-            text-transform: uppercase;
-            font-weight: 300;
-        }
-
-        section .container_login .user .formBx form .signup a {
-            font-weight: 600;
-            text-decoration: none;
-            color: #677eff;
-        }
-
-        section .container_login .signupBx {
-            pointer-events: none;
-        }
-
-        section .container_login.active .signupBx {
-            pointer-events: initial;
-        }
-
-        section .container_login .signupBx .formBx {
-            left: 100%;
-        }
-
-        section .container_login.active .signupBx .formBx {
-            left: 0;
-        }
-
-        section .container_login .signupBx .imgBx {
-            left: -100%;
-        }
-
-
-        section .container_login.active .signinBx .formBx {
-            left: 100%;
-        }
-
-
-        section .container_login.active .signinBx .imgBx {
-            left: -100%;
-        }
-
-        @media (max-width: 991px) {
-            section .container_login {
-                max-width: 400px;
-            }
-
-            section .container_login .imgBx {
-                display: none;
-            }
-
-            section .container_login .user .formBx {
-                width: 100%;
-            }
-        }
-
-
-    </style>
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-    <section>
-        <div class="container_login">
-            <div class="user signinBx">
-                <div class="imgBx"><img src="{% static '/images/welcome.png' %}"></div>
-                <div class="formBx">
-                    <form action="{% url 'login' %}" method="POST">
-                        {% csrf_token %}
-                        <h2>Log In</h2>
-                        <input type="text" name="username" placeholder="Email"/>
-                        <input type="password" name="password" placeholder="Password"/>
-                        <input type="submit" name="" value="Login"/>
-                        <p class="signup">
-                            Don't have an account ?
-                            <a href="#" onclick="toggleForm();">Sign Up.</a>
-                        </p>
-                    </form>
-                </div>
-            </div>
-            <div class="user signupBx">
-                <div class="formBx">
-                    <form action="/accounts/register" method="POST">
-                        {% csrf_token %}
-                        <h2>Create an account</h2>
-                        <input type="text" name="full_name" placeholder="Full Name"/>
-                        <input type="email" name="email" placeholder="Email Address"/>
-                        <input type="text" name="mob_no" placeholder="Contact number"/>
-                        <input type="password" name="pwd1" placeholder="Create Password"/>
-                        <input type="password" name="pwd2" placeholder="Confirm Password"/>
-                        <p class="signup">
-                            By clicking the "Sign Up" button below, you are agreeing to our <a href="/terms_and_conditions"> Terms & conditions</a>
-                        </p>
-                        <input type="submit" name="submit" value="Sign Up"/>
-                        <p class="signup">
-                            Already have an account ?
-                            <a onclick="toggleForm();">Sign in.</a>
-                        </p>
-                    </form>
-                </div>
-                <div class="imgBx"><img src="{% static '/images/welcome.png' %}"></div>
+<section>
+    <div class="container_login">
+        <div class="user signinBx">
+            <div class="imgBx"><img src="{% static '/images/welcome.png' %}"></div>
+            <div class="formBx">
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <h2>Log In</h2>
+                    <input type="text" name="username" placeholder="Email" required />
+                    <input type="password" name="password" placeholder="Password" required />
+                    <input type="submit" name="" value="Login" />
+                    <p class="signup">
+                        Don't have an account ?
+                        <a href="#" onclick="toggleForm();">Sign Up.</a>
+                    </p>
+                </form>
             </div>
         </div>
-    </section>
+        <div class="user signupBx">
+            <div class="formBx">
+                <form action="/accounts/register" method="POST">
+                    {% csrf_token %}
+
+                    <h2>Create an account</h2>
+                    <input type="text" name="full_name" placeholder="Full Name" required />
+                    <input type="email" name="email" placeholder="Email Address" required />
+                    <input type="text" name="mob_no" placeholder="Contact number" required />
+                    <input type="password" name="pwd1" placeholder="Create Password" required />
+                    <input type="password" name="pwd2" placeholder="Confirm Password" required />
+                    <p class="signup">
+                        By clicking the "Sign Up" button below, you are agreeing to our <a href="/terms_and_conditions">
+                            Terms & conditions</a>
+                    </p>
+                    <input type="submit" name="submit" value="Sign Up" />
+                    <p class="signup">
+                        Already have an account ?
+                        <a onclick="toggleForm();">Log in</a>
+                    </p>
+
+                </form>
+            </div>
+            <div class="imgBx"><img src="{% static '/images/welcome.png' %}"></div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
 {% block extra_scripts %}
-    <script>
-        const toggleForm = () => {
-            const container = document.querySelector('.container_login');
-            container.classList.toggle('active');
-        };
+<script>
+    const toggleForm = () => {
+        const container = document.querySelector('.container_login');
+        container.classList.toggle('active');
+    };
 
-    </script>
+</script>
 {% endblock %}

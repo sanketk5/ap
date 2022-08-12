@@ -17,7 +17,8 @@ class CheckoutForm(forms.Form):
     }), required=False)
     state = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Maharashtra',
-        'class': 'form-control'
+        'class': 'form-control',
+        'value': 'Maharashtra',
     }), required=False)
     pin_code = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Pin code',

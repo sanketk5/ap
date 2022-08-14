@@ -14,7 +14,7 @@
 
     <!-- Animate On Scroll -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <title>Navbar & Footer!</title>
     <style>
         /*
@@ -101,7 +101,12 @@ Header
         .loader {
             height: 100vh;
             width: 100vw;
-            background: {% static './images/loader.svg' %} center/30rem no-repeat fixed;
+
+            background: {
+                % static './images/loader.svg' %
+            }
+
+            center/30rem no-repeat fixed;
         }
 
         #pre-loader.hide {
@@ -524,7 +529,8 @@ Navigation Media Query
         }
 
         --------------------------------------------------------------------
-            /*
+
+        /*
     ======================
     Footer
     ======================
@@ -588,12 +594,15 @@ Navigation Media Query
             }
         }
 
-        input[type=text], select, textarea {
+        input[type=text],
+        select,
+        textarea {
             width: 100%;
             padding: 2px;
             border: 1px solid #ccc;
             box-sizing: border-box;
             resize: vertical;
+            font-size: 1.4rem;
         }
 
         input[type=submit] {
@@ -614,296 +623,319 @@ Navigation Media Query
 
             padding-right: 20px;
         }
-
     </style>
     {% block extra_head %}{% endblock %}
 
 </head>
 
 <body>
-<!-- Header -->
-<header id="header" class="header">
-    <div class="navigation">
-        <div class="container_home">
-            <div class="nav_base">
-                <div class="nav__hamburger">
-                    <img src="{% static './images/icons/hamburger.svg' %}"/>
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="navigation">
+            <div class="container_home">
+                <div class="nav_base">
+                    <div class="nav__hamburger">
+                        <img src="{% static './images/icons/hamburger.svg' %}" />
 
-                </div>
+                    </div>
 
-                <div class="nav__logo">
-                    <a href="/" class="nav__link">
-                        Aplepustak
-                    </a>
-                </div>
-                <div class="nav__menu">
-                    <div class="menu__top">
-                        <span class="nav__category">Aplepustak</span>
-                        <a class="close__toggle">
-                            <img src="{% static './images/icons/close.svg' %}"/>
+                    <div class="nav__logo">
+                        <a href="/" class="nav__link">
+                            Aplepustak
                         </a>
                     </div>
-                    <ul class="nav__list">
-                        <li class="nav__item">
-                            <a href="/" class="nav__link">Home</a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="/sell-book" class="nav__link">Sell</a>
-                        </li>
-                        <li class="nav__item">
-                            <a href="#footer" class="nav__link scroll-link">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav__icons">
-                    <a class="icon__item openBtn" onclick="openSearch()">
-                        <img src="{% static './images/icons/search.svg' %}"/>
-                    </a>
-                    {% if user.is_authenticated %}
-                        <a href="/my-profile" class="icon__item user">
-                            <img src="{% static './images/icons/user.svg' %}"/>
+                    <div class="nav__menu">
+                        <div class="menu__top">
+                            <span class="nav__category">Aplepustak</span>
+                            <a class="close__toggle">
+                                <img src="{% static './images/icons/close.svg' %}" />
+                            </a>
+                        </div>
+                        <ul class="nav__list">
+                            <li class="nav__item">
+                                <a href="/" class="nav__link">Home</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="/sell-book" class="nav__link">Sell</a>
+                            </li>
+                            <li class="nav__item">
+                                <a href="#footer" class="nav__link scroll-link">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav__icons">
+                        <a class="icon__item openBtn" onclick="openSearch()">
+                            <img src="{% static './images/icons/search.svg' %}" />
                         </a>
-                    {% else %}
+                        {% if user.is_authenticated %}
+                        <a href="/my-profile" class="icon__item user">
+                            <img src="{% static './images/icons/user.svg' %}" />
+                        </a>
+                        {% else %}
                         <a href="/profile/login/" class="icon__item user">
 
                             <i class="fa fa-user-plus" aria-hidden="true"></i>
                         </a>
-                    {% endif %}
-                    <a href="{% url 'book:od-summary' %}" class="icon__item cart">
-                        <img src="{% static './images/icons/cart.svg' %}"/>
-                        <!--<span id="cart__total"></span>-->
-                    </a>
-                    {% if user.is_superuser or user.is_staff %}
+                        {% endif %}
+                        <a href="{% url 'book:od-summary' %}" class="icon__item cart">
+                            <img src="{% static './images/icons/cart.svg' %}" />
+                            <!--<span id="cart__total"></span>-->
+                        </a>
+                        {% if user.is_superuser or user.is_staff %}
                         <a href="/admin" class='btn btn-success ml-1 mt-1' target='_blank'>Admin</a>
-                    {% else %}
-                    {% endif %}
+                        {% else %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!---login-and-sign-up--------------------------------->
+        <!---login-and-sign-up--------------------------------->
 
-</header>
+    </header>
 
-<!-- End Header-->
-<div class="pt-2">
-    {% if messages %} {% for message in messages %}
+    <!-- End Header-->
+    <div class="pt-2">
+        {% if messages %} {% for message in messages %}
 
         <div class="pt-0">
             {% if messages %} {% for message in messages %}
-                <div class="alert">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    <strong> {{ message }}</strong>
-                </div>
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong> {{ message }}</strong>
+            </div>
 
             {% endfor %} {% endif %}
         </div>
-        </div>
+    </div>
     {% endfor %} {% endif %}
 
-<div id="myOverlay" class="overlay">
-    <div class="overlay-content">
-        <form style="display:flex;flex-direction:row;">
-            <input type="text" placeholder="Search.." name="query" id="query">
-            <button type="submit" formaction="/search" formmethod="get"><i class="fa fa-search"></i></button>
-            <button onclick="closeSearch()" style="border-top-right-radius:2.2rem;border-bottom-right-radius: 2.2rem;"><i class="fa fa-close"></i></button>
-        </form>
+    <div id="myOverlay" class="overlay">
+        <div class="overlay-content">
+            <form style="display:flex;flex-direction:row;">
+                <input type="text" placeholder="Search.." name="query" id="query">
+                <button type="submit" formaction="/search" formmethod="get"><i class="fa fa-search"></i></button>
+                <button onclick="closeSearch()"
+                    style="border-top-right-radius:2.2rem;border-bottom-right-radius: 2.2rem;"><i
+                        class="fa fa-close"></i></button>
+            </form>
+        </div>
     </div>
-</div>
-{% block content %}
+    {% block content %}
 
-{% endblock %}
+    {% endblock %}
 
 
-</main>
-<!-- End Main -->
-<!-- Footer -->
-<br>
-<footer id="footer" class="section footer"
+    </main>
+    <!-- End Main -->
+    <!-- Footer -->
+    
+    <footer id="footer" class="section footer"
         style="background-color: var(--black3); line-height: 3rem;padding: 3rem 1rem 3rem;">
-    <div class="container_ftr">
-        <div class="footer__top">
-            <div class="footer-top__box contact_form">
-                <h3>Message for us</h3>
-                <form action="/message/" method="POST">
-                    {% csrf_token %}
+        <div class="container_ftr">
+            <div class="footer__top">
+                <div class="footer-top__box contact_form">
+                    <h3>Message for us</h3>
+                    <form action="/message/" method="POST">
+                        {% csrf_token %}
 
-                    <label for="lname">Contact no</label>
-                    <input type="text" id="num" name="cn" placeholder="Enter Your Number.."
-                    >
+                        <label for="lname" style="font-size: 1.4rem;">Contact no</label>
+                        <input type="text" id="num" name="cn" placeholder="Enter Your Number..">
 
-                    <label for="subject">Message</label>
-                    <textarea id="msg" name="msg" placeholder="Write something.."
-                              style="height:70px;font-family:'Poppins'"></textarea>
+                        <label for="subject" style="font-size: 1.4rem;">Message</label>
+                        <textarea id="msg" name="msg" placeholder="Write something.."
+                            style="height:70px;font-family:'Poppins'"></textarea>
 
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
-            <div class="footer-top__box">
-                <h3>INFORMATION</h3>
-                <a href="/about">About Us</a>
-                <!--<a href="#">Privacy Policy</a>-->
-                <a href="/terms_and_conditions">Terms & Conditions</a>
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+                <div class="footer-top__box">
+                    <h3>INFORMATION</h3>
+                    <a href="/about">About Us</a>
+                    <!--<a href="#">Privacy Policy</a>-->
+                    <a href="/terms_and_conditions">Terms & Conditions</a>
 
-            </div>
-            <div class="footer-top__box">
-                <h3>MY ACCOUNT</h3>
-                {% if user.is_authenticated %}
+                </div>
+                <div class="footer-top__box">
+                    <h3>MY ACCOUNT</h3>
+                    {% if user.is_authenticated %}
                     <a href="/my-profile">My Account</a>
-                {% endif %}
-                <a href="{% url 'book:od-summary' %}">My cart</a>
-                <a href="/sell-book">Sell book</a>
+                    {% endif %}
+                    <a href="{% url 'book:od-summary' %}">My cart</a>
+                    <a href="/sell-book">Sell book</a>
 
-            </div>
-            <div class="footer-top__box">
-                <h3>CONTACT US</h3>
-                <div>
-                    <a href="http://maps.google.com/?q=Safed Pul, Saki Naka, Mumbai, Maharashtra" target="_blank">
-            <span>
-              <img src="{% static './images/icons/placeholder.svg' %}">
-            </span>
-                        Safed Pul, Mumbai- 400072</a>
                 </div>
-                <div><a
-                        href="mailto:Aplepustak@gmail.com">
-            <span>
-              <img src=" {% static './images/icons/mail.svg' %}">
-            </span>
-                    aplepustak@gmail.com</a>
+                <div class="footer-top__box">
+                    <h3>CONTACT US</h3>
+                    <div>
+                        <a href="http://maps.google.com/?q=Safed Pul, Saki Naka, Mumbai, Maharashtra" target="_blank">
+                            <span>
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                            Safed Pul, Mumbai- 400072</a>
+                    </div>
+                    <div><a href="mailto:Aplepustak@gmail.com">
+                            <span>
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            aplepustak@gmail.com</a>
+                    </div>
+                    <div><a href="tel:+91-9136869309">
+                            <span>
+                                <i class="fa fa-phone"></i>
+                            </span>
+                            +91-9136869309</a>
+
+                    </div>
+                    <br><br>
+                    <div class="social-icons" style="display: flex;flex-direction: row;justify-content: space-between;align-items:flex-start;">
+                        <div class="insta"><a href="https://www.instagram.com/aplepustak/" target="_blank">
+                                <span>
+                                    <i class="fa fa-instagram fa-2x" style="color: #ff33cc;"></i>
+                                </span>
+                            </a>
+                        </div>
+                        <div><a href="https://www.facebook.com/pages/category/E-commerce-website/Aplepustak-100276508808837/"
+                                target="_blank">
+                                <span>
+                                    <i class="fa fa-facebook-square fa-2x" style="color: rgb(31, 181, 240);"></i>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div><a href="https://wa.me/919136869309?text='Hello!'" target="_blank">
+                                <span>
+                                    <i class="fa fa-whatsapp fa-2x" style="color: #00ff00;"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
-                <div><a
-                        href="tel:+91-9136869309">
-            <span>
-              <img src="{% static './images/icons/phone.svg' %}">
-            </span>
-                    +91-9136869309</a>
+
+            </div>
+            <div class="footer__bottom">
+                <div class="footer-bottom__box">
+
                 </div>
+                <div class="footer-bottom__box">
 
+                </div>
             </div>
-        </div>
-        <div class="footer__bottom">
-            <div class="footer-bottom__box">
 
-            </div>
-            <div class="footer-bottom__box">
+    </footer>
+    <!-- End Footer -->
 
-            </div>
-        </div>
-
-</footer>
-<!-- End Footer -->
-
-<!-- Glide Carousel Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<!-- Animate On Scroll -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script type="text/javascript">
-    /*
-       =============
-       Msg bar
-       =============
-       */
-    function closemessagebar() {
-        document.getElementById("messageBar").style.display = "none";
-    }
-
-    /*
-    =============
-    Navigation
-    =============
-    */
-    const navOpen = document.querySelector(".nav__hamburger");
-    const navClose = document.querySelector(".close__toggle");
-    const menu = document.querySelector(".nav__menu");
-    const scrollLink = document.querySelectorAll(".scroll-link");
-    const navContainer = document.querySelector(".nav__menu");
-
-    navOpen.addEventListener("click", () => {
-        menu.classList.add("open");
-        document.body.classList.add("active");
-        navContainer.style.left = "0";
-        navContainer.style.width = "30rem";
-    });
-
-    navClose.addEventListener("click", () => {
-        menu.classList.remove("open");
-        document.body.classList.remove("active");
-        navContainer.style.left = "-30rem";
-        navContainer.style.width = "0";
-    });
-
-    const navBar = document.querySelector(".navigation");
-    const gotoTop = document.querySelector(".goto-top");
-
-
-    window.addEventListener("scroll", e => {
-        const scrollHeight = window.pageYOffset;
-        const navHeight = navBar.getBoundingClientRect().height;
-        if (scrollHeight > navHeight) {
-            navBar.classList.add("fix__nav");
-        } else {
-            navBar.classList.remove("fix__nav");
+    <!-- Glide Carousel Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- Animate On Scroll -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript">
+        /*
+           =============
+           Msg bar
+           =============
+           */
+        function closemessagebar() {
+            document.getElementById("messageBar").style.display = "none";
         }
 
-        if (scrollHeight > 300) {
-            gotoTop.classList.add("show-top");
-        } else {
-            gotoTop.classList.remove("show-top");
-        }
-    });
+        /*
+        =============
+        Navigation
+        =============
+        */
+        const navOpen = document.querySelector(".nav__hamburger");
+        const navClose = document.querySelector(".close__toggle");
+        const menu = document.querySelector(".nav__menu");
+        const scrollLink = document.querySelectorAll(".scroll-link");
+        const navContainer = document.querySelector(".nav__menu");
+
+        navOpen.addEventListener("click", () => {
+            menu.classList.add("open");
+            document.body.classList.add("active");
+            navContainer.style.left = "0";
+            navContainer.style.width = "30rem";
+        });
+
+        navClose.addEventListener("click", () => {
+            menu.classList.remove("open");
+            document.body.classList.remove("active");
+            navContainer.style.left = "-30rem";
+            navContainer.style.width = "0";
+        });
+
+        const navBar = document.querySelector(".navigation");
+        const gotoTop = document.querySelector(".goto-top");
 
 
-    // Smooth Scroll
-
-
-    Array.from(scrollLink).map(link => {
-        link.addEventListener("click", e => {
-// Prevent Default
-            e.preventDefault();
-
-            const id = e.currentTarget.getAttribute("href").slice(1);
-            const element = document.getElementById(id);
+        window.addEventListener("scroll", e => {
+            const scrollHeight = window.pageYOffset;
             const navHeight = navBar.getBoundingClientRect().height;
-            const fixNav = navBar.classList.contains("fix__nav");
-            let position = element.offsetTop - navHeight;
-
-            if (!fixNav) {
-                position = position - navHeight;
+            if (scrollHeight > navHeight) {
+                navBar.classList.add("fix__nav");
+            } else {
+                navBar.classList.remove("fix__nav");
             }
 
-            window.scrollTo({
-                left: 0,
-                top: position,
-            });
-            navContainer.style.left = "-30rem";
-            document.body.classList.remove("active");
+            if (scrollHeight > 300) {
+                gotoTop.classList.add("show-top");
+            } else {
+                gotoTop.classList.remove("show-top");
+            }
         });
-    });
 
 
-    // Search Bar......
-
-    function openSearch() {
-        document.getElementById("myOverlay").style.display = "block";
-    }
-
-    function closeSearch() {
-        document.getElementById("myOverlay").style.display = "none";
-    }
-
-    // preloader
-    window.addEventListener("load", () => {
-        const loader = document.getElementById("pre-loader");
-        setTimeout(() => {
-            loader.classList.add("hide");
-        }, 2000);
-    });
+        // Smooth Scroll
 
 
-</script>
-{% block extra_scripts %}L̥
-{% endblock %}
+        Array.from(scrollLink).map(link => {
+            link.addEventListener("click", e => {
+                // Prevent Default
+                e.preventDefault();
+
+                const id = e.currentTarget.getAttribute("href").slice(1);
+                const element = document.getElementById(id);
+                const navHeight = navBar.getBoundingClientRect().height;
+                const fixNav = navBar.classList.contains("fix__nav");
+                let position = element.offsetTop - navHeight;
+
+                if (!fixNav) {
+                    position = position - navHeight;
+                }
+
+                window.scrollTo({
+                    left: 0,
+                    top: position,
+                });
+                navContainer.style.left = "-30rem";
+                document.body.classList.remove("active");
+            });
+        });
+
+
+        // Search Bar......
+
+        function openSearch() {
+            document.getElementById("myOverlay").style.display = "block";
+        }
+
+        function closeSearch() {
+            document.getElementById("myOverlay").style.display = "none";
+        }
+
+        // preloader
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("pre-loader");
+            setTimeout(() => {
+                loader.classList.add("hide");
+            }, 2000);
+        });
+
+
+    </script>
+    {% block extra_scripts %}L̥
+    {% endblock %}
 
 </body>
 

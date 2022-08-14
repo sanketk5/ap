@@ -73,13 +73,14 @@ class Myprofile(View):
     def get(self, *args, **kwargs):
         try:
             if self.request.user.is_authenticated:
-                print('my_profile 1')
+                
                 print(f"user is {self.request.user.username}")
                 user_m = self.request.user
                 pro = Profile.objects.filter(user=user_m)
                 # print(f"user is {get_user_model()}")
                 c = list()
                 mylist = list()
+                print(23)
                 if Order.objects.filter(ordered=True, recieved=False, user=user_m):
                     order = Order.objects.order_by('-start_date')
                     print(11)
@@ -94,22 +95,27 @@ class Myprofile(View):
                         'pro': pro,
                         'mylist': mylist,  # LIst of c and order
                     }
+                    print(11)
                     return render(self.request, "my_profile.html", context)
                 else:
+                    print(1234)
                     context = {
                         'user': user_m,
                         'pro': pro,
                         'mylist': mylist,  # LIst of c and order
                     }
+                    print(12)
                     return render(self.request, "my_profile.html", context)
+            else:
+                print(112)
+                messages.info(
+                self.request, "Your profile is not ready.")
+                return redirect("/home")
 
         except ObjectDoesNotExist:
             print('my_profile working not')
             messages.info(
                 self.request, "Your profile is not ready.")
-            return redirect("/home")
-
-        except AnonymousUser:
             return redirect("/home")
 
         except TemplateDoesNotExist:
@@ -267,7 +273,7 @@ def add_to_cart(request, slug):
     else:
         messages.info(
             request, "Please login first.")
-        return redirect("book:home")
+        return redirect("/profile/login")
 
 
 @csrf_protect
@@ -474,7 +480,8 @@ class PaymentView(View):
                 # order.delievery_address.refer_code
 
                 if order.delievery_address.refer_code:
-                    a = Profile.objects.filter(refer_code=order.delievery_address.refer_code)
+                    a = Profile.objects.filter(
+                        refer_code=order.delievery_address.refer_code)
                     for i in a:
                         if self.request.user != i.user:
                             i.refer_order += 1
@@ -540,7 +547,8 @@ def message_new(request):
     try:
         contact_no = request.POST['cn']
         msg = request.POST['msg']
-        ms = Messages.objects.create(contact_no=contact_no, message=msg, message_time=timezone.now())
+        ms = Messages.objects.create(
+            contact_no=contact_no, message=msg, message_time=timezone.now())
         ms.save()
         messages.info(
             request, "Your message is succesfully recieved.")

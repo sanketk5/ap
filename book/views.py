@@ -44,6 +44,7 @@ def search(request):
     if len(query) > 55:
         search_products = Book.objects.none()
     else:
+        print(11)
         bk_title = Book.objects.filter(
             book_title__icontains=query)
         print(type(bk_title))
@@ -76,8 +77,9 @@ class Myprofile(View):
                 
                 print(f"user is {self.request.user.username}")
                 user_m = self.request.user
-                pro = Profile.objects.filter(user=user_m)
+                pro = Profile.objects.get(user=user_m)
                 # print(f"user is {get_user_model()}")
+                print(pro.refer_code)
                 c = list()
                 mylist = list()
                 print(23)
@@ -86,7 +88,6 @@ class Myprofile(View):
                     print(11)
                     for i in range(0, len(order)):
                         b = order[i]
-                        print(b.get_total())
                         c += b.products.all()
 
                     mylist = list(zip(c, order))

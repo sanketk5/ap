@@ -211,28 +211,28 @@
                 <div class="row">
                     {% for book in products %}
                         {% if book.book_stock >= 1 %}
-                            <div class="col-sm-6 col-lg-4 mb-4">
+                        <div class="col-sm-6 col-lg-4 mb-4">
 
-                                <div class="book-list book-grid">
+                            <div class="book-list book-grid">
 
-                                    <div class="book-list-image">
-                                        <img class="img-fluid" src="{{ book.book_image1.url }}"
-                                             alt="{{ book.book_title }}">
-                                    </div>
-                                    <div class="book-list-details">
-                                        <a href="{{ book.get_absolute_url }}" class="stretched-link">
-                                            <div class="book-list-info">
-                                                <div class="book-list-title">
-                                                    <h5>{{ book.book_title }}</h5>
-                                                </div>
+                                <div class="book-list-image">
+                                    <img class="img-fluid" src="{{ book.book_image1.url }}"
+                                         alt="{{ book.book_title }}">
+                                </div>
+                                <div class="book-list-details">
+                                    <a href="{{ book.get_absolute_url }}" class="stretched-link">
+                                        <div class="book-list-info">
+                                            <div class="book-list-title">
+                                                <h5>{{ book.book_title }}</h5>
                                             </div>
-                                        </a>
-                                        <div class="book-list-favourite-time">
+                                        </div>
+                                    </a>
+                                    <div class="book-list-favourite-time">
 
-                                            <ul class="list-unstyled">
-                                                <li style="font-size: large; color: #e74c3c;">
+                                        <ul class="list-unstyled">
+                                            <li style="font-size: large; color: #e74c3c;">
 
-                                                   &#8377 50
+                                                   &#8377 {{ book.book_price }}
                                                 </li>
                                                 <li style="font-size: 10px; padding-top: 5%;">
                                                     <strike>&#8377 {{ book.book_mrp }} </strike></li>
@@ -241,8 +241,8 @@
                                     </div>
                                 </div>
 
-                            </div>
-                        {% endif %}
+                                                    </div>
+                                                {% endif %}
 
                     {% endfor %}
                 </div>

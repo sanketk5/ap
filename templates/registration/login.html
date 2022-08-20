@@ -179,8 +179,8 @@
                     <form action="{% url 'login' %}" method="POST">
                         {% csrf_token %}
                         <h2>Log In</h2>
-                        <input type="text" name="username" placeholder="Email"/>
-                        <input type="password" name="password" placeholder="Password"/>
+                        <input type="text" name="username" placeholder="Email" required/>
+                        <input type="password" name="password" placeholder="Password" required/>
                         <input type="submit" name="" value="Login"/>
                         <p class="signup">
                             Don't have an account ?
@@ -194,11 +194,11 @@
                     <form action="/accounts/register" method="POST" style="margin: auto;">
                         {% csrf_token %}
                         <h2>Create an account</h2>
-                        <input type="text" name="full_name" placeholder="Full Name"/>
-                        <input type="email" name="email" placeholder="Email Address"/>
-                        <input type="text" name="mob_no" placeholder="Contact number"/>
-                        <input type="password" name="pwd1" placeholder="Create Password"/>
-                        <input type="password" name="pwd2" placeholder="Confirm Password"/>
+                        <input type="text" name="full_name" placeholder="Full Name" required/>
+                        <input type="email" name="email" placeholder="Email Address" required/>
+                        <input type="text" name="mob_no" placeholder="Contact number" required/>
+                        <input type="password" name="pwd1" placeholder="Create Password" required/>
+                        <input type="password" name="pwd2" placeholder="Confirm Password" required/>
                         <p class="signup">
                             By clicking the "Sign Up" button below, you are agreeing to our <a href="/terms_and_conditions"> Terms & conditions</a>
                         </p>
